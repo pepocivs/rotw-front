@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<link rel="import" href="general-style.html">
+
+<dom-module id="my-items">
+    <template>
+      <style include="general-style">
+        :host {
+            display: block;
+          }
+          paper-year-list{
+            min-height: 400px;
+          }
+      </style>
+
+      hello world
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'my-items',
+
+            properties: {
+              inventory: {
+                type: Object
+              }
+            },
+            observers: []
+        });
+    </script>
+</dom-module>
