@@ -1,21 +1,28 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
 <link rel="import" href="general-style.html">
 
 <dom-module id="my-items">
     <template>
-      <style include="general-style">
+      <style include="general-style iron-flex iron-flex-alignment">
         :host {
             display: block;
           }
-          paper-year-list{
-            min-height: 400px;
-          }
       </style>
+      <iron-ajax auto
+      url="http://localhost:4040/items"
+      params='{}'
+      handle-as="json"
+      last-response="{{itemsResponse}}"></iron-ajax>
 
-      hello world
-
+      <div class="layout horizontal wrap center-center item-container">
+        <template is="dom-repeat" items="[[itemList]]">
+            <div class="item-box" style="background-image: url('{{item.image}}');">
+              <!-- <img src="{{item.image}}" /> -->
+            </div>
+        </template>
+      </div>
     </template>
 
     <script>
@@ -25,9 +32,16 @@
             properties: {
               inventory: {
                 type: Object
+              },
+              itemsResponse: {
+                type: Object,
+                observer: '_itemsResponse'
               }
             },
-            observers: []
+            observers: [],
+            _itemsResponse: function(response) {
+                this.itemList = response;
+            },
         });
     </script>
 </dom-module>
