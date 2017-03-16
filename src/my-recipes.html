@@ -3,7 +3,7 @@
 
 <link rel="import" href="general-style.html">
 
-<dom-module id="my-items">
+<dom-module id="my-recipes">
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
@@ -11,15 +11,20 @@
           }
       </style>
       <iron-ajax auto
-      url="http://zelda.pepocivs.com/items"
+      url="http://zelda.pepocivs.com/recipes"
       params='{}'
       handle-as="json"
-      last-response="{{itemsResponse}}"></iron-ajax>
+      last-response="{{recipesResponse}}"></iron-ajax>
 
       <div class="layout horizontal wrap center-center item-container">
-        <template is="dom-repeat" items="[[itemList]]">
+        <template is="dom-repeat" items="[[recipeList]]">
             <div class="item-box" style="background-image: url('{{item.image}}');">
-              <div class="item-count">x{{item._id}}</div>
+              <template is="dom-repeat" items="[[item.ingredients]]" as="ingredient">
+                {{ingredient.name}}
+              </template>
+              <template is="dom-repeat" items="[[item.effects]]" as="effect">
+                {{effect.name}}
+              </template>
             </div>
         </template>
       </div>
@@ -27,20 +32,20 @@
 
     <script>
         Polymer({
-            is: 'my-items',
+            is: 'my-recipes',
 
             properties: {
               inventory: {
                 type: Object
               },
-              itemsResponse: {
+              recipesResponse: {
                 type: Object,
-                observer: '_itemsResponse'
+                observer: '_recipesResponse'
               }
             },
             observers: [],
-            _itemsResponse: function(response) {
-                this.itemList = response;
+            _recipesResponse: function(response) {
+                this.recipeList = response;
             },
         });
     </script>

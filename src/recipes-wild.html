@@ -72,6 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="items" href="/items">My items</a>
+          <a name="recipes" href="/recipes">My recipes</a>
         </iron-selector>
       </app-drawer>
 
@@ -90,6 +91,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="items"
             role="main">
+          <my-recipes name="recipes"></my-recipes>
           <my-items name="items"></my-items>
         </iron-pages>
       </app-header-layout>
