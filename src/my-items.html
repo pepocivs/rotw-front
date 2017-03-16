@@ -19,7 +19,7 @@
       <div class="layout horizontal wrap center-center item-container">
         <template is="dom-repeat" items="[[itemList]]">
             <div class="item-box" style="background-image: url('{{item.image}}');">
-              <!-- <img src="{{item.image}}" /> -->
+              <div class="item-count">x{{item._id}}</div>
             </div>
         </template>
       </div>
