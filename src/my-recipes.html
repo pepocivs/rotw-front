@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/wild-main/wild-main.html">
 
 <link rel="import" href="general-style.html">
 
@@ -9,6 +11,9 @@
         :host {
             display: block;
           }
+          span.title{
+            margin-left: 15px !important;
+          }
       </style>
       <iron-ajax auto
       url="http://zelda.pepocivs.com/recipes"
@@ -16,15 +21,31 @@
       handle-as="json"
       last-response="{{recipesResponse}}"></iron-ajax>
 
-      <div class="layout horizontal wrap center-center item-container">
+      <paper-toolbar>
+        <iron-icon class="iconleft" src="/images/pira.svg"></iron-icon>  
+        <span class="title">1 receta</span>
+        <iron-icon icon="icons:search"></iron-icon> 
+      </paper-toolbar>
+
+      <div class="layout horizontal wrap center-center">
+      
         <template is="dom-repeat" items="[[recipeList]]">
-            <div class="item-box" style="background-image: url('{{item.image}}');">
-              <template is="dom-repeat" items="[[item.ingredients]]" as="ingredient">
-                {{ingredient.name}}
-              </template>
-              <template is="dom-repeat" items="[[item.effects]]" as="effect">
-                {{effect.name}}
-              </template>
+            <div class="food-box">
+              <div class="food-box-one">
+                <img src="{{item.image}}" alt="" class="foodprincipal">
+                <p>{{item.name}}</p>
+                <template is="dom-repeat" items="[[item.effects]]" as="effect">
+                  <img src="{{effect.icon}}" alt=""class="img-efects">
+                </template>
+              </div>
+              
+              <hr>
+
+              <div class="food-box-two">
+                <template is="dom-repeat" items="[[item.ingredients]]" as="ingredient">
+                  <img src="{{ingredient.image}}" alt=""class="img-ingredients">
+                </template>
+              </div>              
             </div>
         </template>
       </div>
