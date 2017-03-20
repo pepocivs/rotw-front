@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/wild-main/wild-main.html">
 <link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 
 <link rel="import" href="general-style.html">
 
@@ -22,26 +23,34 @@
       handle-as="json"
       last-response="{{recipesResponse}}"></iron-ajax>
 
-      <paper-toolbar>
-        <iron-icon class="iconleft" src="/images/pira.svg"></iron-icon>  
-        <span class="title">1 receta</span>
-        <iron-icon icon="icons:search"></iron-icon> 
-      </paper-toolbar>
+      <div class="info-black layout horizontal wrap center around-justified">
+        <iron-icon src="/images/pira.svg"></iron-icon>  
+        <span class="flex ">1 receta</span>
+        <iron-icon  icon="icons:search"></iron-icon> 
+      </div>
 
       <div class="layout horizontal wrap center-center">
       
         <template is="dom-repeat" items="[[recipeList]]">
-            <div class="food-box">
-              <div class="food-box-one">
+
+            <div class="food-box layout horizontal nowrap center-center justified">
+            
+            <div class="flex one">
                 <img src="{{item.image}}" alt="" class="foodprincipal">
+            </div>
+
+
+            <div class="food-box-one flex six layout self-start">
                 <p>{{item.name}}</p>
                 <template is="dom-repeat" items="[[item.effects]]" as="effect">
                   <img src="{{effect.icon}}" alt=""class="img-efects">
                 </template>
-              </div>
+            </div>
+                
+              
               
 
-              <div class="food-box-two">
+              <div class="flex food-box-two layout self-start">
                 <template is="dom-repeat" items="[[item.ingredients]]" as="ingredient">
                   <img src="{{ingredient.image}}" alt=""class="img-ingredients">
                 </template>

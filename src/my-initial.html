@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
@@ -30,20 +31,28 @@
         <img src="/images/pira.svg" alt="" height="60px">
           <p>añadir</p>
         </paper-button>
-
+        <div class="information layout horizontal wrap center justified " >
+          <div style="width:100%; text-align:right;"> 0/5 </div>
+          <div>1 receta</div>
+          <div>
+          <iron-icon src="/images/hinox_guts.png"></iron-icon>
+          <iron-icon src="/images/hinox_guts.png"></iron-icon>
+          <iron-icon src="/images/hinox_guts.png"></iron-icon>
+          <iron-icon src="/images/hinox_guts.png"></iron-icon>
+          <iron-icon src="/images/hinox_guts.png"></iron-icon>
+          </div>
+        </div>
       </div>
 
-      <neon-animated-pages id="pages" entry-animation="{{entryAnimation}}" exit-animation="{{exitAnimation}}" on-track="handleTrack">
-        <neon-animatable>
           <div class="layout horizontal wrap center-center item-container-initial">
+          
             <template is="dom-repeat" items="[[itemList]]">
                 <div class="item-box" style="background-image: url('{{item.image}}');">
+                  <div class="item-minus">-</div>
                   <div class="item-count">x{{item._id}}</div>
                 </div>
             </template>
           </div>
-        </neon-animatable>
-      </neon-animated-pages>
 
 
     </template>
@@ -65,34 +74,7 @@
             _itemsResponse: function(response) {
                 this.itemList = response;
             },
-            handleTrack: function(e){
-              switch(e.detail.state){
-                case 'start':
-                this.sizeTapped = e.detail.y;
-                console.log(this.sizeTapped);
-                break;
-                case 'track':
-
-                  break;
-
-                case 'end':
-                  if(this.$.pages.selected == 0){
-                      if(e.detail.y < (this.sizeTapped-100)){
-                        this.exitAnimation= 'fade-out-animation';
-                        this.entryAnimation= 'slide-down-animation';
-                        this.$.pages.selected = 1;
-                      }
-                  }
-                  if(this.$.pages.selected == 1 && this.sizeTapped < 50){
-                      if(e.detail.y < (this.sizeTapped+100)){
-                        this.exitAnimation= 'fade-up-animation';
-                        this.entryAnimation= 'slide-in-animation';
-                        this.$.pages.selected = 0;
-                      }
-                  }
-                  break;
-              }
-            }
+            
             
         });
     </script>
