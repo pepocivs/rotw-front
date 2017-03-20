@@ -36,24 +36,30 @@
             <div class="food-box layout horizontal nowrap center-center justified">
             
             <div class="flex one">
+            
                 <img src="{{item.image}}" alt="" class="foodprincipal">
             </div>
 
 
-            <div class="food-box-one flex six layout self-start">
+            <div class="food-box-one flex three  self-start">
                 <p>{{item.name}}</p>
                 <template is="dom-repeat" items="[[item.effects]]" as="effect">
                   <img src="{{effect.icon}}" alt=""class="img-efects">
                 </template>
+
             </div>
+
+
+            <div class="v"></div>
                 
               
               
 
-              <div class="flex food-box-two layout self-start">
+              <div class="flex one food-box-two  self-start">
                 <template is="dom-repeat" items="[[item.ingredients]]" as="ingredient">
                   <img src="{{ingredient.image}}" alt=""class="img-ingredients">
                 </template>
+                <iron-icon  icon="icons:star-border"></iron-icon> 
               </div>              
             </div>
         </template>

@@ -21,10 +21,13 @@
         margin: 5px;
         padding: 5px;
         border-radius: 8px;
+        position: relative;
         box-shadow: 0px 2px 8px rgba(136, 136, 136, 0.24);
       }
+      .food-box > div{
+        
+      }
       .food-box-one{
-        border-right: 1px solid black;
         padding: 0 3px;
         height: 100%;
       }
@@ -53,6 +56,12 @@
         flex-wrap: wrap;
         align-items: center;
       }
+      .food-box-two>iron-icon{
+        position: absolute;
+        bottom: 5px;
+        color: #caca1b;
+        right: 5px;
+      }
       .img-ingredients{
         height: 23%;
         width: 31%;
@@ -76,8 +85,15 @@
    
       }
       .info-black>iron-icon{
-        margin: 0 20px;
+        margin: 0 24px;
       }
+      div.v{
+        height: 85px;
+        border-left: 1px solid #c7c7c7;
+        background-color: black;
+        margin-right: 6px;
+      }
+      
 
       /*...................................................................................INITIAL.........................*/
       .icon-initial{
@@ -97,7 +113,7 @@
       }
       .item-container-initial{
         background-color: #000000;
-        height: 228px;
+        height: 201px;
         overflow: scroll;
         bottom: 0;
         position: absolute;
