@@ -7,7 +7,19 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 
 <link rel="import" href="general-style.html">
-
+<style include="general-style iron-flex iron-flex-alignment iron-pages">
+        body {
+            @apply(--fullbleed-vertical-layout);
+            margin: 0;
+            height: 100vh;
+        }
+        iron-pages{
+          height: 100%;
+        }
+        my-initial{
+          height: 100%;
+        }
+      </style>
 
 <dom-module id="my-initial">
     <template>
@@ -23,15 +35,15 @@
         last-response="{{itemsResponse}}">
       </iron-ajax>
 
+      <div class="layout vertical " style="height:100%;">
       
-      <div class="layout horizontal wrap center-center box-initial">
-
+        <div class="flex layout horizontal center-center box-initial">
 
         <paper-button class="icon-initial" raised class="indigo" >
         <img src="/images/pira.svg" alt="" height="60px">
           <p>añadir</p>
         </paper-button>
-        
+
         <div class="information layout horizontal wrap center justified " >
           <div style="width:100%; text-align:right;"> 0/5 </div>
           <div>1 receta</div>
@@ -45,7 +57,7 @@
         </div>
 
       </div>
-
+        <div>
           <div class="layout horizontal wrap center-center item-container-initial">
           
             <template is="dom-repeat" items="[[itemList]]">
@@ -55,6 +67,10 @@
                 </div>
             </template>
           </div>
+        </div>
+      </div>
+      
+          
 
 
     </template>
