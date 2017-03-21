@@ -18,8 +18,8 @@
 
       <div class="layout horizontal wrap center-center item-container">
         <template is="dom-repeat" items="[[itemList]]">
-            <div class="item-box" style="background-image: url('{{item.image}}');">
-              <div class="item-count">x{{item._id}}</div>
+            <div class="item-box" on-tap="_addElement" style="background-image: url('{{item.image}}');">
+              <div class="item-count">x{{item.count}}</div>
             </div>
         </template>
       </div>
@@ -38,10 +38,19 @@
                 observer: '_itemsResponse'
               }
             },
+            listeners: {
+            },
             observers: [],
             _itemsResponse: function(response) {
+                for (var x = 0; x < response.length; x++) {
+                  if (!response[x].count) response[x].count = 0;
+                }
                 this.itemList = response;
             },
+            _addElement: function(e) {
+              var model = e.model;
+              model.set('item.count', model.item.count+1);
+            }
         });
     </script>
 </dom-module>
