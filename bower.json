@@ -20,7 +20,12 @@
     "neon-animation": "^1.2.4",
     "paper-button": "^1.0.14",
     "iron-icons": "^1.2.0",
-    "paper-dialog": "^1.1.0"
+    "paper-dialog": "^1.1.0",
+    "iron-form": "^1.1.4",
+    "paper-input": "^1.1.23",
+    "paper-menu": "^1.2.2",
+    "paper-dropdown-menu": "^1.5.0",
+    "paper-item": "^1.2.1"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"

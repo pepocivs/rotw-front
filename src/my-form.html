@@ -1,0 +1,248 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+
+<link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="general-style.html">
+
+<dom-module id="my-form">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+            display: block;
+          }
+      </style>
+      <iron-ajax auto
+        url="http://zelda.pepocivs.com/items"
+        params='{}'
+        handle-as="json"
+        last-response="{{itemsResponse}}">
+      </iron-ajax>
+      <iron-ajax auto
+        url="http://zelda.pepocivs.com/food-img"
+        params='{}'
+        handle-as="json"
+        last-response="{{foodimgResponse}}">
+      </iron-ajax>
+      <iron-ajax auto
+        url="http://zelda.pepocivs.com/effects"
+        params='{}'
+        handle-as="json"
+        last-response="{{effectsResponse}}">
+      </iron-ajax>
+
+
+
+
+
+      <div class="layout vertical " style="height:100%;">
+
+            <paper-dialog id="dialog" style="position:absolute; height: 65%;">
+                  <div class="layout horizontal wrap center " >
+                  <h2 class="flex">INGREDIENTES</h2>
+                    <paper-button dialog-confirm autofocus raised style="background-color:#e74c3c;color:white;font-weight:800;">Cancelar</paper-button>
+                    <paper-button raised style="background-color:#2ecc71;color:white;font-weight:800;">Aceptar</paper-button>
+                  </div>
+                    <div class="layout horizontal wrap center justified " >
+
+                    <div style="width:100%; text-align:right;"> 0/5 </div>
+                    <div>1 receta</div>
+                    <div>
+                    <iron-icon src="/images/hinox_guts.png"></iron-icon>
+                    <iron-icon src="/images/hinox_guts.png"></iron-icon>
+                    <iron-icon src="/images/hinox_guts.png"></iron-icon>
+                    <iron-icon src="/images/hinox_guts.png"></iron-icon>
+                    <iron-icon src="/images/hinox_guts.png"></iron-icon>
+                    </div>
+                  </div>
+                  <div class="layout horizontal wrap center-center form-box">
+              
+                    <template is="dom-repeat" items="[[itemList]]">
+                        <div class="item-box-form" style="background-image: url('{{item.image}}');">
+                          <div class="item-minus">-</div>
+                          <div class="item-count">x{{item._id}}</div>
+                        </div>
+                    </template>
+                  </div>
+            </paper-dialog>
+
+            <paper-dialog id="plato" style="position:absolute; height: 65%;">
+                  <div class="layout horizontal wrap center " >
+                  <h2 class="flex">PLATO</h2>
+                    <paper-button dialog-confirm autofocus raised style="background-color:#e74c3c;color:white;font-weight:800;">Cancelar</paper-button>
+                    <paper-button raised style="background-color:#2ecc71;color:white;font-weight:800;">Aceptar</paper-button>
+                  </div>
+                    <div class="layout horizontal wrap center justified " >
+
+                    <div style="width:100%; text-align:right;"> 0/1 </div>
+                    <div>1 receta</div>
+                    <div>
+                    <iron-icon src="http://zelda.pepocivs.com/images/meat_and_seafood_fry.png"></iron-icon>
+                    </div>
+                  </div>
+                  <div class="layout horizontal wrap center-center form-box">
+              
+                    <template is="dom-repeat" items="[[foodimgList]]">
+                        <div class="item-box-form" style="background-image: url('{{item.image}}');">
+                        </div>
+                    </template>
+                  </div>
+            </paper-dialog>
+
+            <paper-dialog id="efectos" style="position:absolute; height: 65%;">
+                  <div class="layout horizontal wrap center " >
+                  <h2 class="flex">EFECTOS</h2>
+                    <paper-button dialog-confirm autofocus raised style="background-color:#e74c3c;color:white;font-weight:800;">Cancelar</paper-button>
+                    <paper-button raised style="background-color:#2ecc71;color:white;font-weight:800;">Aceptar</paper-button>
+                  </div>
+                    <div class="layout horizontal wrap center justified " >
+
+                    <div style="width:100%; text-align:right;"> 0/1 </div>
+                    <div>1 receta</div>
+                    <div>
+                    <iron-icon src="http://zelda.pepocivs.com/images/meat_and_seafood_fry.png"></iron-icon>
+                    </div>
+                  </div>
+                  <div class="layout horizontal wrap center-center form-box">
+              
+                    <template is="dom-repeat" items="[[effectsList]]">
+                        <div class="item-box-form" style="background-image: url('{{effects.icon}}');">
+                        </div>
+                    </template>
+                  </div>
+            </paper-dialog>
+      
+
+
+
+        <div class="flex layout horizontal center-center box-initial" >
+
+
+
+          <form is="iron-form" method="get" action="/" id="basic">
+            <paper-input name="name" label="Nombre de la receta" required></paper-input>
+            <paper-textarea label="Descripción de la receta..."></paper-textarea>
+            <paper-button raised on-tap="togglePlato">PLATO</paper-button>
+            <paper-button raised on-tap="toggleDialog">INGREDIENTES</paper-button>
+            <paper-button raised on-tap="toggleEfectos">EFECTOS</paper-button>
+
+            
+            <paper-dropdown-menu label="crafteo" name="crafteo" required>
+              <paper-menu class="dropdown-content">
+                <paper-item value="crafteo"><iron-icion src="/images/hinox_guts.png"></iocn>crafteo</paper-item>
+                <paper-item value="crafteo"><iron-icion src="/images/hinox_guts.png"></iocn>crafteo</paper-item>
+                <paper-item value="crafteo"><iron-icion src="/images/hinox_guts.png"></iocn>crafteo</paper-item>
+                <paper-item value="crafteo"><iron-icion src="/images/hinox_guts.png"></iocn>crafteo</paper-item>
+              </paper-menu>
+            </paper-dropdown-menu>
+            
+            <paper-button raised >Submit</paper-button>
+            <paper-button raised >Reset</paper-button>
+            <div class="output"></div>
+          </form>
+
+
+
+      </div>
+        <div>
+          <div class="layout horizontal wrap center-center form-inform-boxs">
+          
+            <div class="food-box layout horizontal nowrap center-center justified" >
+            
+            <div  style="width: 24%;margin-right: 9px;">
+            
+                <img src="http://zelda.pepocivs.com/images/meat_and_seafood_fry.png" alt="" class="foodprincipal">
+            </div>
+
+
+            <div class="food-box-one flex three  self-start">
+                <p>NOMBRE</p>
+                <p>descripcion</p>
+              
+                <img src="http://zelda.pepocivs.com/images/ic_heart_red.png" alt=""class="img-efects">
+                <img src="http://zelda.pepocivs.com/images/ic_heart_red.png" alt=""class="img-efects">
+                <img src="http://zelda.pepocivs.com/images/ic_heart_red.png" alt=""class="img-efects">
+                <img src="http://zelda.pepocivs.com/images/ic_heart_red.png" alt=""class="img-efects">
+
+            </div>
+
+
+            <div class="v"></div>
+                
+              
+              
+
+              <div class="flex one food-box-two  self-start">
+
+                  <img src="http://zelda.pepocivs.com/images/apple.png" alt=""class="img-ingredients">
+                  <img src="http://zelda.pepocivs.com/images/apple.png" alt=""class="img-ingredients">
+                  <img src="http://zelda.pepocivs.com/images/apple.png" alt=""class="img-ingredients">
+                  <img src="http://zelda.pepocivs.com/images/apple.png" alt=""class="img-ingredients">
+                  <img src="http://zelda.pepocivs.com/images/apple.png" alt=""class="img-ingredients">
+
+                <iron-icon  icon="icons:star-border"></iron-icon> 
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+          
+    </template>
+    <script>
+        Polymer({
+            is: 'my-form',
+
+            properties: {
+              inventory: {
+                type: Object
+              },
+              itemsResponse: {
+                type: Object,
+                observer: '_itemsResponse'
+              },
+              foodimgResponse: {
+                type: Object,
+                observer: '_foodimgResponse'
+              },
+              effectsResponse: {
+                type: Object,
+                observer: '_effectsResponse'
+              },
+            },
+            observers: [],
+            _itemsResponse: function(response) {
+                this.itemList = response;
+              },
+            _foodimgResponse: function(response) {
+                this.foodimgList = response;
+
+            },
+            _effectsResponse: function(response) {
+                this.effectsList = response;
+
+            },
+            toggleDialog: function() {
+            this.$.dialog.toggle();
+        },
+        togglePlato: function() {
+            this.$.plato.toggle();
+        },
+        toggleEfectos: function() {
+            this.$.efectos.toggle();
+        },
+            
+        });
+    </script>
+</dom-module>
