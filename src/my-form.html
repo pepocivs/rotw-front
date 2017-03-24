@@ -173,13 +173,13 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
       <!-- RESUME -->
       <div>
         <div class="layout horizontal wrap center-center form-inform-boxs">
-          <div class="food-box layout horizontal nowrap center-center justified" >
+          <div class="food-box-form layout horizontal nowrap center-center justified" >
             <div  style="width: 24%;margin-right: 9px;">
               <img src="{{dishImage}}" alt="{{data.name}}" class="foodprincipal">
             </div>
-            <div class="food-box-one flex three  self-start">
+            <div class="food-box-one flex three wrap  self-start">
               <p>{{data.name}}</p>
-              <p>{{data.description}}</p>
+              <div class="flex">{{data.description}}</div>
               <template is="dom-repeat" items="{{data.effects}}" as="effect" index-as="x">
                 <img src="{{effect.icon}}" value="{{effect._id}}" alt="" class="img-efects">
               </template>
