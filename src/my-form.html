@@ -288,7 +288,7 @@ Funcion de guardar con tratamiento de datos para API
         var model = e.model;
         if(this.nIngredients < 5) {
           model.set('item.count', model.item.count+1);
-          this.data.ingredients.push({
+          this.push('data.ingredients', {
             "_id": e.target.value,
             "image": e.target.image
           });
