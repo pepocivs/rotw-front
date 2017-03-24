@@ -17,14 +17,9 @@
 <link rel="import" href="general-style.html">
 <!--
 TODO:
-
-Hacer que el dom-repeat de ingredientes pinte los seleccionados
-Hacer funcion remove Item de ingredientResumeList
-
-Replicar todo a efectos (y resumen)
-
-Funcion de guardar con tratamiento de datos para API
-
+Fix item counter each
+Funcion de guardar con tratamiento de datos para API (counter)
+Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
 -->
 <dom-module id="my-form">
   <template>
@@ -98,7 +93,7 @@ Funcion de guardar con tratamiento de datos para API
           <div style="width:100%; text-align:right;"> {{nIngredients}}/5 </div>
           <div>Ingredientes seleccionados</div>
           <div>
-            <template id="ingredientList" is="dom-repeat" items="{{data.ingredients}}" as="ingredient" index-as="x">
+            <template is="dom-repeat" items="{{data.ingredients}}" as="ingredient" index-as="x">
               <iron-icon on-tap="removeItem" value="{{ingredient._id}}" src="{{ingredient.image}}"></iron-icon>
             </template>
           </div>
@@ -128,13 +123,20 @@ Funcion de guardar con tratamiento de datos para API
           <div style="width:100%; text-align:right;">-</div>
           <div>Efectos seleccionados</div>
           <div>
-            <iron-icon src="http://zelda.pepocivs.com/images/meat_and_seafood_fry.png"></iron-icon>
+            <template is="dom-repeat" items="{{data.effects}}" as="effect" index-as="x">
+              <iron-icon on-tap="removeEffect" value="{{effect._id}}" src="{{effect.icon}}"></iron-icon>
+            </template>
           </div>
         </div>
 
         <div class="layout horizontal wrap center-center form-box">
-          <template is="dom-repeat" items="[[effectsList]]" as="effects">
-            <div class="item-box-form" style="background-image: url('{{effects.icon}}');"></div>
+          <template is="dom-repeat" items="[[effectsList]]" as="effect">
+            <div class="item-box-form"
+                 style="background-image: url('{{effect.icon}}');"
+                 on-tap="addEffect"
+                 value="{{effect._id}}"
+                 icon="{{effect.icon}}">
+            </div>
           </template>
         </div>
       </paper-dialog>
@@ -178,15 +180,14 @@ Funcion de guardar con tratamiento de datos para API
             <div class="food-box-one flex three  self-start">
               <p>{{data.name}}</p>
               <p>{{data.description}}</p>
-              <img src="http://zelda.pepocivs.com/images/ic_heart_red.png" alt="" class="img-efects">
-              <img src="http://zelda.pepocivs.com/images/ic_heart_red.png" alt="" class="img-efects">
-              <img src="http://zelda.pepocivs.com/images/ic_heart_red.png" alt="" class="img-efects">
-              <img src="http://zelda.pepocivs.com/images/ic_heart_red.png" alt="" class="img-efects">
+              <template is="dom-repeat" items="{{data.effects}}" as="effect" index-as="x">
+                <img src="{{effect.icon}}" value="{{effect._id}}" alt="" class="img-efects">
+              </template>
             </div>
             <div class="v"></div>
             <div class="flex one food-box-two  self-start">
-              <template id="ingredientResumeList" is="dom-repeat" items="[[data.ingredients]]" as="ingredient">
-                <img src="{{ingredient.image}}" alt="" class="img-ingredients">
+              <template is="dom-repeat" items="{{data.ingredients}}" as="ingredient" index-as="x">
+                <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="" class="img-ingredients" />
               </template>
               <iron-icon src="{{craftingIcon}}"></iron-icon>
             </div>
@@ -292,25 +293,35 @@ Funcion de guardar con tratamiento de datos para API
             "_id": e.target.value,
             "image": e.target.image
           });
-          this.nIngredients = this.nIngredients+1;
-
-          this.$.ingredientList.render();
-          this.$.ingredientResumeList.render();
+          this.nIngredients = this.data.ingredients.length;
         }
       },
       removeItem: function(e) {
-        var ingredients = [];
-        var removed     = false;
-
+        var removed = false;
         for (var i = 0; i < this.data.ingredients.length; i++) {
           if (e.target.value === this.data.ingredients[i]._id && !removed) {
+            this.splice('data.ingredients', i, 1);
             removed = true;
-            this.nIngredients = this.nIngredients-1;
-          } else {
-            ingredients.push(this.data.ingredients[i]);
           }
         }
-        this.data.ingredients  = ingredients;
+        this.nIngredients = this.data.ingredients.length;
+      },
+      addEffect: function(e) {
+        var model = e.model;
+        this.push('data.effects', {
+          "_id": e.target.value,
+          "icon": e.target.icon
+        });
+      },
+      removeEffect: function(e) {
+        var removed = false;
+        for (var i = 0; i < this.data.effects.length; i++) {
+          if (e.target.value === this.data.effects[i]._id && !removed) {
+            this.splice('data.effects', i, 1);
+            removed = true;
+          }
+        }
+        this.nIngredients = this.data.ingredients.length;
       },
       resetFunction: function(e) {
         this.nDish = 0;
