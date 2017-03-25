@@ -17,9 +17,8 @@
 <link rel="import" href="general-style.html">
 <!--
 TODO:
-Fix item counter each
+Pintar bien la resta de elementos
 Funcion de guardar con tratamiento de datos para API (counter)
-Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
 -->
 <dom-module id="my-form">
   <template>
@@ -45,7 +44,7 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
                  last-response="{{foodimgResponse}}">
       </iron-ajax>
       <iron-ajax auto
-                 url="http://zelda.pepocivs.com/effects"
+                 url="http://zelda.pepocivs.com/effects-full"
                  params='{}'
                  handle-as="json"
                  last-response="{{effectsResponse}}">
@@ -56,6 +55,22 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
                  handle-as="json"
                  last-response="{{craftingResponse}}">
       </iron-ajax>
+      <iron-ajax id="saveForm"
+                 handle-as="json"
+                 content-type="application/json"
+                 method="PUT"
+                 on-response="_getComplete"
+                 last-response="{{insertResponse}}"
+                 last-error="{{error}}"></iron-ajax>
+
+      <template is="dom-if" if="[[sended]]">
+        <template is="dom-if" if="[[success]]">
+          <paper-item class="success">Datos guardados correctamente!!!</paper-item>
+        </template>
+        <template is="dom-if" if="[[error]]">
+          <paper-item class="error">Error al guardar los datos!!!</paper-item>
+        </template>
+      </template>
 
       <!-- DISHES MODAL -->
       <paper-dialog id="dish" style="position:absolute; height: 65%;">
@@ -100,7 +115,7 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
         </div>
 
         <div class="layout horizontal wrap center-center form-box">
-          <template is="dom-repeat" items="[[itemList]]">
+          <template id="ingredientList" is="dom-repeat" items="[[itemList]]">
             <div class="item-box-form"
                  style="background-image: url('{{item.image}}');"
                  on-tap="addItem"
@@ -135,11 +150,25 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
                  style="background-image: url('{{effect.icon}}');"
                  on-tap="addEffect"
                  value="{{effect._id}}"
+                 hastime="{{effect.hasTime}}"
+                 timevalue="{{effect.value}}"
                  icon="{{effect.icon}}">
             </div>
           </template>
         </div>
       </paper-dialog>
+
+      <paper-dialog id="effectValue" style="position:absolute; height: 65%;">
+        <h2>¿Cuanto tiempo dura?</h2>
+        <paper-input type="number" value="{{timeValue}}"></paper-input>
+        <paper-button on-tap="addEffect"
+                      value="{{tempEffectId}}"
+                      hastime="0"
+                      timevalue={{timeValue}}
+                      icon="{{tempEffectIcon}}">Agregar</paper-button>
+
+      </paper-dialog>
+
 
       <!-- FORM -->
       <div class="flex layout horizontal center-center box-initial" >
@@ -179,7 +208,7 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
             </div>
             <div class="food-box-one flex three wrap  self-start">
               <p>{{data.name}}</p>
-              <div class="flex">{{data.description}}</div>
+              <div class="flex wrapText grey">{{data.description}}</div>
               <template is="dom-repeat" items="{{data.effects}}" as="effect" index-as="x">
                 <img src="{{effect.icon}}" value="{{effect._id}}" alt="" class="img-efects">
               </template>
@@ -206,6 +235,30 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
         data: {
           type: Object,
           notify: true
+        },
+        sended: {
+          type: Boolean,
+          value: false
+        },
+        error: {
+          type: Boolean,
+          value: false
+        },
+        success: {
+          type: Boolean,
+          value: false
+        },
+        timeValue: {
+          type: String,
+          value:''
+        },
+        tempEffectIcon:{
+          type: Number,
+          value: 0
+        },
+        tempEffectId:{
+          type: Number,
+          value: 0
         },
         inventory: {
           type: Object
@@ -254,7 +307,7 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
         for (var i = 0; i < response.length; i++) {
           if (!response[i].count) response[i].count = 0;
         }
-        this.itemList  = response;
+        this.itemList = response;
       },
       _foodimgResponse: function(response) {
         this.foodimgList = response;
@@ -285,18 +338,43 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
         this.dishImage  = "http://zelda.pepocivs.com/images/"+e.target.value+".png";
         this.nDish      = 1;
       },
+      getCount: function(_id) {
+        var count = 0;
+        for (var i = 0; i < this.data.ingredients.length; i++) {
+          if (this.data.ingredients[i]._id === _id) count = count + 1;
+        }
+        return count;
+      },
+      updateItems() {
+        // this.itemList.forEach(function(item) {
+        //   item.set('count', this.getCount(item._id));
+        // });
+        // function getCount(_id) {
+        //   var count = 0;
+        //   for (var i = 0; i < this.data.ingredients.length; i++) {
+        //     if (this.data.ingredients[i]._id === _id) count = count + 1;
+        //   }
+        //   return count;
+        // }
+        for (var i = 0; i < this.itemList.length; i++) {
+          this.itemList[i].count = this.getCount(this.itemList[i]._id);
+        }
+        this.$.ingredientList.render();
+        console.log(this.itemList);
+      },
       addItem: function(e) {
         var model = e.model;
         if(this.nIngredients < 5) {
-          model.set('item.count', model.item.count+1);
           this.push('data.ingredients', {
             "_id": e.target.value,
             "image": e.target.image
           });
+          model.set('item.count', this.getCount(model.item._id));
           this.nIngredients = this.data.ingredients.length;
         }
       },
       removeItem: function(e) {
+        var model = e.model;
         var removed = false;
         for (var i = 0; i < this.data.ingredients.length; i++) {
           if (e.target.value === this.data.ingredients[i]._id && !removed) {
@@ -304,14 +382,25 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
             removed = true;
           }
         }
+        this.updateItems();
         this.nIngredients = this.data.ingredients.length;
       },
       addEffect: function(e) {
-        var model = e.model;
-        this.push('data.effects', {
-          "_id": e.target.value,
-          "icon": e.target.icon
-        });
+        if (e.target.hastime === 1) {
+          this.tempEffectId   = e.target.value;
+          this.tempEffectIcon = e.target.icon;
+          this.$.effectValue.toggle();
+        } else {
+          this.push('data.effects', {
+            "_id": e.target.value,
+            "icon": e.target.icon,
+            "value": e.target.timevalue
+          });
+          this.tempEffectId   = 0;
+          this.tempEffectIcon = 0;
+          this.timeValue      = "";
+          this.$.effectValue.close();
+        }
       },
       removeEffect: function(e) {
         var removed = false;
@@ -336,7 +425,83 @@ Agregar todos los tipos de efectos (1/2 Corazon 1/4... etc)
         }
       },
       saveFunction: function(e) {
-        console.log(this.data);
+        var dataToSend = {
+          "name"         : this.data.name,
+          "description"  : this.data.description,
+          "image"        : this.data.image,
+          "craftingType" : this.data.craftingType,
+          "ingredients"  : this.getIngredients(),
+          "effects"      : this.getEffects()
+        };
+        console.log(JSON.stringify(dataToSend));
+        console.log(dataToSend);
+        this.$.saveForm.url  = "http://zelda.pepocivs.com/save-recipe";
+        this.$.saveForm.body = JSON.stringify(dataToSend);
+        this.$.saveForm.generateRequest();
+
+        this.sended = true;
+      },
+      getIngredients: function() {
+        var ingredients = [];
+        for (var i = 0; i < this.data.ingredients.length; i++) {
+          var exists = checkExist(ingredients, this.data.ingredients[i]._id);
+          if (exists > -1) {
+            ingredients[exists].howMany = ingredients[exists].howMany+1;
+          } else {
+            ingredients.push({
+              "item_id": this.data.ingredients[i]._id,
+              "howMany": 1
+            });
+          }
+        }
+        return ingredients;
+
+        function checkExist(ingredients, _id) {
+          var exist = -1;
+          for (var x = 0; x < ingredients.length; x++) {
+            if (ingredients[x].item_id === _id) {
+              exist = x;
+            }
+          }
+          return exist;
+        }
+      },
+      getEffects: function() {
+        var effects = [];
+        for (var i = 0; i < this.data.effects.length; i++) {
+          var exists = checkExist(effects, this.data.effects[i]._id);
+          if (exists > -1) {
+            effects[exists].value = effects[exists].value + parseFloat(this.data.effects[i].value);
+          } else {
+            effects.push({
+              "effect_id": this.data.effects[i]._id,
+              "value": parseFloat(this.data.effects[i].value)
+            });
+          }
+        }
+        return effects;
+
+        function checkExist(effects, _id) {
+          var exist = -1;
+          for (var x = 0; x < effects.length; x++) {
+            if (effects[x].effect_id === _id) {
+              exist = x;
+            }
+          }
+          return exist;
+        }
+      },
+      _getComplete: function() {
+        this.setSuccess(true);
+      },
+      _errorResponse: function(error) {
+        console.log('Error', error);
+        this.setSuccess(false);
+      },
+      setSuccess: function(status) {
+        if (status) this.resetFunction();
+        this.error   = !status;
+        this.success = status;
       }
     });
   </script>
