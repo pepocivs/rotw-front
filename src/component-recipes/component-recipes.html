@@ -13,14 +13,6 @@
         }
       </style>
 
-      <template is="dom-if" if="[[showBar]]">
-        <div class="info-black layout horizontal wrap center around-justified">
-          <iron-icon src="../../images/pira.svg"></iron-icon>
-          <span class="flex">{{title}} - {{recipeList.length}} recetas</span>
-          <!-- <iron-icon  icon="icons:search"></iron-icon> -->
-        </div>
-      </template>
-
       <div class="layout horizontal wrap center-center"style="background-color: white;">
 
         <template is="dom-repeat" items="[[recipeList]]">
@@ -58,13 +50,6 @@
               recipeList: {
                 type: Object,
                 observer: '_formatRecipe'
-              },
-              title: {
-                type: String
-              },
-              showBar: {
-                type: Boolean,
-                value: false
               }
             },
             observers: [],

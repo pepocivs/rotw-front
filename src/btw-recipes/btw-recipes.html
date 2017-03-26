@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../component-recipes/component-recipes.html">
+<link rel="import" href="../component-infobar/component-infobar.html">
 
 <dom-module id="btw-recipes">
     <template>
@@ -14,7 +15,8 @@
       handle-as="json"
       last-response="{{recipesResponse}}"></iron-ajax>
 
-      <component-recipes recipe-list="[[recipeList]]" title="Disponibles" show-bar="true"></component-recipes>
+      <component-infobar title="{{barTitle}}"></component-infobar>
+      <component-recipes recipe-list="[[recipeList]]"></component-recipes>
 
     </template>
 
@@ -25,11 +27,16 @@
               recipesResponse: {
                 type: Object,
                 observer: '_recipesResponse'
+              },
+              barTitle: {
+                type: String
               }
             },
             observers: [],
             _recipesResponse: function(response) {
               this.recipeList = response;
+              var recipeText  = (this.recipeList.length === 1) ? 'receta' : 'recetas';
+              this.barTitle   = "Disponibles - "+this.recipeList.length+" "+recipeText;
             },
         });
     </script>

@@ -1,0 +1,51 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../general-style.html">
+
+<dom-module id="component-infobar">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .info-black {
+          width: 100%;
+          height: 65px;
+          background-color: black;
+          color: white;
+        }
+        .info-black>iron-icon {
+          margin: 0 24px;
+        }
+      </style>
+
+      <div class="info-black layout horizontal wrap center around-justified">
+        <iron-icon src="../../images/pira.svg"></iron-icon>
+        <span class="flex">{{title}}</span>
+        <!-- <iron-icon  icon="icons:search"></iron-icon> -->
+      </div>
+
+
+      <!-- <div class="info-black layout horizontal wrap center around-justified">
+        <iron-icon class="iconinfo"  icon="icons:info"></iron-icon>
+        <img src="http://zelda.pepocivs.com/images/ic_heart_red.png">
+        <span class="flex "> Manzana</span>
+
+        <iron-icon class="iconinfo" src="/images/rupee_wh.png"></iron-icon>
+        <span class="rupiainfo">2</span>
+      </div> -->
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'component-infobar',
+            properties: {
+              title: {
+                type: String
+              }
+            }
+        });
+    </script>
+</dom-module>
