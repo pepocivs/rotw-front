@@ -1,14 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../component-recipes/component-recipes.html">
+<link rel="import" href="../component-infobar/component-infobar.html">
 
 <link rel="import" href="../general-style.html">
-      <style include="general-style iron-flex iron-flex-alignment iron-pages">
-      </style>
 
 <dom-module id="btw-info">
     <template>
@@ -24,53 +18,38 @@
         last-response="{{recipesResponse}}">
       </iron-ajax>
 
-      <div class="info-black layout horizontal wrap center around-justified">
-        <iron-icon class="iconinfo"  icon="icons:info"></iron-icon>
-        <img src="http://zelda.pepocivs.com/images/ic_heart_red.png">    
-        <span class="flex "> Manzana</span>
-        
-        <iron-icon class="iconinfo" src="/images/rupee_wh.png"></iron-icon>
-        <span class="rupiainfo">2</span>
-      </div>
+      <component-infobar title="Manzana" icon="http://zelda.pepocivs.com/images/ic_heart_red.png" rupees="20"></component-infobar>
 
       <div class="layout horizontal nowrap center-center" style="padding: 0 20px;">
         <div class="icon-info-food"><img src="http://zelda.pepocivs.com/images/apple.png" alt=""></div>
         <div class="flex">Manazana que se utiliza para recuperar medio corazón.</div>
       </div>
-
       <hr>
 
-      <div class="layout horizontal wrap center-center" style="background-color:white;">
-      
-        <template is="dom-repeat" items="[[recipeList]]">
+      <component-recipes recipe-list="[[recipeList]]"></component-recipes>
 
+      <!--
+      <div class="layout horizontal wrap center-center" style="background-color:white;">
+        <template is="dom-repeat" items="[[recipeList]]">
             <div class="food-box-info layout vertical nowrap center-center justified">
-            
             <div class="comida-info-icono">
-            
                 <img src="{{item.image}}" alt="" class="foodprincipal">
             </div>
-
-
             <div class="food-box-one center-center">
                 <template is="dom-repeat" items="[[item.effects]]" as="effect">
                   <img src="{{effect.icon}}" alt=""class="img-efects">
                 </template>
-
             </div>
-                              
             </div>
         </template>
       </div>
+      -->
+
     </template>
     <script>
         Polymer({
             is: 'btw-info',
-
             properties: {
-              inventory: {
-                type: Object
-              },
               recipesResponse: {
                 type: Object,
                 observer: '_recipesResponse'

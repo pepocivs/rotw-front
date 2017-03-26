@@ -1,11 +1,11 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../general-style.html">
+<!-- <link rel="import" href="../general-style.html"> -->
 
 <dom-module id="component-infobar">
     <template>
-      <style include="general-style iron-flex iron-flex-alignment">
+      <style include="iron-flex iron-flex-alignment">
         :host {
           display: block;
         }
@@ -18,23 +18,31 @@
         .info-black>iron-icon {
           margin: 0 24px;
         }
+        .info-black>img{
+          height: 37%;
+          margin: 0 9px;
+        }
+        iron-icon.iconinfo {
+          margin-right: 0;
+        }
+        .rupiainfo{
+          margin-right: 20px;
+        }
       </style>
 
       <div class="info-black layout horizontal wrap center around-justified">
         <iron-icon src="../../images/pira.svg"></iron-icon>
+        <template is="dom-if" if="[[hasIcon]]">
+          <img src="{{icon}}">
+        </template>
         <span class="flex">{{title}}</span>
-        <!-- <iron-icon  icon="icons:search"></iron-icon> -->
+
+        <template is="dom-if" if="[[hasRupees]]">
+          <iron-icon class="iconinfo" src="/images/rupee_wh.png"></iron-icon>
+          <span class="rupiainfo">{{rupees}}</span>
+        </template>
       </div>
 
-
-      <!-- <div class="info-black layout horizontal wrap center around-justified">
-        <iron-icon class="iconinfo"  icon="icons:info"></iron-icon>
-        <img src="http://zelda.pepocivs.com/images/ic_heart_red.png">
-        <span class="flex "> Manzana</span>
-
-        <iron-icon class="iconinfo" src="/images/rupee_wh.png"></iron-icon>
-        <span class="rupiainfo">2</span>
-      </div> -->
 
     </template>
 
@@ -44,7 +52,31 @@
             properties: {
               title: {
                 type: String
+              },
+              icon: {
+                type: String,
+                value: '',
+                observer: '_checkIcon'
+              },
+              hasIcon: {
+                type: Boolean,
+                value: false
+              },
+              rupees: {
+                type: Number,
+                value: 0,
+                observer: '_checkRupees'
+              },
+              hasRupeess: {
+                type: Boolean,
+                value: false
               }
+            },
+            _checkIcon: function() {
+              this.hasIcon = (this.icon.length > 0);
+            },
+            _checkRupees: function() {
+              this.hasRupees = (this.rupees > 0);
             }
         });
     </script>
