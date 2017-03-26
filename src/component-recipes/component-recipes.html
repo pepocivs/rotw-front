@@ -23,7 +23,7 @@
 
       <div class="layout horizontal wrap center-center"style="background-color: white;">
 
-        <template is="dom-repeat" items="[[recipes]]">
+        <template is="dom-repeat" items="[[recipeList]]">
 
             <div class="food-box-form layout horizontal nowrap center-center justified" >
               <div  style="width: 24%;margin-right: 9px;">
@@ -59,9 +59,6 @@
                 type: Object,
                 observer: '_formatRecipe'
               },
-              recipes: {
-                type: Object
-              },
               title: {
                 type: String
               },
@@ -72,58 +69,47 @@
             },
             observers: [],
             _formatRecipe: function() {
-              if (!this.isArray(this.recipeList)) {
-                this.recipes = [this.recipeList];
-              } else {
-                this.recipes = this.recipeList;
+              for (var i = 0; i < this.recipeList.length; i++) {
+                this.getPrintableEffects(i);
               }
             },
-            isArray: function(e) {
-              return (Object.prototype.toString.call(e) === '[object Array]')
+            getPrintableEffects: function(i) {
+              this.recipeList[i].effectsToPrint = [];
+              for (var x = 0; x < this.recipeList[i].effects.length; x++) {
+                var effectIcon = this.recipeList[i].effects[x].icon;
+                if (effectIcon.indexOf('/ic_heart_red.png') > 0)    this.formatHearts(i, x);
+                if (effectIcon.indexOf('/ic_heart_yellow.png') > 0) this.formatHearts(i, x);
+
+              }
             },
-            _recipesResponse: function() {
-              for (var i = 0; i < this.response.length; i++) {
-                this.response[i].effectsToPrint = [];
-                for (var x = 0; x < this.response[i].effects.length; x++) {
-                  if (this.response[i].effects[x].icon.indexOf('/ic_heart_red.png') > 0) {
-                      var n = Math.floor(this.response[i].effects[x].value);
-                      var m = (this.response[i].effects[x].value - n);
-                      for (var j = 0; j < n; j++ ) {
-                        this.response[i].effectsToPrint.push({
-                          "_id": this.response[i].effects[x]._id,
-                          "name": this.response[i].effects[x].name,
-                          "icon": this.response[i].effects[x].icon,
-                          "value": "1"
-                        });
-                      }
-                      if (m === 0.25) {
-                        this.response[i].effectsToPrint.push({
-                          "_id": this.response[i].effects[x]._id,
-                          "name": this.response[i].effects[x].name,
-                          "icon": "http://zelda.pepocivs.com/images/ic_heart_red_quarter.png",
-                          "value": "1"
-                        });
-                      } else if (m === 0.50) {
-                        this.response[i].effectsToPrint.push({
-                          "_id": this.response[i].effects[x]._id,
-                          "name": this.response[i].effects[x].name,
-                          "icon": "http://zelda.pepocivs.com/images/ic_heart_red_half.png",
-                          "value": "1"
-                        });
-                      } else if (m === 0.75) {
-                        this.response[i].effectsToPrint.push({
-                          "_id": this.response[i].effects[x]._id,
-                          "name": this.response[i].effects[x].name,
-                          "icon": "http://zelda.pepocivs.com/images/ic_heart_red_three_quarter.png",
-                          "value": "1"
-                        });
-                      }
-                  }
+            formatHearts: function(i, x) {
+              var n = Math.floor(this.recipeList[i].effects[x].value);
+              var m = (this.recipeList[i].effects[x].value - n);
+              for (var j = 0; j < n; j++ ) {
+                this.recipeList[i].effectsToPrint.push({
+                  "_id": this.recipeList[i].effects[x]._id,
+                  "name": this.recipeList[i].effects[x].name,
+                  "icon": this.recipeList[i].effects[x].icon,
+                  "value": "1"
+                });
+              }
+              if (m > 0) {
+                var partIcon = '';
+                if      (m === 0.25) partIcon = "ic_heart_red_quarter";
+                else if (m === 0.50) partIcon = "ic_heart_red_half";
+                else if (m === 0.75) partIcon = "ic_heart_red_three_quarter";
+
+                if (partIcon !== '') {
+                  this.recipeList[i].effectsToPrint.push({
+                    "_id"   : this.recipeList[i].effects[x]._id,
+                    "name"  : this.recipeList[i].effects[x].name,
+                    "icon"  : "http://zelda.pepocivs.com/images/"+partIcon+".png",
+                    "value" : "1"
+                  });
                 }
               }
-              // console.log(this.response);
-              this.recipeList = this.response;
-            },
+
+            }
         });
     </script>
 </dom-module>
