@@ -77,20 +77,31 @@
               this.recipeList[i].effectsToPrint = [];
               for (var x = 0; x < this.recipeList[i].effects.length; x++) {
                 var effectIcon = this.recipeList[i].effects[x].icon;
-                if (effectIcon.indexOf('/ic_heart_red.png') > 0)    this.formatHearts(i, x);
-                if (effectIcon.indexOf('/ic_heart_yellow.png') > 0) this.formatHearts(i, x);
-
+                if (effectIcon.indexOf('/ic_heart_red_max.png') > 0) this.formatHearts(i, x);
+                if (effectIcon.indexOf('/ic_heart_red.png') > 0)     this.formatHearts(i, x);
+                if (effectIcon.indexOf('/ic_heart_yellow.png') > 0)  this.formatHearts(i, x);
               }
             },
             formatHearts: function(i, x) {
+              var color = (this.recipeList[i].effects[x].icon.indexOf('heart_red') > 0) ? 'red' : 'yellow';
               var n = Math.floor(this.recipeList[i].effects[x].value);
               var m = (this.recipeList[i].effects[x].value - n);
-              for (var j = 0; j < n; j++ ) {
+              var fiveHearts = Math.floor(n/5);
+              for (var j = 0; j < fiveHearts; j++ ) {
                 this.recipeList[i].effectsToPrint.push({
-                  "_id": this.recipeList[i].effects[x]._id,
-                  "name": this.recipeList[i].effects[x].name,
-                  "icon": this.recipeList[i].effects[x].icon,
-                  "value": "1"
+                  "_id"   : this.recipeList[i].effects[x]._id,
+                  "name"  : this.recipeList[i].effects[x].name,
+                  "icon"  : "http://zelda.pepocivs.com/images/ic_heart_five_"+color+".png",
+                  "value" : "1"
+                });
+              }
+              n = n -(fiveHearts*5);
+              for (var k = 0; k < n; k++ ) {
+                this.recipeList[i].effectsToPrint.push({
+                  "_id"   : this.recipeList[i].effects[x]._id,
+                  "name"  : this.recipeList[i].effects[x].name,
+                  "icon"  : this.recipeList[i].effects[x].icon,
+                  "value" : "1"
                 });
               }
               if (m > 0) {
@@ -98,7 +109,6 @@
                 if      (m === 0.25) partIcon = "ic_heart_red_quarter";
                 else if (m === 0.50) partIcon = "ic_heart_red_half";
                 else if (m === 0.75) partIcon = "ic_heart_red_three_quarter";
-
                 if (partIcon !== '') {
                   this.recipeList[i].effectsToPrint.push({
                     "_id"   : this.recipeList[i].effects[x]._id,
