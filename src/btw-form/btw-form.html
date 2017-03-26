@@ -33,25 +33,25 @@ Funcion de guardar con tratamiento de datos para API (counter)
 
       <!-- AJAX CALLS -->
       <iron-ajax auto
-                 url="http://localhost:4040/items"
+                 url="http://zelda.pepocivs.com/items"
                  params='{}'
                  handle-as="json"
                  last-response="{{itemsResponse}}">
       </iron-ajax>
       <iron-ajax auto
-                 url="http://localhost:4040/food-img"
+                 url="http://zelda.pepocivs.com/food-img"
                  params='{}'
                  handle-as="json"
                  last-response="{{foodimgResponse}}">
       </iron-ajax>
       <iron-ajax auto
-                 url="http://localhost:4040/effects-full"
+                 url="http://zelda.pepocivs.com/effects-full"
                  params='{}'
                  handle-as="json"
                  last-response="{{effectsResponse}}">
       </iron-ajax>
       <iron-ajax auto
-                 url="http://localhost:4040/crafting"
+                 url="http://zelda.pepocivs.com/crafting"
                  params='{}'
                  handle-as="json"
                  last-response="{{craftingResponse}}">
@@ -294,7 +294,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
         },
         craftingIcon: {
           type: String,
-          value: "http://localhost:4040/images/ic_fire.png"
+          value: "http://zelda.pepocivs.com/images/ic_fire.png"
         },
         itemCount: {
           type: Object
@@ -336,7 +336,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
       },
       selectImage: function(e) {
         this.data.image = e.target.value;
-        this.dishImage  = "http://localhost:4040/images/"+e.target.value+".png";
+        this.dishImage  = "http://zelda.pepocivs.com/images/"+e.target.value+".png";
         this.nDish      = 1;
       },
       getCount: function(_id) {
@@ -436,7 +436,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
         };
         console.log(JSON.stringify(dataToSend));
         console.log(dataToSend);
-        this.$.saveForm.url  = "http://localhost:4040/save-recipe";
+        this.$.saveForm.url  = "http://zelda.pepocivs.com/save-recipe";
         this.$.saveForm.body = JSON.stringify(dataToSend);
         this.$.saveForm.generateRequest();
 
