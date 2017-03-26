@@ -1,9 +1,10 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "recipes-of-the-wild",
   "authors": [
-    "The Polymer Authors"
+    "Jorge Martin - PepoCivs",
+    "Juan Carlos Tamurejo - Sorakuroi"
   ],
-  "license": "https://polymer.github.io/LICENSE.txt",
+  "license": "MIT",
   "dependencies": {
     "app-layout": "PolymerElements/app-layout#^0.10.0",
     "app-route": "PolymerElements/app-route#^0.9.0",

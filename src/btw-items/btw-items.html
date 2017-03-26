@@ -1,9 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
-<link rel="import" href="general-style.html">
+<link rel="import" href="../general-style.html">
 
-<dom-module id="my-items">
+<dom-module id="btw-items">
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
@@ -11,7 +11,7 @@
           }
       </style>
       <iron-ajax auto
-      url="http://zelda.pepocivs.com/items"
+      url="http://localhost:4040/items"
       params='{}'
       handle-as="json"
       last-response="{{itemsResponse}}"></iron-ajax>
@@ -27,7 +27,7 @@
 
     <script>
         Polymer({
-            is: 'my-items',
+            is: 'btw-items',
 
             properties: {
               inventory: {

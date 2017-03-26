@@ -1,30 +1,21 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="my-icons.html">
-<link rel="import" href="general-style.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="btw-icons/btw-icons.html">
+<link rel="import" href="/src/general-style.html">
 
 <dom-module id="recipes-wild">
   <template>
@@ -36,7 +27,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         display: block;
       }
-
       app-header {
         color: #000;
         background-color: #ffffff;
@@ -44,11 +34,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       app-header paper-icon-button {
         --paper-icon-button-ink-color: white;
       }
-
       .drawer-list {
         margin: 0 20px;
       }
-
       .drawer-list a {
         display: block;
         padding: 0 16px;
@@ -56,7 +44,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: var(--app-secondary-color);
         line-height: 40px;
       }
-
       .drawer-list a.iron-selected {
         color: black;
         font-weight: bold;
@@ -80,13 +67,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="form" href="/form">Formulario</a>
-          <a name="info" href="/info">Informacion</a>
+          <a name="form"    href="/form">Formulario</a>
+          <a name="info"    href="/info">Informacion</a>
           <a name="initial" href="/initial">Inicio</a>
-          <a name="items" href="/items">Items</a>
+          <a name="items"   href="/items">Items</a>
           <a name="recipes" href="/recipes">Recetas</a>
 
-          
+
         </iron-selector>
       </app-drawer>
 
@@ -95,7 +82,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+            <paper-icon-button icon="btw-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>Recipes of the wild</div>
             <iron-icon src="/images/piranegra.svg"></iron-icon>
             <iron-icon icon="icons:search"></iron-icon>
@@ -107,13 +94,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             selected="[[page]]"
             attr-for-selected="name"
             fallback-selection="items"
-            role="main" 
+            role="main"
             style="height:100%;background-color:white;">
-          <my-initial name="initial" style="height:100%;"></my-initial>
-          <my-recipes name="recipes"></my-recipes>
-          <my-info name="info"></my-info>
-          <my-form name="form" style="height:100%;"></my-form>
-          <my-items name="items"></my-items>
+          <btw-initial name="initial" style="height:100%;"></btw-initial>
+          <btw-recipes name="recipes"></btw-recipes>
+          <btw-info name="info"></btw-info>
+          <btw-form name="form" style="height:100%;"></btw-form>
+          <btw-items name="items"></btw-items>
 
         </iron-pages>
       </app-header-layout>
@@ -145,8 +132,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       _pageChanged: function(page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-'+ page + '.html');
+        var resolvedPageUrl = this.resolveUrl('btw-'+page+'/btw-'+ page + '.html');
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
       },
 

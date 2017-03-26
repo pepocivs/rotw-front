@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../component-recipes/component-recipes.html">
+
+<dom-module id="btw-recipes">
+    <template>
+      <style>
+        :host {
+          display: block;
+        }
+      </style>
+      <iron-ajax auto
+      url="http://localhost:4040/recipes"
+      params='{}'
+      handle-as="json"
+      last-response="{{recipesResponse}}"></iron-ajax>
+
+      <component-recipes recipe-list="[[recipeList]]" title="Disponibles" show-bar="true"></component-recipes>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'btw-recipes',
+            properties: {
+              recipesResponse: {
+                type: Object,
+                observer: '_recipesResponse'
+              }
+            },
+            observers: [],
+            _recipesResponse: function(response) {
+              this.recipeList = response;
+            },
+        });
+    </script>
+</dom-module>

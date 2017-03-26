@@ -6,11 +6,11 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 
-<link rel="import" href="general-style.html">
+<link rel="import" href="../general-style.html">
       <style include="general-style iron-flex iron-flex-alignment iron-pages">
       </style>
 
-<dom-module id="my-info">
+<dom-module id="btw-info">
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
@@ -18,7 +18,7 @@
           }
       </style>
       <iron-ajax auto
-        url="http://zelda.pepocivs.com/recipes"
+        url="http://localhost:4040/recipes"
         params='{}'
         handle-as="json"
         last-response="{{recipesResponse}}">
@@ -26,7 +26,7 @@
 
       <div class="info-black layout horizontal wrap center around-justified">
         <iron-icon class="iconinfo"  icon="icons:info"></iron-icon>
-        <img src="http://zelda.pepocivs.com/images/ic_heart_red.png">    
+        <img src="http://localhost:4040/images/ic_heart_red.png">    
         <span class="flex "> Manzana</span>
         
         <iron-icon class="iconinfo" src="/images/rupee_wh.png"></iron-icon>
@@ -34,7 +34,7 @@
       </div>
 
       <div class="layout horizontal nowrap center-center" style="padding: 0 20px;">
-        <div class="icon-info-food"><img src="http://zelda.pepocivs.com/images/apple.png" alt=""></div>
+        <div class="icon-info-food"><img src="http://localhost:4040/images/apple.png" alt=""></div>
         <div class="flex">Manazana que se utiliza para recuperar medio corazón.</div>
       </div>
 
@@ -65,7 +65,7 @@
     </template>
     <script>
         Polymer({
-            is: 'my-info',
+            is: 'btw-info',
 
             properties: {
               inventory: {
