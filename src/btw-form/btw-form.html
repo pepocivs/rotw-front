@@ -434,8 +434,6 @@ Funcion de guardar con tratamiento de datos para API (counter)
           "ingredients"  : this.getIngredients(),
           "effects"      : this.getEffects()
         };
-        console.log(JSON.stringify(dataToSend));
-        console.log(dataToSend);
         this.$.saveForm.url  = "http://zelda.pepocivs.com/save-recipe";
         this.$.saveForm.body = JSON.stringify(dataToSend);
         this.$.saveForm.generateRequest();

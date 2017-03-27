@@ -25,7 +25,16 @@
                 <p>{{item.name}}</p>
                 <div class="flex wrapText grey">{{item.description}}</div>
                 <template is="dom-repeat" items="{{item.effectsToPrint}}" as="effect" index-as="x">
-                    <img src="{{effect.icon}}" value="{{effect._id}}" alt="" class="img-efects">
+                  <template is="dom-if" if="{{!effect.humanTime}}">
+                    <img src="{{effect.icon}}" value="{{effect._id}}" alt="{{effect.name}}" title="{{effect.name}} | {{effect.value}}" class="img-efects">
+                  </template>
+                  <template is="dom-if" if="{{effect.humanTime}}">
+                    <div class="time-effect">
+                      <img src="{{effect.icon}}" value="{{effect._id}}" alt="{{effect.name}}" title="{{effect.name}} | {{effect.humanTime}}" class="img-efects">
+                      <!-- <p>{{effect.name}} - {{effect.humanTime}}</p> -->
+                      <p>{{effect.humanTime}}</p>
+                    </div>
+                  </template>
                 </template>
               </div>
               <div class="v"></div>
@@ -65,7 +74,51 @@
                 if (effectIcon.indexOf('/ic_heart_red_max.png') > 0) this.formatHearts(i, x);
                 if (effectIcon.indexOf('/ic_heart_red.png') > 0)     this.formatHearts(i, x);
                 if (effectIcon.indexOf('/ic_heart_yellow.png') > 0)  this.formatHearts(i, x);
+                if (effectIcon.indexOf('/ic_stamina_green_') > 0)    this.formatStamina(i, x);
+                if (effectIcon.indexOf('/ic_stamina_yellow_') > 0)   this.formatStamina(i, x);
+                var timeEffects = this.getTimeEffects();
+                for (var index = 0; index < timeEffects.length; index++ ) {
+                  if (effectIcon.indexOf(timeEffects[index]) > 0) this.formatTime(i, x);
+                }
               }
+            },
+            formatTime: function(i, x) {
+              var time    = this.recipeList[i].effects[x].value;
+              var minutes = Math.floor(time / 60);
+              var seconds = time - (minutes * 60);
+              var humanTime = str_pad_left(minutes,'0',2)+':'+str_pad_left(seconds,'0',2);
+
+              this.recipeList[i].effectsToPrint.push({
+                "_id"       : this.recipeList[i].effects[x]._id,
+                "name"      : this.recipeList[i].effects[x].name,
+                "icon"      : this.recipeList[i].effects[x].icon,
+                "humanTime" : humanTime,
+                "value"     : time
+              });
+
+              function str_pad_left(string,pad,length) {
+                return (new Array(length+1).join(pad)+string).slice(-length);
+              }
+            },
+            formatStamina: function(i, x) {
+              var color        = (this.recipeList[i].effects[x].icon.indexOf('ic_stamina_green_') > 0) ? 'green' : 'yellow';
+              var staminaValue = this.recipeList[i].effects[x].value;
+              this.calculateStamina(i, x, staminaValue, 6, color);
+            },
+            calculateStamina: function(i, x, staminaValue, s, color) {
+              var counter = Math.floor(staminaValue/s);
+              for (var j = 0; j < counter; j++ ) {
+                this.recipeList[i].effectsToPrint.push({
+                  "_id"   : this.recipeList[i].effects[x]._id,
+                  "name"  : this.recipeList[i].effects[x].name,
+                  "icon"  : "http://zelda.pepocivs.com/images/ic_stamina_"+color+"_"+s+".png",
+                  "value" : s
+                });
+                staminaValue = staminaValue - s;
+              }
+              s = s - 1;
+              if (s > 0) this.calculateStamina(i, x, staminaValue, s, color);
+              else return false;
             },
             formatHearts: function(i, x) {
               var color = (this.recipeList[i].effects[x].icon.indexOf('heart_red') > 0) ? 'red' : 'yellow';
@@ -77,7 +130,7 @@
                   "_id"   : this.recipeList[i].effects[x]._id,
                   "name"  : this.recipeList[i].effects[x].name,
                   "icon"  : "http://zelda.pepocivs.com/images/ic_heart_five_"+color+".png",
-                  "value" : "1"
+                  "value" : "5"
                 });
               }
               n = n -(fiveHearts*5);
@@ -99,11 +152,19 @@
                     "_id"   : this.recipeList[i].effects[x]._id,
                     "name"  : this.recipeList[i].effects[x].name,
                     "icon"  : "http://zelda.pepocivs.com/images/"+partIcon+".png",
-                    "value" : "1"
+                    "value" : m
                   });
                 }
               }
-
+            },
+            getTimeEffects: function() {
+              return ['/ic_haste',
+                      '/ic_sneak',
+                      '/ic_snowflake',
+                      '/ic_fire',
+                      '/ic_bolt',
+                      '/ic_sword_plus',
+                      '/ic_sheild'];
             }
         });
     </script>
