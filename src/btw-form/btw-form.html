@@ -294,7 +294,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
         },
         craftingIcon: {
           type: String,
-          value: "http://zelda.pepocivs.com/images/ic_fire.png"
+          value: "http://img.zelda.pepocivs.com/ic_fire.png"
         },
         itemCount: {
           type: Object
@@ -336,7 +336,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
       },
       selectImage: function(e) {
         this.data.image = e.target.value;
-        this.dishImage  = "http://zelda.pepocivs.com/images/"+e.target.value+".png";
+        this.dishImage  = "http://img.zelda.pepocivs.com/"+e.target.value+".png";
         this.nDish      = 1;
       },
       getCount: function(_id) {
@@ -361,7 +361,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
           this.itemList[i].count = this.getCount(this.itemList[i]._id);
         }
         this.$.ingredientList.render();
-        console.log(this.itemList);
+        // console.log(this.itemList);
       },
       addItem: function(e) {
         var model = e.model;
@@ -383,7 +383,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
             removed = true;
           }
         }
-        this.updateItems();
+        // this.updateItems(); //TODO: Remove item count when delete
         this.nIngredients = this.data.ingredients.length;
       },
       addEffect: function(e) {
