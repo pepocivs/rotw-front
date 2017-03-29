@@ -41,7 +41,12 @@
               <div class="flex one food-box-two  self-start">
                 <template is="dom-repeat" items="{{item.ingredients}}" as="ingredient" index-as="x">
                   <template is="dom-repeat-n" count="{{ingredient.howMany}}">
-                    <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="" class="img-ingredients" />
+                    <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
+                      <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="" class="img-ingredients" title="Available"/>
+                    </template>
+                    <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
+                      <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="" class="img-ingredients not-available" title="Not available"/>
+                    </template>
                   </template>
                 </template>
                 <iron-icon src="{{item.craftingIcon}}"></iron-icon>
@@ -66,6 +71,9 @@
               for (var i = 0; i < this.recipeList.length; i++) {
                 this.getPrintableEffects(i);
               }
+            },
+            _isAvailable: function(index, available) {
+              return (index < available);
             },
             getPrintableEffects: function(i) {
               this.recipeList[i].effectsToPrint = [];

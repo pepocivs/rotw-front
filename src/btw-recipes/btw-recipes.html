@@ -11,12 +11,18 @@
       </style>
       <iron-ajax auto
       url="http://zelda.pepocivs.com/recipes"
-      params='{}'
+      params="{{params}}"
       handle-as="json"
       last-response="{{recipesResponse}}"></iron-ajax>
 
-      <component-infobar title="{{barTitle}}"></component-infobar>
-      <component-recipes recipe-list="[[recipeList]]"></component-recipes>
+      <component-infobar title="{{availableTitle}}"></component-infobar>
+      <component-recipes recipe-list="[[recipeList.available]]"></component-recipes>
+
+      <component-infobar title="{{possibleTitle}}"></component-infobar>
+      <component-recipes recipe-list="[[recipeList.possible]]"></component-recipes>
+
+      <component-infobar title="{{unavailableTitle}}"></component-infobar>
+      <component-recipes recipe-list="[[recipeList.unavailable]]"></component-recipes>
 
     </template>
 
@@ -28,15 +34,31 @@
                 type: Object,
                 observer: '_recipesResponse'
               },
-              barTitle: {
+              availableTitle: {
                 type: String
+              },
+              possibleTitle: {
+                type: String
+              },
+              unavailableTitle: {
+                type: String
+              },
+              params: {
+                type: Object,
+                value: {
+                  'inventory': '[{"itemId":3,"count":3},{"itemId":9,"count":1},{"itemId":10,"count":3},{"itemId":11,"count":2},{"itemId":17,"count":5},{"itemId":22,"count":3}]'
+                }
               }
             },
             observers: [],
             _recipesResponse: function(response) {
               this.recipeList = response;
-              var recipeText  = (this.recipeList.length === 1) ? 'receta' : 'recetas';
-              this.barTitle   = "Disponibles - "+this.recipeList.length+" "+recipeText;
+              var availableText  = (this.recipeList.available.length === 1) ? 'receta' : 'recetas';
+              this.availableTitle   = "Disponibles - "+this.recipeList.available.length+" "+availableText;
+              var possibleText  = (this.recipeList.possible.length === 1) ? 'receta' : 'recetas';
+              this.possibleTitle   = "Posibles - "+this.recipeList.possible.length+" "+possibleText;
+              var unavailableText  = (this.recipeList.unavailable.length === 1) ? 'receta' : 'recetas';
+              this.unavailableTitle   = "No Disponibles - "+this.recipeList.unavailable.length+" "+unavailableText;
             },
         });
     </script>
