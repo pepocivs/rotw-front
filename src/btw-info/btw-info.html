@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../component-recipes/component-recipes.html">
 <link rel="import" href="../component-infobar/component-infobar.html">
+<link rel="import" href="../component-effects/component-effects.html">
 
 <link rel="import" href="../general-style.html">
 
@@ -44,6 +45,7 @@
         <div class="layout horizontal nowrap center-center" style="padding: 0 20px;">
           <div class="icon-info-food"><img src="{{item.image}}" alt="{{item.name}}"></div>
           <div class="flex">{{item.description}}</div>
+          <component-effects effects="{{item.effects}}"></component-effects>
         </div>
       </template>
 
@@ -94,6 +96,9 @@
                 this.params = {'inventory': '[{"itemId":'+this.itemId+',"count":"99999"}]'};
               }
             },
+            getEffects: function(itm) {
+              console.log(itm);
+            }
         });
         function searchToObject() {
           var pairs = window.location.search.substring(1).split("&"), obj = {}, pair, i;

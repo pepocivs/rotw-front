@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../general-style.html">
+
+<dom-module id="component-ingredients">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .img-ingredients {
+          height: 62px;
+          width: 62px;
+        }
+        .img-ingredients.not-available {
+          opacity: 0.5;
+          filter: alpha(opacity=50);
+        }
+      </style>
+
+      <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
+        <template is="dom-repeat-n" count="{{ingredient.howMany}}">
+          <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
+            <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="Available"/>
+          </template>
+          <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
+            <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="Not available"/>
+          </template>
+        </template>
+      </template>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'component-ingredients',
+            properties: {
+              ingredients: {
+                type: Object
+              }
+            },
+            _isAvailable: function(index, available) {
+              return (index < available);
+            }
+        });
+    </script>
+</dom-module>

@@ -17,11 +17,7 @@
 <link rel="import" href="../component-recipes/recipes-style.html">
 
 <link rel="import" href="../general-style.html">
-<!--
-TODO:
-Pintar bien la resta de elementos
-Funcion de guardar con tratamiento de datos para API (counter)
--->
+
 <dom-module id="btw-form">
   <template>
     <div class="layout vertical" style="height:100%;">
@@ -29,6 +25,26 @@ Funcion de guardar con tratamiento de datos para API (counter)
       <style include="general-style recipes-style iron-flex iron-flex-alignment">
         :host {
           display: block;
+        }
+        .img-efects {
+          float: left;
+          width: 15px;
+          height: 15px !important;
+          margin-right: 6px;
+        }
+        .time-effect {
+          float: left;
+          width: 100%;
+          margin: 5px 0px;
+        }
+        .time-effect img {
+          width: 25px !important;
+          height: 25px !important;
+        }
+        .time-effect p {
+          color: grey;
+          font-weight: bold;
+          margin-top: 1px;
         }
         .form-box{
           background-color: #dadada;
@@ -55,6 +71,14 @@ Funcion de guardar con tratamiento de datos para API (counter)
           height: 184px;
           overflow: scroll;
           bottom: 0;
+        }
+        .img-ingredients {
+          height: 23%;
+          width: 31%;
+        }
+        .img-ingredients.not-available {
+          opacity: 0.5;
+          filter: alpha(opacity=50);
         }
       </style>
 

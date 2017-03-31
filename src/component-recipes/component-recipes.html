@@ -2,6 +2,9 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../component-effects/component-effects.html">
+<link rel="import" href="../component-ingredients/component-ingredients.html">
+
 <link rel="import" href="../general-style.html">
 <link rel="import" href="recipes-style.html">
 
@@ -16,7 +19,6 @@
       <div class="layout horizontal wrap center-center" style="background-color: white;">
 
         <template is="dom-repeat" items="[[recipeList]]">
-
             <div class="food-box-form layout horizontal nowrap center-center justified" >
               <div  style="width: 24%;margin-right: 9px;">
                 <img src="{{item.image}}" alt="{{item.name}}" class="foodprincipal">
@@ -24,36 +26,16 @@
               <div class="food-box-one flex three wrap  self-start">
                 <p>{{item.name}}</p>
                 <div class="flex wrapText grey">{{item.description}}</div>
-                <template is="dom-repeat" items="{{item.effectsToPrint}}" as="effect" index-as="x">
-                  <template is="dom-if" if="{{!effect.humanTime}}">
-                    <img src="{{effect.icon}}" value="{{effect._id}}" alt="{{effect.name}}" title="{{effect.name}} | {{effect.value}}" class="img-efects">
-                  </template>
-                  <template is="dom-if" if="{{effect.humanTime}}">
-                    <div class="time-effect">
-                      <img src="{{effect.icon}}" value="{{effect._id}}" alt="{{effect.name}}" title="{{effect.name}} | {{effect.humanTime}}" class="img-efects">
-                      <!-- <p>{{effect.name}} - {{effect.humanTime}}</p> -->
-                      <p>{{effect.humanTime}}</p>
-                    </div>
-                  </template>
-                </template>
+                <component-effects effects="{{item.effects}}"></component-effects>
               </div>
               <div class="v"></div>
               <div class="flex one food-box-two  self-start">
-                <template is="dom-repeat" items="{{item.ingredients}}" as="ingredient" index-as="x">
-                  <template is="dom-repeat-n" count="{{ingredient.howMany}}">
-                    <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
-                      <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="" class="img-ingredients" title="Available"/>
-                    </template>
-                    <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
-                      <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="" class="img-ingredients not-available" title="Not available"/>
-                    </template>
-                  </template>
-                </template>
+                <component-ingredients ingredients="{{item.ingredients}}"></component-ingredients>
                 <iron-icon src="{{item.craftingIcon}}"></iron-icon>
               </div>
             </div>
-
         </template>
+
       </div>
     </template>
 
@@ -62,117 +44,8 @@
             is: 'component-recipes',
             properties: {
               recipeList: {
-                type: Object,
-                observer: '_formatRecipe'
+                type: Object
               }
-            },
-            observers: [],
-            _formatRecipe: function() {
-              for (var i = 0; i < this.recipeList.length; i++) {
-                this.getPrintableEffects(i);
-              }
-            },
-            _isAvailable: function(index, available) {
-              return (index < available);
-            },
-            getPrintableEffects: function(i) {
-              this.recipeList[i].effectsToPrint = [];
-              for (var x = 0; x < this.recipeList[i].effects.length; x++) {
-                var effectIcon = this.recipeList[i].effects[x].icon;
-                if (effectIcon.indexOf('/ic_heart_red_max.png') > 0) this.formatHearts(i, x);
-                if (effectIcon.indexOf('/ic_heart_red.png') > 0)     this.formatHearts(i, x);
-                if (effectIcon.indexOf('/ic_heart_yellow.png') > 0)  this.formatHearts(i, x);
-                if (effectIcon.indexOf('/ic_stamina_green_') > 0)    this.formatStamina(i, x);
-                if (effectIcon.indexOf('/ic_stamina_yellow_') > 0)   this.formatStamina(i, x);
-                var timeEffects = this.getTimeEffects();
-                for (var index = 0; index < timeEffects.length; index++ ) {
-                  if (effectIcon.indexOf(timeEffects[index]) > 0) this.formatTime(i, x);
-                }
-              }
-            },
-            formatTime: function(i, x) {
-              var time    = this.recipeList[i].effects[x].value;
-              var minutes = Math.floor(time / 60);
-              var seconds = time - (minutes * 60);
-              var humanTime = str_pad_left(minutes,'0',2)+':'+str_pad_left(seconds,'0',2);
-
-              this.recipeList[i].effectsToPrint.push({
-                "_id"       : this.recipeList[i].effects[x]._id,
-                "name"      : this.recipeList[i].effects[x].name,
-                "icon"      : this.recipeList[i].effects[x].icon,
-                "humanTime" : humanTime,
-                "value"     : time
-              });
-
-              function str_pad_left(string,pad,length) {
-                return (new Array(length+1).join(pad)+string).slice(-length);
-              }
-            },
-            formatStamina: function(i, x) {
-              var color        = (this.recipeList[i].effects[x].icon.indexOf('ic_stamina_green_') > 0) ? 'green' : 'yellow';
-              var staminaValue = this.recipeList[i].effects[x].value;
-              this.calculateStamina(i, x, staminaValue, 6, color);
-            },
-            calculateStamina: function(i, x, staminaValue, s, color) {
-              var counter = Math.floor(staminaValue/s);
-              for (var j = 0; j < counter; j++ ) {
-                this.recipeList[i].effectsToPrint.push({
-                  "_id"   : this.recipeList[i].effects[x]._id,
-                  "name"  : this.recipeList[i].effects[x].name,
-                  "icon"  : "http://img.zelda.pepocivs.com/ic_stamina_"+color+"_"+s+".png",
-                  "value" : s
-                });
-                staminaValue = staminaValue - s;
-              }
-              s = s - 1;
-              if (s > 0) this.calculateStamina(i, x, staminaValue, s, color);
-              else return false;
-            },
-            formatHearts: function(i, x) {
-              var color = (this.recipeList[i].effects[x].icon.indexOf('heart_red') > 0) ? 'red' : 'yellow';
-              var n = Math.floor(this.recipeList[i].effects[x].value);
-              var m = (this.recipeList[i].effects[x].value - n);
-              var fiveHearts = Math.floor(n/5);
-              for (var j = 0; j < fiveHearts; j++ ) {
-                this.recipeList[i].effectsToPrint.push({
-                  "_id"   : this.recipeList[i].effects[x]._id,
-                  "name"  : this.recipeList[i].effects[x].name,
-                  "icon"  : "http://img.zelda.pepocivs.com/ic_heart_five_"+color+".png",
-                  "value" : "5"
-                });
-              }
-              n = n -(fiveHearts*5);
-              for (var k = 0; k < n; k++ ) {
-                this.recipeList[i].effectsToPrint.push({
-                  "_id"   : this.recipeList[i].effects[x]._id,
-                  "name"  : this.recipeList[i].effects[x].name,
-                  "icon"  : this.recipeList[i].effects[x].icon,
-                  "value" : "1"
-                });
-              }
-              if (m > 0) {
-                var partIcon = '';
-                if      (m === 0.25) partIcon = "ic_heart_red_quarter";
-                else if (m === 0.50) partIcon = "ic_heart_red_half";
-                else if (m === 0.75) partIcon = "ic_heart_red_three_quarter";
-                if (partIcon !== '') {
-                  this.recipeList[i].effectsToPrint.push({
-                    "_id"   : this.recipeList[i].effects[x]._id,
-                    "name"  : this.recipeList[i].effects[x].name,
-                    "icon"  : "http://img.zelda.pepocivs.com/"+partIcon+".png",
-                    "value" : m
-                  });
-                }
-              }
-            },
-            getTimeEffects: function() {
-              return ['/ic_haste',
-                      '/ic_sneak',
-                      '/ic_snowflake',
-                      '/ic_fire',
-                      '/ic_bolt',
-                      '/ic_sword_plus',
-                      '/ic_sheild'];
             }
         });
     </script>
