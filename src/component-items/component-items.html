@@ -177,13 +177,5 @@
             location.href = this.goTo+'?itemId='+e.target.value;
           }
         });
-        function searchById (arrayData, id) {
-          for (var i = 0; i < arrayData.length; i++) {
-            if (+arrayData[i]._id == +id) {
-              return arrayData[i];
-            }
-          }
-          return null;
-        }
     </script>
 </dom-module>
