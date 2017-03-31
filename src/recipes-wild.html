@@ -71,7 +71,6 @@
           <a name="inventory" href="/inventory">Mi inventario</a>
           <a name="items"     href="/items">Elementos</a>
           <a name="recipes"   href="/recipes">Recetas</a>
-          <a name="info"      href="/info">Informacion</a>
           <a name="form"      href="/form">Insertar recetas nuevas</a>
 
 
@@ -86,7 +85,7 @@
             <paper-icon-button icon="btw-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>Recipes of the wild</div>
             <iron-icon src="/images/piranegra.svg"></iron-icon>
-            <iron-icon icon="icons:search"></iron-icon>
+            <!-- <iron-icon icon="icons:search"></iron-icon> -->
 
           </app-toolbar>
         </app-header>
@@ -126,7 +125,7 @@
       ],
 
       _routePageChanged: function(page) {
-        this.page = page || 'inventory';
+        this.page = page || 'initial';
 
         if (!this.$.drawer.persistent) {
           this.$.drawer.close();
@@ -139,7 +138,7 @@
       },
 
       _showPage404: function() {
-        this.page = 'inventory';
+        this.page = 'initial';
       },
     });
   </script>
