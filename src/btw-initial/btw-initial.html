@@ -46,17 +46,6 @@
                 <div>Cocinar</div>
             </paper-button>
           </a>
-
-          <div class="information layout horizontal wrap center justified " >
-            <div style="width:100%; text-align:right;"> {{nIngredients}}/5 </div>
-            <div>Elementos de la receta</div>
-            <div>
-              <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
-                <iron-icon on-tap="removeItem" value="{{ingredient._id}}" src="{{ingredient.image}}"></iron-icon>
-              </template>
-            </div>
-          </div>
-
         </div>
 
         <component-items
@@ -77,56 +66,24 @@
             properties: {
               inventory: {
                 type: Object,
-                observer: '_formatInventory'
-              },
-              ingredients: {
-                type: Object
-              },
-              nIngredients: {
-                type: Number,
-                value: 0
+                observer: 'setJsonParam'
               },
               jsonSend: {
                 type: String,
                 value: 'recipes'
               }
             },
-            _formatInventory: function() {
-              var ingredients = [];
-              this.inventory.forEach(function(itm){
-                for (var x = 0; x < itm.count; x++ ){
-                  ingredients.push({
-                    '_id':  itm.itemId,
-                    'image':  itm.image
-                  });
-                }
-              });
-              this.nIngredients = ingredients.length;
-              this.ingredients  = ingredients;
-              this.setJsonParam();
-            },
-            removeItem: function(e) {
-              var model = e.model;
-              var removed = false;
-              for (var i = 0; i < this.ingredients.length; i++) {
-                if (e.target.value === this.ingredients[i]._id && !removed) {
-                  this.splice('ingredients', i, 1);
-                  removed = true;
-                }
-              }
-              this.inventory.forEach(function(inv) {
-                if (e.target.value === inv.itemId) inv.count --;
-              });
-              this.nIngredients = this.ingredients.length;
-            },
             setJsonParam: function(e) {
               var inventory = [];
               this.inventory.forEach(function(inv) {
-                inventory.push({
-                  'itemId': inv.itemId,
-                  'count': inv.count
-                })
+                if(inv.count > 0) {
+                  inventory.push({
+                    'itemId': inv.itemId,
+                    'count': inv.count
+                  });
+                }
               })
+              console.log(JSON.stringify(inventory));
               this.jsonSend = 'recipes?inventory='+JSON.stringify(inventory);
             }
         });
