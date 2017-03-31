@@ -373,7 +373,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
         }
         return count;
       },
-      updateItems() {
+      updateItems: function() {
         // this.itemList.forEach(function(item) {
         //   item.set('count', this.getCount(item._id));
         // });
@@ -469,7 +469,7 @@ Funcion de guardar con tratamiento de datos para API (counter)
       getIngredients: function() {
         var ingredients = [];
         for (var i = 0; i < this.data.ingredients.length; i++) {
-          var exists = checkExist(ingredients, this.data.ingredients[i]._id);
+          var exists = this.checkExistIngredient(ingredients, this.data.ingredients[i]._id);
           if (exists > -1) {
             ingredients[exists].howMany = ingredients[exists].howMany+1;
           } else {
@@ -480,21 +480,11 @@ Funcion de guardar con tratamiento de datos para API (counter)
           }
         }
         return ingredients;
-
-        function checkExist(ingredients, _id) {
-          var exist = -1;
-          for (var x = 0; x < ingredients.length; x++) {
-            if (ingredients[x].item_id === _id) {
-              exist = x;
-            }
-          }
-          return exist;
-        }
       },
       getEffects: function() {
         var effects = [];
         for (var i = 0; i < this.data.effects.length; i++) {
-          var exists = checkExist(effects, this.data.effects[i]._id);
+          var exists = this.checkExistEffect(effects, this.data.effects[i]._id);
           if (exists > -1) {
             effects[exists].value = effects[exists].value + parseFloat(this.data.effects[i].value);
           } else {
@@ -506,15 +496,25 @@ Funcion de guardar con tratamiento de datos para API (counter)
         }
         return effects;
 
-        function checkExist(effects, _id) {
-          var exist = -1;
-          for (var x = 0; x < effects.length; x++) {
-            if (effects[x].effect_id === _id) {
-              exist = x;
-            }
+
+      },
+      checkExistEffect: function(effects, _id) {
+        var exist = -1;
+        for (var x = 0; x < effects.length; x++) {
+          if (effects[x].effect_id === _id) {
+            exist = x;
           }
-          return exist;
         }
+        return exist;
+      },
+      checkExistIngredient: function(ingredients, _id) {
+        var exist = -1;
+        for (var x = 0; x < ingredients.length; x++) {
+          if (ingredients[x].item_id === _id) {
+            exist = x;
+          }
+        }
+        return exist;
       },
       _getComplete: function() {
         this.setSuccess(true);
