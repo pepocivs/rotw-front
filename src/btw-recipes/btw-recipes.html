@@ -11,18 +11,25 @@
       </style>
       <iron-ajax auto
       url="http://zelda.pepocivs.com/recipes"
-      params="{{params}}"
+      params="{{_getParams()}}"
       handle-as="json"
       last-response="{{recipesResponse}}"></iron-ajax>
 
-      <component-infobar title="{{availableTitle}}"></component-infobar>
-      <component-recipes recipe-list="[[recipeList.available]]"></component-recipes>
 
-      <component-infobar title="{{possibleTitle}}"></component-infobar>
-      <component-recipes recipe-list="[[recipeList.possible]]"></component-recipes>
+      <template is="dom-if" if="[[showTitle(recipeList.available)]]">
+        <component-infobar title="{{availableTitle}}"></component-infobar>
+        <component-recipes recipe-list="[[recipeList.available]]"></component-recipes>
+      </template>
 
-      <component-infobar title="{{unavailableTitle}}"></component-infobar>
-      <component-recipes recipe-list="[[recipeList.unavailable]]"></component-recipes>
+      <template is="dom-if" if="[[showTitle(recipeList.possible)]]">
+        <component-infobar title="{{possibleTitle}}"></component-infobar>
+        <component-recipes recipe-list="[[recipeList.possible]]"></component-recipes>
+      </template>
+
+      <template is="dom-if" if="[[showTitle(recipeList.unavailable)]]">
+        <component-infobar title="{{unavailableTitle}}"></component-infobar>
+        <component-recipes recipe-list="[[recipeList.unavailable]]"></component-recipes>
+      </template>
 
     </template>
 
@@ -33,33 +40,41 @@
               recipesResponse: {
                 type: Object,
                 observer: '_recipesResponse'
-              },
-              availableTitle: {
-                type: String
-              },
-              possibleTitle: {
-                type: String
-              },
-              unavailableTitle: {
-                type: String
-              },
-              params: {
-                type: Object,
-                value: {
-                  'inventory': '[{"itemId":3,"count":3},{"itemId":9,"count":1},{"itemId":10,"count":3},{"itemId":11,"count":2},{"itemId":17,"count":5},{"itemId":22,"count":3}]'
-                }
               }
             },
             observers: [],
             _recipesResponse: function(response) {
               this.recipeList = response;
-              var availableText  = (this.recipeList.available.length === 1) ? 'receta' : 'recetas';
-              this.availableTitle   = "Disponibles - "+this.recipeList.available.length+" "+availableText;
-              var possibleText  = (this.recipeList.possible.length === 1) ? 'receta' : 'recetas';
-              this.possibleTitle   = "Posibles - "+this.recipeList.possible.length+" "+possibleText;
-              var unavailableText  = (this.recipeList.unavailable.length === 1) ? 'receta' : 'recetas';
-              this.unavailableTitle   = "No Disponibles - "+this.recipeList.unavailable.length+" "+unavailableText;
+              if (this.recipeList.available.length === 1)
+                this.availableTitle = "Puedes hacer esta receta";
+              else
+                this.availableTitle  = "Puedes hacer estas "+this.recipeList.available.length+" recetas";
+
+              if (this.recipeList.possible.length === 1)
+                this.possibleTitle = "Te falta algún ingrediente para hacer esta receta";
+              else
+                this.possibleTitle  = "Te falta algún ingrediente para hacer estas "+this.recipeList.possible.length+" recetas";
+
+              if (this.recipeList.unavailable.length === 1)
+                this.unavailableTitle = "No tienes ningún ingrediente para esta receta";
+              else
+                this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas";
             },
+            showTitle: function(list) {
+              return (list.length > 0);
+            },
+            _getParams: function() {
+              return searchToObject(window.location.search);
+            }
         });
+        function searchToObject() {
+          var pairs = window.location.search.substring(1).split("&"), obj = {}, pair, i;
+          for ( i in pairs ) {
+            if ( pairs[i] === "" ) continue;
+            pair = pairs[i].split("=");
+            obj[ decodeURIComponent( pair[0] ) ] = decodeURIComponent( pair[1] );
+          }
+          return obj;
+        }
     </script>
 </dom-module>
