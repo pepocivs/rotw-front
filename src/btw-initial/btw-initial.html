@@ -36,7 +36,7 @@
 
         <div class="flex layout horizontal center-center box-initial">
           <paper-button class="icon-initial" raised class="indigo" on-tap="goToRecipes">
-          <img src="/images/pira.svg" alt="" height="60px">
+          <img src="../../images/pira.svg" alt="" height="60px">
             <p>Cocinar</p>
           </paper-button>
 
@@ -115,7 +115,7 @@
                   'count': inv.count
                 })
               })
-              location.href = '/recipes?inventory='+JSON.stringify(inventory);
+              location.href = 'recipes?inventory='+JSON.stringify(inventory);
             }
         });
     </script>
