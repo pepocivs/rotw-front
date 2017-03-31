@@ -67,11 +67,12 @@
 
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="form"    href="/form">Formulario</a>
-          <a name="info"    href="/info">Informacion</a>
-          <a name="initial" href="/initial">Inicio</a>
-          <a name="items"   href="/items">Items</a>
-          <a name="recipes" href="/recipes">Recetas</a>
+          <a name="initial"   href="/initial">Inicio</a>
+          <a name="inventory" href="/inventory">Mi inventario</a>
+          <a name="items"     href="/items">Elementos</a>
+          <a name="recipes"   href="/recipes">Recetas</a>
+          <a name="info"      href="/info">Informacion</a>
+          <a name="form"      href="/form">Insertar recetas nuevas</a>
 
 
         </iron-selector>
@@ -93,14 +94,15 @@
         <iron-pages
             selected="[[page]]"
             attr-for-selected="name"
-            fallback-selection="items"
+            fallback-selection="inventory"
             role="main"
             style="height:100%;background-color:white;">
-          <btw-initial name="initial" style="height:100%;"></btw-initial>
-          <btw-recipes name="recipes"></btw-recipes>
-          <btw-info name="info"></btw-info>
-          <btw-form name="form" style="height:100%;"></btw-form>
-          <btw-items name="items"></btw-items>
+          <btw-initial   name="initial" style="height:100%;"></btw-initial>
+          <btw-form      name="form"    style="height:100%;"></btw-form>
+          <btw-recipes   name="recipes"></btw-recipes>
+          <btw-info      name="info"></btw-info>
+          <btw-items     name="items"></btw-items>
+          <btw-inventory name="inventory"></btw-inventory>
 
         </iron-pages>
       </app-header-layout>
@@ -124,7 +126,7 @@
       ],
 
       _routePageChanged: function(page) {
-        this.page = page || 'items';
+        this.page = page || 'inventory';
 
         if (!this.$.drawer.persistent) {
           this.$.drawer.close();
@@ -137,7 +139,7 @@
       },
 
       _showPage404: function() {
-        this.page = 'items';
+        this.page = 'inventory';
       },
     });
   </script>
