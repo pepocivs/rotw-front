@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../component-items/component-items.html">
+
+<link rel="import" href="../general-style.html">
+
+<dom-module id="btw-inventory">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+      </style>
+
+      <iron-ajax auto
+      url="http://zelda.pepocivs.com/items"
+      params='{}'
+      handle-as="json"
+      last-response="{{itemsResponse}}"></iron-ajax>
+
+      <paper-button on-tap="goToRecipes">¿Qué puedo cocinar con estos elementos?</paper-button>
+      <component-items item-list="[[itemsResponse]]" inventory="{{inventory}}"></component-items>
+
+    </template>
+
+    <script>
+        Polymer({
+          is: 'btw-inventory',
+          properties: {
+            inventory: {
+              type: Object,
+              notify: true
+            }
+          },
+          goToRecipes: function(e) {
+            var inventory = [];
+            this.inventory.forEach(function(inv) {
+              inventory.push({
+                'itemId': inv.itemId,
+                'count': inv.count
+              })
+            })
+            location.href = '/recipes?inventory='+JSON.stringify(inventory);
+          }
+        });
+    </script>
+</dom-module>
