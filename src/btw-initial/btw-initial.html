@@ -1,10 +1,13 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../component-items/component-items.html">
+
 
 <link rel="import" href="../general-style.html">
 <style include="general-style iron-flex iron-flex-alignment iron-pages">
@@ -36,42 +39,33 @@
       </iron-ajax>
 
       <div class="layout vertical " style="height:100%;">
-      
+
         <div class="flex layout horizontal center-center box-initial">
+          <paper-button class="icon-initial" raised class="indigo" >
+          <img src="/images/pira.svg" alt="" height="60px">
+            <p>Cocinar</p>
+          </paper-button>
 
-        <paper-button class="icon-initial" raised class="indigo" >
-        <img src="/images/pira.svg" alt="" height="60px">
-          <p>añadir</p>
-        </paper-button>
-
-        <div class="information layout horizontal wrap center justified " >
-          <div style="width:100%; text-align:right;"> 0/5 </div>
-          <div>1 receta</div>
-          <div>
-          <iron-icon src="/images/hinox_guts.png"></iron-icon>
-          <iron-icon src="/images/hinox_guts.png"></iron-icon>
-          <iron-icon src="/images/hinox_guts.png"></iron-icon>
-          <iron-icon src="/images/hinox_guts.png"></iron-icon>
-          <iron-icon src="/images/hinox_guts.png"></iron-icon>
+          <div class="information layout horizontal wrap center justified " >
+            <div style="width:100%; text-align:right;"> {{nIngredients}}/5 </div>
+            <div>Elementos de la receta</div>
+            <div>
+              <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
+                <iron-icon on-tap="removeItem" value="{{ingredient._id}}" src="{{ingredient.image}}"></iron-icon>
+              </template>
+            </div>
           </div>
+
         </div>
 
-      </div>
-        <div>
-          <div class="layout horizontal wrap center-center item-container-initial">
-          
-            <template is="dom-repeat" items="[[itemList]]">
-                <div class="item-box" style="background-image: url('{{item.image}}');">
-                  <div class="item-minus">-</div>
-                  <div class="item-count">x{{item._id}}</div>
-                </div>
-            </template>
-          </div>
-        </div>
-      </div>
-      
-          
+        <component-items
+                item-list="[[itemsResponse]]"
+                inventory="{{inventory}}"
+                tap="true"
+                item-limit="5"
+                custom-class="item-container-initial"></component-items>
 
+      </div>
 
     </template>
 
@@ -81,19 +75,58 @@
 
             properties: {
               inventory: {
+                type: Object,
+                observer: '_formatInventory'
+              },
+              ingredients: {
                 type: Object
               },
-              itemsResponse: {
-                type: Object,
-                observer: '_itemsResponse'
+              nIngredients: {
+                type: Number,
+                value: 0
               }
             },
-            observers: [],
-            _itemsResponse: function(response) {
-                this.itemList = response;
+            _formatInventory: function() {
+              var ingredients = [];
+              this.inventory.forEach(function(itm){
+                for (var x = 0; x < itm.count; x++ ){
+                  ingredients.push({
+                    '_id':  itm.itemId,
+                    'image':  itm.image
+                  });
+                }
+              });
+              this.nIngredients = ingredients.length;
+              this.ingredients  = ingredients;
             },
-            
-            
+            removeItem: function(e) {
+              var model = e.model;
+              var removed = false;
+              for (var i = 0; i < this.ingredients.length; i++) {
+                if (e.target.value === this.ingredients[i]._id && !removed) {
+                  this.splice('ingredients', i, 1);
+                  removed = true;
+                }
+              }
+              this.inventory.forEach(function(inv) {
+                if (e.target.value === inv.itemId) inv.count --;
+              });
+              console.log(JSON.stringify(this.ingredients));
+              console.log(JSON.stringify(this.inventory));
+              this.nIngredients = this.ingredients.length;
+            },
+
+            goToRecipes: function(e) {
+              var inventory = [];
+              this.inventory.forEach(function(inv) {
+                inventory.push({
+                  'itemId': inv.itemId,
+                  'count': inv.count
+                })
+              })
+              console.log(JSON.stringify(inventory));
+              location.href = '/recipes?inventory='+JSON.stringify(inventory);
+            }
         });
     </script>
 </dom-module>
