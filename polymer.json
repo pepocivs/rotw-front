@@ -2,14 +2,22 @@
   "entrypoint": "index.html",
   "shell": "src/recipes-wild.html",
   "fragments": [
-
+    "btw-form/btw-form.html",
+    "btw-info/btw-info.html",
+    "btw-initial/btw-initial.html",
+    "btw-inventory/btw-inventory.html",
+    "btw-items/btw-items.html",
+    "btw-recipes/btw-recipes.html"
   ],
-  "sourceGlobs": [
+  "lint": {
+    "rules": ["polymer-1"]
+  },
+  "source": [
     "src/**/*",
     "images/**/*",
     "bower.json"
   ],
-  "includeDependencies": [
+  "extraDependencies": [
     "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ]
