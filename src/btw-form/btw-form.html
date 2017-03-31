@@ -1,21 +1,22 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
-<link rel="import" href="../../bower_components/iron-form/iron-form.html">
-<link rel="import" href="../../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
-<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item.html">
-<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
-<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
-
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
-<link rel="import" href="../general-style.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
 <link rel="import" href="../component-recipes/recipes-style.html">
+
+<link rel="import" href="../general-style.html">
 <!--
 TODO:
 Pintar bien la resta de elementos
@@ -27,8 +28,34 @@ Funcion de guardar con tratamiento de datos para API (counter)
 
       <style include="general-style recipes-style iron-flex iron-flex-alignment">
         :host {
-            display: block;
-          }
+          display: block;
+        }
+        .form-box{
+          background-color: #dadada;
+          height: 100%;
+          overflow: scroll;
+          bottom: 0;
+        }
+        .item-box-form {
+          background-color: #FFFFFF;
+          width: 94px;
+          height: 94px;
+          margin: 5px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 77%;
+          position: relative;
+          padding: 5px;
+          border-radius: 7px;
+          box-shadow: 1px 5px 6px 1px rgba(0, 0, 0, 0.09);
+          cursor: pointer;
+        }
+        .form-inform-boxs{
+          background-color: #ececec;
+          height: 184px;
+          overflow: scroll;
+          bottom: 0;
+        }
       </style>
 
       <!-- AJAX CALLS -->
