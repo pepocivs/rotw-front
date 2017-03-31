@@ -22,8 +22,13 @@
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
-            display: block;
-          }
+          display: block;
+        }
+        .indigo {
+          text-decoration: none;
+          color: #FFFFFF;
+          text-align: center;
+        }
       </style>
       <iron-ajax auto
         url="http://zelda.pepocivs.com/items"
@@ -35,9 +40,12 @@
       <div class="layout vertical " style="height:100%;">
 
         <div class="flex layout horizontal center-center box-initial">
-          <paper-button class="icon-initial" raised class="indigo" on-tap="goToRecipes">
-          <img src="../../images/pira.svg" alt="" height="60px">
-            <p>Cocinar</p>
+          <paper-button class="icon-initial" raised>
+            <a href$="{{jsonSend}}" class="indigo">
+              <!-- <paper-button class="icon-initial indigo" raised class="" href="{{jsonSend}}"> -->
+              <img src="../../images/pira.svg" alt="" height="60px" />
+              <div>Cocinar</div>
+            </a>
           </paper-button>
 
           <div class="information layout horizontal wrap center justified " >
@@ -78,6 +86,10 @@
               nIngredients: {
                 type: Number,
                 value: 0
+              },
+              jsonSend: {
+                type: String,
+                value: 'recipes'
               }
             },
             _formatInventory: function() {
@@ -92,6 +104,7 @@
               });
               this.nIngredients = ingredients.length;
               this.ingredients  = ingredients;
+              this.setJsonParam();
             },
             removeItem: function(e) {
               var model = e.model;
@@ -107,7 +120,7 @@
               });
               this.nIngredients = this.ingredients.length;
             },
-            goToRecipes: function(e) {
+            setJsonParam: function(e) {
               var inventory = [];
               this.inventory.forEach(function(inv) {
                 inventory.push({
@@ -115,7 +128,7 @@
                   'count': inv.count
                 })
               })
-              location.href = 'recipes?inventory='+JSON.stringify(inventory);
+              this.jsonSend = 'recipes?inventory='+JSON.stringify(inventory);
             }
         });
     </script>

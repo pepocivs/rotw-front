@@ -48,9 +48,11 @@
 
         <template is="dom-if" if="[[isLink]]">
           <template is="dom-repeat" items="[[itemList]]">
-              <div class="item-box small" on-tap="_goTo" value="{{item._id}}" style="background-image: url('{{item.image}}');">
+            <a href$="{{goTo}}?itemId={{item._id}}" class="invisible-a">
+              <div class="item-box small" style="background-image: url('{{item.image}}');">
                 <div class="item-count">{{item.name}}</div>
               </div>
+            </a>
           </template>
         </template>
 
@@ -172,9 +174,6 @@
           },
           _isGoTo: function() {
               this.isLink = (this.goTo.length > 0);
-          },
-          _goTo: function(e) {
-            location.href = this.goTo+'?itemId='+e.target.value;
           }
         });
     </script>

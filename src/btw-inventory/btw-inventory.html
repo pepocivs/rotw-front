@@ -20,7 +20,9 @@
       handle-as="json"
       last-response="{{itemsResponse}}"></iron-ajax>
 
-      <paper-button on-tap="goToRecipes">¿Qué puedo cocinar con estos elementos?</paper-button>
+      <paper-button>
+        <a href$="{{jsonSend}}" class="invisible-a">¿Qué puedo cocinar con estos elementos?</a>
+      </paper-button>
       <component-items item-list="[[itemsResponse]]" inventory="{{inventory}}"></component-items>
 
     </template>
@@ -31,10 +33,15 @@
           properties: {
             inventory: {
               type: Object,
-              notify: true
+              notify: true,
+              observer: 'setJsonParam'
+            },
+            jsonSend: {
+              type: String,
+              value: 'recipes'
             }
           },
-          goToRecipes: function(e) {
+          setJsonParam: function(e) {
             var inventory = [];
             this.inventory.forEach(function(inv) {
               inventory.push({
@@ -42,7 +49,7 @@
                 'count': inv.count
               })
             })
-            location.href = 'recipes?inventory='+JSON.stringify(inventory);
+            this.jsonSend = 'recipes?inventory='+JSON.stringify(inventory);
           }
         });
     </script>
