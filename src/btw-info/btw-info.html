@@ -8,57 +8,89 @@
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
-            display: block;
-          }
+          display: block;
+        }
+        .food-box-info{
+          background-color: #fdfdfd;
+          /* height: 96px; */
+          width: 40%;
+          border-radius: 10px;
+          margin: 10px;
+          padding: 0 0 19px 0;
+          box-shadow: 0px 2px 8px rgba(136, 136, 136, 0.24);
+        }
+        .comida-info-icono{
+          height: 100%;
+        }
+        .comida-info-icono>img{
+          height: 100%;
+        }
       </style>
       <iron-ajax auto
-        url="http://zelda.pepocivs.com/recipes"
-        params='{}'
-        handle-as="json"
-        last-response="{{recipesResponse}}">
+                 url="http://zelda.pepocivs.com/recipes"
+                 params="{{_getParams()}}"
+                 handle-as="json"
+                 last-response="{{recipesResponse}}">
+      </iron-ajax>
+      <iron-ajax auto
+                 url="http://zelda.pepocivs.com/items/{{_getItemId()}}"
+                 params="{}"
+                 handle-as="json"
+                 last-response="{{itemResponse}}">
       </iron-ajax>
 
-      <component-infobar title="Manzana" icon="http://img.zelda.pepocivs.com/ic_heart_red.png" rupees="20"></component-infobar>
+      <template is="dom-repeat" items="[[ingredient]]">
+        <component-infobar title="{{item.name}}" icon="{{item.image}}" rupees="{{item.sell_price}}"></component-infobar>
+        <div class="layout horizontal nowrap center-center" style="padding: 0 20px;">
+          <div class="icon-info-food"><img src="{{item.image}}" alt="{{item.name}}"></div>
+          <div class="flex">{{item.description}}</div>
+        </div>
+      </template>
 
-      <div class="layout horizontal nowrap center-center" style="padding: 0 20px;">
-        <div class="icon-info-food"><img src="http://img.zelda.pepocivs.com/apple.png" alt=""></div>
-        <div class="flex">Manazana que se utiliza para recuperar medio corazón.</div>
-      </div>
       <hr>
 
-      <component-recipes recipe-list="[[recipeList]]"></component-recipes>
-
-      <!--
-      <div class="layout horizontal wrap center-center" style="background-color:white;">
-        <template is="dom-repeat" items="[[recipeList]]">
-            <div class="food-box-info layout vertical nowrap center-center justified">
-            <div class="comida-info-icono">
-                <img src="{{item.image}}" alt="" class="foodprincipal">
-            </div>
-            <div class="food-box-one center-center">
-                <template is="dom-repeat" items="[[item.effects]]" as="effect">
-                  <img src="{{effect.icon}}" alt=""class="img-efects">
-                </template>
-            </div>
-            </div>
-        </template>
-      </div>
-      -->
+      <component-recipes recipe-list="[[recipeList.available]]"></component-recipes>
+      <component-recipes recipe-list="[[recipeList.possible]]"></component-recipes>
 
     </template>
     <script>
         Polymer({
             is: 'btw-info',
             properties: {
+              itemResponse: {
+                type: Object,
+                observer: '_getItemResponse'
+              },
               recipesResponse: {
                 type: Object,
-                observer: '_recipesResponse'
+                observer: '_getRecipesResponse'
               }
             },
-            observers: [],
-            _recipesResponse: function(response) {
-                this.recipeList = response;
+            _getItemResponse: function(response) {
+              this.ingredient = response;
             },
+            _getRecipesResponse: function(response) {
+              this.recipeList = response;
+            },
+            _getParams: function() {
+              if (this._getItemId())
+                return {'inventory': '[{"itemId":'+this._getItemId()+',"count":"99999"}]'};
+              else
+                return {};
+            },
+            _getItemId: function() {
+              var itemId = searchToObject();
+              return itemId.itemId;
+            }
         });
+        function searchToObject() {
+          var pairs = window.location.search.substring(1).split("&"), obj = {}, pair, i;
+          for ( i in pairs ) {
+            if ( pairs[i] === "" ) continue;
+            pair = pairs[i].split("=");
+            obj[ decodeURIComponent( pair[0] ) ] = decodeURIComponent( pair[1] );
+          }
+          return obj;
+        }
     </script>
 </dom-module>
