@@ -11,18 +11,12 @@
 
 <link rel="import" href="../general-style.html">
 <style include="general-style iron-flex iron-flex-alignment iron-pages">
-        body {
-            @apply(--fullbleed-vertical-layout);
-            margin: 0;
-            height: 100vh;
-        }
-        iron-pages{
-          height: 100%;
-        }
-        my-initial{
-          height: 100%;
-        }
-      </style>
+  body {
+    @apply(--fullbleed-vertical-layout);
+    margin: 0;
+    height: 100vh;
+  }
+</style>
 
 <dom-module id="btw-initial">
     <template>
@@ -41,7 +35,7 @@
       <div class="layout vertical " style="height:100%;">
 
         <div class="flex layout horizontal center-center box-initial">
-          <paper-button class="icon-initial" raised class="indigo" >
+          <paper-button class="icon-initial" raised class="indigo" on-tap="goToRecipes">
           <img src="/images/pira.svg" alt="" height="60px">
             <p>Cocinar</p>
           </paper-button>
@@ -111,11 +105,8 @@
               this.inventory.forEach(function(inv) {
                 if (e.target.value === inv.itemId) inv.count --;
               });
-              console.log(JSON.stringify(this.ingredients));
-              console.log(JSON.stringify(this.inventory));
               this.nIngredients = this.ingredients.length;
             },
-
             goToRecipes: function(e) {
               var inventory = [];
               this.inventory.forEach(function(inv) {
@@ -124,7 +115,6 @@
                   'count': inv.count
                 })
               })
-              console.log(JSON.stringify(inventory));
               location.href = '/recipes?inventory='+JSON.stringify(inventory);
             }
         });
