@@ -11,7 +11,7 @@
       </style>
       <iron-ajax auto
       url="http://zelda.pepocivs.com/recipes"
-      params="{{_getParams()}}"
+      params="{{params}}"
       handle-as="json"
       last-response="{{recipesResponse}}"></iron-ajax>
 
@@ -40,9 +40,18 @@
               recipesResponse: {
                 type: Object,
                 observer: '_recipesResponse'
+              },
+              params: {
+                type: Object,
+                value: {}
               }
             },
-            observers: [],
+            ready: function() {
+              this._getParams();
+            },
+            attributeChanged: function() {
+              this._getParams();
+            },
             _recipesResponse: function(response) {
               this.recipeList = response;
               if (this.recipeList.available.length === 1)
@@ -64,7 +73,7 @@
               return (list.length > 0);
             },
             _getParams: function() {
-              return searchToObject();
+              this.params = searchToObject();
             }
         });
         function searchToObject() {

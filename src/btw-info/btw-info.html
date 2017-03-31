@@ -28,12 +28,12 @@
       </style>
       <iron-ajax auto
                  url="http://zelda.pepocivs.com/recipes"
-                 params="{{_getParams()}}"
+                 params="{{params}}"
                  handle-as="json"
                  last-response="{{recipesResponse}}">
       </iron-ajax>
       <iron-ajax auto
-                 url="http://zelda.pepocivs.com/items/{{_getItemId()}}"
+                 url="http://zelda.pepocivs.com/items/{{itemId}}"
                  params="{}"
                  handle-as="json"
                  last-response="{{itemResponse}}">
@@ -64,7 +64,21 @@
               recipesResponse: {
                 type: Object,
                 observer: '_getRecipesResponse'
+              },
+              itemId: {
+                type: String,
+                value: ''
+              },
+              params: {
+                type: Object,
+                value: {}
               }
+            },
+            ready: function() {
+              this._getParams();
+            },
+            attributeChanged: function() {
+              this._getParams();
             },
             _getItemResponse: function(response) {
               this.ingredient = response;
@@ -73,15 +87,13 @@
               this.recipeList = response;
             },
             _getParams: function() {
-              if (this._getItemId())
-                return {'inventory': '[{"itemId":'+this._getItemId()+',"count":"99999"}]'};
-              else
-                return {};
+              var itemId  = searchToObject();
+              this.itemId = itemId.itemId;
+              this.params = {};
+              if (this.itemId && this.itemId.length > 0) {
+                this.params = {'inventory': '[{"itemId":'+this.itemId+',"count":"99999"}]'};
+              }
             },
-            _getItemId: function() {
-              var itemId = searchToObject();
-              return itemId.itemId;
-            }
         });
         function searchToObject() {
           var pairs = window.location.search.substring(1).split("&"), obj = {}, pair, i;

@@ -20,9 +20,9 @@
       handle-as="json"
       last-response="{{itemsResponse}}"></iron-ajax>
 
-      <paper-button>
-        <a href$="{{jsonSend}}" class="invisible-a">¿Qué puedo cocinar con estos elementos?</a>
-      </paper-button>
+      <a href$="{{jsonSend}}" class="invisible-a">
+        <paper-button>¿Qué puedo cocinar con estos elementos?</paper-button>
+      </a>
       <component-items item-list="[[itemsResponse]]" inventory="{{inventory}}"></component-items>
 
     </template>
