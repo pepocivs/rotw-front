@@ -138,13 +138,7 @@
             }
           },
           addElementByNumber: function(e) {
-            console.log(e.target);
             e.target.set('item.count', this.tempCount);
-            // var element = searchById(this.itemList, this.tempId);
-            // element.count = this.tempCount;
-            // this.$['count'+this.tempId].value = 'pepo';
-            // this.tempCount = 0;
-            // this.tempId    = 0;
 
             this.inventory = this._cleanItems();
             this.$.addByNumber.close();
@@ -180,7 +174,6 @@
               this.isLink = (this.goTo.length > 0);
           },
           _goTo: function(e) {
-            console.log('GO TO: ', e.target.value);
             location.href = this.goTo+'?itemId='+e.target.value;
           }
         });
