@@ -26,6 +26,21 @@
         .comida-info-icono>img{
           height: 100%;
         }
+        .info-comida{
+          background: #ecf0f1;
+          color: #323642;
+          font-size: 12px;
+          font-weight: 400;
+        }
+        hr{
+          margin-top: 0;
+          color: white;
+          border: 4px solid #bdc3c7;
+        }
+        .back{
+          height: 100%;
+          background: #33485c;
+        }
       </style>
       <iron-ajax auto
                  url="http://zelda.pepocivs.com/recipes"
@@ -39,22 +54,25 @@
                  handle-as="json"
                  last-response="{{itemResponse}}">
       </iron-ajax>
+        <div class="back">
+          <template is="dom-repeat" items="[[ingredient]]">
+              <component-infobar title="{{item.name}}" icon="{{item.image}}" rupees="{{item.sell_price}}"></component-infobar>
+              
+              <div class="layout horizontal nowrap center-center info-comida" style="padding: 0 20px;">
+                <div class="icon-info-food"><img src="{{item.image}}" alt="{{item.name}}"></div>
+                <div class="flex">{{item.description}}</div>
+                <component-effects effects="{{item.effects}}"></component-effects>
+              </div>
+            </template>
 
-      <template is="dom-repeat" items="[[ingredient]]">
-        <component-infobar title="{{item.name}}" icon="{{item.image}}" rupees="{{item.sell_price}}"></component-infobar>
-        <div class="layout horizontal nowrap center-center" style="padding: 0 20px;">
-          <div class="icon-info-food"><img src="{{item.image}}" alt="{{item.name}}"></div>
-          <div class="flex">{{item.description}}</div>
-          <component-effects effects="{{item.effects}}"></component-effects>
+            <hr>
+
+            <component-recipes recipe-list="[[recipeList.available]]"></component-recipes>
+            <component-recipes recipe-list="[[recipeList.possible]]"></component-recipes>
+
+          </template>
         </div>
-      </template>
-
-      <hr>
-
-      <component-recipes recipe-list="[[recipeList.available]]"></component-recipes>
-      <component-recipes recipe-list="[[recipeList.possible]]"></component-recipes>
-
-    </template>
+      
     <script>
         Polymer({
             is: 'btw-info',

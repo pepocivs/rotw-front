@@ -1,12 +1,14 @@
 <dom-module id="general-style">
   <template>
+
     <style>
+
       /*...................................................................................INITIAL.........................*/
       .icon-initial{
         border-radius: 100% !important;
         width: 135px;
         height: 135px;
-        background-color: black;
+        background-color: #2c3e50;
         color: white;
         display: flex;
         flex-direction: column;
@@ -15,11 +17,11 @@
       .box-initial{
         height: 100%;
         position: relative;
-        background-color: white;
+        background-color: transparent;
         padding: 20px;
       }
       .item-container-initial{
-        background-color: #000000;
+        background-color: #34495e;
         height: 349px;
         overflow: scroll;
         bottom: 0;
@@ -68,6 +70,16 @@
         color: #9F6000;
         background-color: #FEEFB3;
       }
+     app-drawer {
+        --app-drawer-content-container: {
+          background-color: #1a252f;
+          color: white;
+          -webkit-backdrop-filter: blur(10px); /* Safari 9+ */
+          backdrop-filter: blur(10px); /* Chrome and Opera */
+          box-shadow: 8px 0px 20px 0px rgba(0, 0, 0, 0.51);
+        }
+      }
+      
 
     </style>
   </template>

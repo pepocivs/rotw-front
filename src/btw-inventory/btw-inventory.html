@@ -12,6 +12,27 @@
         :host {
           display: block;
         }
+        .flat-button{
+            TEXT-ALIGN: center;
+            background: #bdc3c7;
+            color: white;
+            border-radius: 10px;
+            padding: 16px;
+            font-weight: 800;
+            margin: 19px;
+            box-shadow: 0px 5px 0px 0px #95a5a6;
+            justify-content: center;
+            margin-right: 0;
+            margin-left: 0;
+        }
+        .flat-back-principal{
+          background-color: #ecf0f1;
+        }
+        
+        .over{
+          height: 100vh;
+          overflow: scroll;
+        }
       </style>
 
       <iron-ajax auto
@@ -20,10 +41,22 @@
       handle-as="json"
       last-response="{{itemsResponse}}"></iron-ajax>
 
-      <a href$="{{jsonSend}}" class="invisible-a">
-        <paper-button>¿Qué puedo cocinar con estos elementos?</paper-button>
-      </a>
-      <component-items item-list="[[itemsResponse]]" inventory="{{inventory}}"></component-items>
+      <div class="layout vertical " style="height:100%;">
+
+      <div>
+        <div class="layout horizontal wrap around-justified flat-back-principal">
+        <a href$="" class="invisible-a">
+          <paper-button class="flat-button">Reset</paper-button>
+        </a>
+        <a href$="{{jsonSend}}" class="invisible-a">
+          <paper-button class="flat-button">¿Qué puedo cocinar?</paper-button>
+        </a>
+      </div>
+      </div>
+      
+      <component-items item-list="[[itemsResponse]]" inventory="{{inventory}}" class="over"></component-items>
+
+      </div>
 
     </template>
 

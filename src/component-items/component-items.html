@@ -14,18 +14,21 @@
           display: block;
         }
         .item-container {
-          background-color: #000000;
+          background-color: #34495e;
         }
         .item-box {
           background-color: #FFFFFF;
           width: 94px;
           height: 94px;
+          border-radius: 14px;
           margin: 5px;
           background-repeat: no-repeat;
           background-position: center;
           background-size: 77%;
           position: relative;
           padding: 5px;
+          border: 2px solid #424754;
+          box-shadow: 1px 3px 1px 2px #323640;
         }
         .item-box.small {
           background-size: 60%;
@@ -40,6 +43,27 @@
         }
         #addByNumber div{
           margin: auto;
+        }
+        .item-name{
+          font-weight: 800;
+          text-transform: uppercase;
+          text-align: center;
+          background-color: rgb(189, 195, 199);
+          position: absolute;
+          /* border-radius: 22px; */
+          color: #323642;
+          bottom: 0;
+          width: 100%;
+          box-shadow: 0px -4px 0px 0px #a6a6a7;
+          left: 0;
+        }
+        .item-box-overflow{
+          overflow: hidden;
+          background-position-y: 12px;
+        }
+        .item-box-numer{
+            border: none !important;
+            box-shadow: none !important;
         }
       </style>
 
@@ -63,8 +87,8 @@
         <template is="dom-if" if="[[isLink]]">
           <template is="dom-repeat" items="[[itemList]]">
             <a href$="{{goTo}}?itemId={{item._id}}" class="invisible-a">
-              <div class="item-box small" style="background-image: url('{{item.image}}');">
-                <div class="item-count">{{item.name}}</div>
+              <div class="item-box item-box-overflow small" style="background-image: url('{{item.image}}');">
+                <div class="item-name">{{item.name}}</div>
               </div>
             </a>
           </template>
@@ -92,7 +116,7 @@
 
         <paper-dialog id="addByNumber">
           <h2>¿Cuantos elementos de este tipo tienes?</h2>
-          <div class="item-box" style="background-image: url('{{targetItem.image}}');"></div>
+          <div class="item-box-numer item-box" style="background-image: url('{{targetItem.image}}');"></div>
           <div>{{tempName}}</div>
           <paper-input type="number" value="{{tempCount}}"></paper-input>
           <paper-button on-tap="addElementByNumber"
