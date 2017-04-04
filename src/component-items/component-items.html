@@ -44,24 +44,31 @@
         #addByNumber div{
           margin: auto;
         }
-        .item-name{
+        .item-name, .item-name-top{
           font-weight: 800;
           text-transform: uppercase;
           text-align: center;
           background-color: rgb(189, 195, 199);
           position: absolute;
-          /* border-radius: 22px; */
           color: #323642;
-          bottom: 0;
           width: 100%;
-          box-shadow: 0px -4px 0px 0px #a6a6a7;
           left: 0;
+        }
+        .item-name {
+          box-shadow: 0px -4px 0px 0px #a6a6a7;
+          bottom: 0;
+        }
+        .item-name-top{
+          border-radius: 16px 16px 0px 0px;
+          box-shadow: 0px 3px 0px 0px #a6a6a7;
+          top: 0;
+          font-size: 9px;
         }
         .item-box-overflow{
           overflow: hidden;
           background-position-y: 12px;
         }
-        .item-box-numer{
+        .item-box-number{
             border: none !important;
             box-shadow: none !important;
         }
@@ -71,7 +78,7 @@
         <div class="flex layout horizontal center-center box-initial">
           <div class="information layout horizontal wrap center justified " >
             <div style="width:100%; text-align:right;"> {{nIngredients}}/{{itemLimit}} </div>
-            <div>Ingredientes:</div>
+            <template  is="dom-if" if="[[!isLink]]"><div>Ingredientes:</div></template>
             <div>
               <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
                 <iron-icon on-tap="removeElement" value="{{ingredient._id}}" src="{{ingredient.image}}"></iron-icon>
@@ -96,8 +103,9 @@
 
         <template is="dom-if" if="[[isTap]]">
           <template is="dom-repeat" items="[[itemList]]">
-              <div class="item-box" on-tap="addElement" style="background-image: url('{{item.image}}');">
-                  <div class="item-count">x{{item.count}}</div>
+              <div class="item-box" on-tap="addElement" style="background-image: url('{{item.image}}');" itemid="{{item._id}}">
+                  <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
+                  <div class="item-name-top">{{item.name}}</div>
               </div>
           </template>
         </template>
@@ -108,7 +116,8 @@
                    on-tap="openDialog"
                    item="{{item}}"
                    style="background-image: url('{{item.image}}');">
-                <div class="item-count">x{{item.count}}</div>
+                <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
+                <div class="item-name-top">{{item.name}}</div>
               </div>
           </template>
         </template>
@@ -116,7 +125,7 @@
 
         <paper-dialog id="addByNumber">
           <h2>¿Cuantos elementos de este tipo tienes?</h2>
-          <div class="item-box-numer item-box" style="background-image: url('{{targetItem.image}}');"></div>
+          <div class="item-box-number item-box" style="background-image: url('{{targetItem.image}}');"></div>
           <div>{{tempName}}</div>
           <paper-input type="number" value="{{tempCount}}"></paper-input>
           <paper-button on-tap="addElementByNumber"
@@ -193,12 +202,15 @@
               model.set('item.count', model.item.count+1);
               this.inventory = this._updateInventory();
             }
+            this.updateCountList(e.target.itemid);
           },
           removeElement: function(e) {
             var model   = e.model;
             var removed = false;
+            var itemId  = 0;
             for (var i = 0; i < this.ingredients.length; i++) {
               if (e.target.value === this.ingredients[i]._id && !removed) {
+                itemId  = this.ingredients[i]._id;
                 this.set('itemList', this._updateItemList(this.ingredients[i]._id));
                 this.splice('ingredients', i, 1);
                 removed = true;
@@ -206,10 +218,12 @@
             }
             this.inventory    = this._updateInventory();
             this.nIngredients = this.ingredients.length;
+            this.updateCountList(itemId);
           },
           addElementByNumber: function(e) {
             e.target.set('item.count', this.tempCount);
             this.inventory = this._updateInventory();
+            this.updateCountList(e.target.item._id);
             this.$.addByNumber.close();
           },
           openDialog: function(e) {
@@ -238,6 +252,18 @@
               if (item._id === itemId) item.count --;
             });
             return itemList;
+          },
+          updateCountList: function(itemId) {
+            if (itemId > 0 && this.$$("#count"+itemId)) {
+              this.$$("#count"+itemId).textContent = 'x'+this.getCount(itemId);
+            }
+          },
+          getCount: function(itemId) {
+            var count = 0;
+            this.inventory.forEach(function(item){
+              if (item.itemId === itemId) count = item.count;
+            });
+            return count;
           },
           _isGoTo: function() {
               this.isLink = (this.goTo.length > 0);
