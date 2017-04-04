@@ -28,7 +28,7 @@
         .flat-back-principal{
           background-color: #ecf0f1;
         }
-        
+
         .over{
           height: 100vh;
           overflow: scroll;
@@ -45,15 +45,15 @@
 
       <div>
         <div class="layout horizontal wrap around-justified flat-back-principal">
-        <a href$="" class="invisible-a">
+        <!-- <a href$="" class="invisible-a">
           <paper-button class="flat-button">Reset</paper-button>
-        </a>
+        </a> -->
         <a href$="{{jsonSend}}" class="invisible-a">
           <paper-button class="flat-button">¿Qué puedo cocinar?</paper-button>
         </a>
       </div>
       </div>
-      
+
       <component-items item-list="[[itemsResponse]]" inventory="{{inventory}}" class="over"></component-items>
 
       </div>
