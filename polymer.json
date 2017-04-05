@@ -7,14 +7,17 @@
     "btw-initial/btw-initial.html",
     "btw-inventory/btw-inventory.html",
     "btw-items/btw-items.html",
-    "btw-recipes/btw-recipes.html"
+    "btw-recipes/btw-recipes.html",
+    "recipes-wild.html"
   ],
   "lint": {
     "rules": ["polymer-1"]
   },
   "source": [
     "src/**/*",
+    "src/*",
     "images/**/*",
+    "images/*",
     "bower.json"
   ],
   "extraDependencies": [

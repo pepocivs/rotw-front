@@ -90,6 +90,14 @@
           width: 100%;
           left: 0;
         }
+        .item-name>div, .item-name-top>div{
+          word-wrap: normal;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 90px;
+          margin: auto;
+        }
         .item-name {
           box-shadow: 0px -4px 0px 0px #a6a6a7;
           bottom: 0;
@@ -199,7 +207,7 @@
                  itemid="{{item._id}}"
                  image="{{item.image}}">
               <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
-              <div class="item-name-top">{{item.name}}</div>
+              <div class="item-name-top"><div>{{item.name}}</div></div>
             </div>
           </template>
         </div>
