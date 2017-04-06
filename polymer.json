@@ -2,34 +2,29 @@
   "entrypoint": "index.html",
   "shell": "src/recipes-wild.html",
   "fragments": [
-    "btw-form/btw-form.html",
-    "btw-info/btw-info.html",
-    "btw-initial/btw-initial.html",
-    "btw-inventory/btw-inventory.html",
-    "btw-items/btw-items.html",
-    "btw-recipes/btw-recipes.html",
-    "recipes-wild.html"
+    "src/btw-form/btw-form.html",
+    "src/btw-info/btw-info.html",
+    "src/btw-initial/btw-initial.html",
+    "src/btw-inventory/btw-inventory.html",
+    "src/btw-items/btw-items.html",
+    "src/btw-recipes/btw-recipes.html"
+  ],
+  "sources": [
+    "images/**/*",
+    "src/**/*",
+    "bower.json",
+    "manifest.json"
+  ],
+  "extraDependencies": [
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ],
   "lint": {
     "rules": ["polymer-1"]
   },
-  "source": [
-    "src/**/*",
-    "images/**/*",
-    "bower.json"
-  ],
-  "extraDependencies": [
-    "manifest.json",
-    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
-  ],
   "builds": [{
-    "name": "bundled",
+    "addServiceWorker": true,
+    "swPrecacheConfig": "sw-precache-config.js",
     "bundle": true,
-    "js": {"minify": true},
-    "css": {"minify": true},
-    "html": {"minify": true}
-  },{
-    "name": "unbundled",
     "js": {"minify": true},
     "css": {"minify": true},
     "html": {"minify": true}
