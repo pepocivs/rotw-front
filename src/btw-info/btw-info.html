@@ -2,6 +2,7 @@
 <link rel="import" href="../component-recipes/component-recipes.html">
 <link rel="import" href="../component-infobar/component-infobar.html">
 <link rel="import" href="../component-effects/component-effects.html">
+<link rel="import" href="../component-locations/component-locations.html">
 
 <link rel="import" href="../general-style.html">
 
@@ -57,10 +58,13 @@
         <div class="back">
           <template is="dom-repeat" items="[[ingredient]]">
               <component-infobar title="{{item.name}}" icon="{{item.image}}" rupees="{{item.sell_price}}"></component-infobar>
-              
+
               <div class="layout horizontal nowrap center-center info-comida" style="padding: 0 20px;">
                 <div class="icon-info-food"><img src="{{item.image}}" alt="{{item.name}}"></div>
-                <div class="flex">{{item.description}}</div>
+                <div class="flex">
+                  {{item.description}}
+                  <component-locations location-string="{{item.location}}"></component-locations>
+                </div>
                 <component-effects effects="{{item.effects}}"></component-effects>
               </div>
             </template>
@@ -72,7 +76,7 @@
 
           </template>
         </div>
-      
+
     <script>
         Polymer({
             is: 'btw-info',
