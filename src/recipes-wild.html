@@ -27,7 +27,7 @@
 
         display: block;
       }
-      
+
       app-header {
         box-shadow: 0 3px 0px 2px rgb(22, 23, 29);
         background: #323642;
@@ -62,7 +62,7 @@
           color: #ffffff;
           line-height: 40px;
           font-weight: 100;
-          
+
           font-size: 12px;
           background-color: rgba(0, 0, 0, 0.33);
       }
@@ -73,7 +73,9 @@
           font-size: 16px;
           text-transform: uppercase;
       }
-      
+      .full-height {
+        height: 100%;
+      }
     </style>
 
 
@@ -82,7 +84,7 @@
         route="{{route}}"
         pattern="/:page"
         data="{{routeData}}"
-        tail="{{subroute}}"></app-route>
+        tail="{{subRoute}}"></app-route>
 
     <app-drawer-layout fullbleed>
       <!-- Drawer content -->
@@ -90,7 +92,7 @@
 
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          
+
         <a  style="text-align: center;height:95px;padding-bottom: 41px;padding-top:41px;background-color:transparent;"><img src="../images/pira.svg" style="height:100%;"></img></a>
           <a name="initial"   href="/initial"><iron-icon src="../images/pira.svg" style="margin-right:24px;"></iron-icon>Inicio</a>
           <a name="inventory" href="/inventory"><iron-icon src="../images/menublanco.svg" style="margin-right:24px;"></iron-icon>Mi inventario</a>
@@ -121,12 +123,13 @@
             fallback-selection="inventory"
             role="main"
             style="height:100%;background-color:#33485c;">
-          <btw-initial   name="initial" style="height:100%;"></btw-initial>
-          <btw-form      name="form"    style="height:100%;"></btw-form>
-          <btw-recipes   name="recipes"></btw-recipes>
-          <btw-info      name="info" style="height:100%;"></btw-info>
-          <btw-items     name="items"></btw-items>
-          <btw-inventory name="inventory" style="height:100%;"></btw-inventory>
+
+          <btw-form name="form" class="full-height"></btw-form>
+          <btw-info name="info" class="full-height"></btw-info>
+          <btw-initial name="initial" class="full-height"></btw-initial>
+          <btw-inventory name="inventory" class="full-height"></btw-inventory>
+          <btw-items name="items"></btw-items>
+          <btw-recipes name="recipes"></btw-recipes>
 
         </iron-pages>
       </app-header-layout>
@@ -143,12 +146,16 @@
           reflectToAttribute: true,
           observer: '_pageChanged',
         },
+        routeData: {
+          type: Object
+        },
+        subRoute: {
+          type: Object
+        }
       },
-
       observers: [
         '_routePageChanged(routeData.page)',
       ],
-
       _routePageChanged: function(page) {
         this.page = page || 'initial';
 
@@ -156,12 +163,10 @@
           this.$.drawer.close();
         }
       },
-
       _pageChanged: function(page) {
         var resolvedPageUrl = this.resolveUrl('btw-'+page+'/btw-'+ page + '.html');
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
       },
-
       _showPage404: function() {
         this.page = 'initial';
       },

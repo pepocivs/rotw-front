@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../component-recipes/component-recipes.html">
 <link rel="import" href="../component-infobar/component-infobar.html">
+<link rel="import" href="../component-recipes/component-recipes.html">
 
 <dom-module id="btw-recipes">
     <template>
@@ -11,10 +11,10 @@
         }
       </style>
       <iron-ajax auto
-      url="https://zelda.pepocivs.com/recipes"
-      params="{{params}}"
-      handle-as="json"
-      last-response="{{recipesResponse}}"></iron-ajax>
+                 url="https://zelda.pepocivs.com/recipes"
+                 params="{{params}}"
+                 handle-as="json"
+                 last-response="{{recipesResponse}}"></iron-ajax>
 
 
       <template is="dom-if" if="[[showTitle(recipeList.available)]]">
@@ -45,6 +45,15 @@
               params: {
                 type: Object,
                 value: {}
+              },
+              recipeList: {
+                type: Object
+              },
+              availableTitle: {
+                type: String
+              },
+              possibleTitle: {
+                type: String
               }
             },
             ready: function() {

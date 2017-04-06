@@ -141,7 +141,6 @@
                  content-type="application/json"
                  method="PUT"
                  on-response="_getComplete"
-                 last-response="{{insertResponse}}"
                  last-error="{{error}}"></iron-ajax>
 
       <template is="dom-if" if="[[sended]]">
@@ -190,7 +189,7 @@
           <div>Ingredientes seleccionados</div>
           <div>
             <template is="dom-repeat" items="{{data.ingredients}}" as="ingredient" index-as="x">
-              <iron-icon on-tap="removeItem" value="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
+              <iron-icon on-tap="removeItem" value$="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
             </template>
           </div>
         </div>
@@ -231,7 +230,7 @@
           <div>Efectos seleccionados</div>
           <div>
             <template is="dom-repeat" items="{{data.effects}}" as="effect" index-as="x">
-              <iron-icon on-tap="removeEffect" value="{{effect._id}}" src="../images/items/{{effect.icon}}"></iron-icon>
+              <iron-icon on-tap="removeEffect" value$="{{effect._id}}" src="../images/items/{{effect.icon}}"></iron-icon>
             </template>
           </div>
         </div>
@@ -255,10 +254,10 @@
         <h2>¿Cuanto tiempo dura?</h2>
         <paper-input type="number" value="{{timeValue}}"></paper-input>
         <paper-button on-tap="addEffect"
-                      value="{{tempEffectId}}"
+                      value$="{{tempEffectId}}"
                       hastime="0"
-                      timevalue={{timeValue}}
-                      icon="{{tempEffectIcon}}">Agregar</paper-button>
+                      timevalue$={{timeValue}}
+                      icon$="{{tempEffectIcon}}">Agregar</paper-button>
 
       </paper-dialog>
 
@@ -281,7 +280,7 @@
           <paper-dropdown-menu label="¿Como se hace?" name="craftingType" value="[[data.craftingType]]">
             <paper-menu attr-for-selected="value" class="dropdown-content" selected="{{data.craftingType}}">
               <template is="dom-repeat" items="[[craftingList]]" as="crafting">
-                <paper-item on-tap="setCraftingIcon" icon="../images/items/{{crafting.icon}}" value="{{crafting._id}}"><iron-icon src="../images/items/{{crafting.icon}}"></iron-icon> {{crafting.type}}</paper-item>
+                <paper-item on-tap="setCraftingIcon" icon="../images/items/{{crafting.icon}}" value$="{{crafting._id}}"><iron-icon src="../images/items/{{crafting.icon}}"></iron-icon> {{crafting.type}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
@@ -396,6 +395,18 @@
           value: ["fruta","seta","tuberculo","hierba","flor","carne","cereal",
                   "lacteos","condimento","mineral","monstruo","pescao","marisco",
                   "bicho","reptiles","material"]
+        },
+        foodimgList: {
+          type: Object
+        },
+        craftingList: {
+          type: Object
+        },
+        itemList: {
+          type: Object
+        },
+        effectsList: {
+          type: Object
         }
       },
       ready: function() {
