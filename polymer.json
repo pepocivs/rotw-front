@@ -2,12 +2,12 @@
   "entrypoint": "index.html",
   "shell": "src/recipes-wild.html",
   "fragments": [
-    "src/btw-form/btw-form.html",
-    "src/btw-info/btw-info.html",
-    "src/btw-initial/btw-initial.html",
-    "src/btw-inventory/btw-inventory.html",
-    "src/btw-items/btw-items.html",
-    "src/btw-recipes/btw-recipes.html"
+    "src/page-form/page-form.html",
+    "src/page-info/page-info.html",
+    "src/page-home/page-home.html",
+    "src/page-inventory/page-inventory.html",
+    "src/page-items/page-items.html",
+    "src/page-recipes/page-recipes.html"
   ],
   "sources": [
     "images/**/*",

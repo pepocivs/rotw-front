@@ -112,6 +112,11 @@
           position: absolute;
           bottom: 0px;
         }
+        .accept-button {
+          background-color: #2ecc71;
+          color: white;
+          font-weight: 800;
+        }
       </style>
 
       <!-- AJAX CALLS -->
@@ -159,14 +164,16 @@
       <paper-dialog id="dish" style="position:absolute; height: 65%;">
         <div class="layout horizontal wrap center">
           <h2 class="flex">PLATO</h2>
-          <paper-button dialog-confirm autofocus raised style="background-color:#2ecc71;color:white;font-weight:800;">Aceptar</paper-button>
+          <paper-button dialog-confirm autofocus raised class="accept-button">Aceptar</paper-button>
         </div>
 
         <div class="layout horizontal wrap center justified">
           <div style="width:100%; text-align:right;"> {{nDish}}/1 </div>
           <div>Plato seleccionado</div>
           <div>
-            <iron-icon src="../images/items/{{dishImage}}"></iron-icon>
+            <template is="dom-if" if="[[dishImage]]">
+              <iron-icon src="../images/items/{{dishImage}}"></iron-icon>
+            </template>
           </div>
         </div>
 
@@ -184,7 +191,7 @@
       <paper-dialog id="ingredients" style="position:absolute; height: 65%;">
         <div class="layout horizontal wrap center">
           <h2 class="flex">INGREDIENTES</h2>
-          <paper-button dialog-confirm autofocus raised style="background-color:#2ecc71;color:white;font-weight:800;">Aceptar</paper-button>
+          <paper-button dialog-confirm autofocus raised class="accept-button">Aceptar</paper-button>
         </div>
 
         <div class="layout horizontal wrap center justified">
@@ -229,7 +236,7 @@
       <paper-dialog id="effects" style="position:absolute; height: 65%;">
         <div class="layout horizontal wrap center">
           <h2 class="flex">EFECTOS</h2>
-          <paper-button dialog-confirm autofocus raised style="background-color:#2ecc71;color:white;font-weight:800;">Aceptar</paper-button>
+          <paper-button dialog-confirm autofocus raised class="accept-button">Aceptar</paper-button>
         </div>
 
         <div class="layout horizontal wrap center justified">
@@ -293,7 +300,7 @@
           <paper-dropdown-menu label="¿Como se hace?" name="craftingType" value="[[data.craftingType]]">
             <paper-menu attr-for-selected="value" class="dropdown-content" selected="{{data.craftingType}}">
               <template is="dom-repeat" items="[[craftingList]]" as="crafting">
-                <paper-item on-tap="setCraftingIcon" icon="../images/items/{{crafting.icon}}" value="{{crafting._id}}"><iron-icon src="../images/items/{{crafting.icon}}"></iron-icon> {{crafting.type}}</paper-item>
+                <paper-item on-tap="setCraftingIcon" icon="{{crafting.icon}}" value="{{crafting._id}}"><iron-icon src="../images/items/{{crafting.icon}}"></iron-icon> {{crafting.type}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
@@ -400,7 +407,7 @@
         },
         craftingIcon: {
           type: String,
-          value: "/ic_fire.png"
+          value: "ic_fire.png"
         },
         itemCount: {
           type: Object
