@@ -209,6 +209,15 @@
               <div class="item-name-top"><div>{{item.name}}</div></div>
             </div>
           </template>
+
+          <template is="dom-repeat" items="{{itemTypes}}" as="itemType">
+            <paper-button on-tap="addAllItem"
+            value="all{{itemType}}"
+            itemid="all{{itemType}}"
+            image="">
+            Todos l@s: {{itemType}}</paper-button>
+          </template>
+
         </div>
       </paper-dialog>
 
@@ -383,6 +392,12 @@
         },
         itemCount: {
           type: Object
+        },
+        itemTypes: {
+          type: Object,
+          value: ["fruta","seta","tuberculo","hierba","flor","carne","cereal",
+                  "lacteos","condimento","mineral","monstruo","pescao","marisco",
+                  "bicho","reptiles","material"]
         }
       },
       ready: function() {
