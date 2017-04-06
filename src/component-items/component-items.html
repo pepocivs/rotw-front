@@ -89,7 +89,7 @@
             <template  is="dom-if" if="[[!isLink]]"><div>Ingredientes:</div></template>
             <div>
               <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
-                <iron-icon on-tap="removeElement" value="{{ingredient._id}}" src="{{ingredient.image}}"></iron-icon>
+                <iron-icon on-tap="removeElement" value="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
               </template>
             </div>
           </div>
@@ -102,7 +102,7 @@
         <template is="dom-if" if="[[isLink]]">
           <template is="dom-repeat" items="[[itemList]]">
             <a href$="{{goTo}}?itemId={{item._id}}" class="invisible-a">
-              <div class="item-box item-box-overflow small" style="background-image: url('{{item.image}}');">
+              <div class="item-box item-box-overflow small" style="background-image: url('../images/items/{{item.image}}');">
                 <div class="item-name"><div>{{item.name}}</div></div>
               </div>
             </a>
@@ -111,7 +111,7 @@
 
         <template is="dom-if" if="[[isTap]]">
           <template is="dom-repeat" items="[[itemList]]">
-              <div class="item-box" on-tap="addElement" style="background-image: url('{{item.image}}');" itemid="{{item._id}}">
+              <div class="item-box" on-tap="addElement" style="background-image: url('../images/items/{{item.image}}');" itemid="{{item._id}}">
                   <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
                   <div class="item-name-top"><div>{{item.name}}</div></div>
               </div>
@@ -123,7 +123,7 @@
               <div class="item-box"
                    on-tap="openDialog"
                    item="{{item}}"
-                   style="background-image: url('{{item.image}}');">
+                   style="background-image: url('../images/items/{{item.image}}');">
                 <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
                 <div class="item-name-top"><div>{{item.name}}</div></div>
               </div>
@@ -133,7 +133,7 @@
 
         <paper-dialog id="addByNumber">
           <h2>¿Cuantos elementos de este tipo tienes?</h2>
-          <div class="item-box-number item-box" style="background-image: url('{{targetItem.image}}');"></div>
+          <div class="item-box-number item-box" style="background-image: url('../images/items/{{targetItem.image}}');"></div>
           <div>{{tempName}}</div>
           <paper-input type="number" value="{{tempCount}}"></paper-input>
           <paper-button on-tap="addElementByNumber"

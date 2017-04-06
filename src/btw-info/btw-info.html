@@ -57,10 +57,10 @@
       </iron-ajax>
         <div class="back">
           <template is="dom-repeat" items="[[ingredient]]">
-              <component-infobar title="{{item.name}}" icon="{{item.image}}" rupees="{{item.sell_price}}"></component-infobar>
+              <component-infobar title="{{item.name}}" icon="../images/items/{{item.image}}" rupees="{{item.sell_price}}"></component-infobar>
 
               <div class="layout horizontal nowrap center-center info-comida" style="padding: 0 20px;">
-                <div class="icon-info-food"><img src="{{item.image}}" alt="{{item.name}}"></div>
+                <div class="icon-info-food"><img src="../images/items/{{item.image}}" alt="{{item.name}}"></div>
                 <div class="flex">
                   {{item.description}}
                   <component-locations location-string="{{item.location}}"></component-locations>

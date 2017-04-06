@@ -175,7 +175,7 @@
           <div on-tap="selectImage"
                value="{{dish._id}}"
                class="item-box-form"
-               style="background-image: url('{{dish.image}}');"></div>
+               style="background-image: url('../images/items/{{dish.image}}');"></div>
           </template>
         </div>
       </paper-dialog>
@@ -192,7 +192,7 @@
           <div>Ingredientes seleccionados</div>
           <div>
             <template is="dom-repeat" items="{{data.ingredients}}" as="ingredient" index-as="x">
-              <iron-icon on-tap="removeItem" value="{{ingredient._id}}" src="{{ingredient.image}}"></iron-icon>
+              <iron-icon on-tap="removeItem" value="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
             </template>
           </div>
         </div>
@@ -200,11 +200,11 @@
         <div class="layout horizontal wrap center-center form-box">
           <template id="ingredientList" is="dom-repeat" items="[[itemList]]">
             <div class="item-box-form"
-                 style="background-image: url('{{item.image}}');"
+                 style="background-image: url('../images/items/{{item.image}}');"
                  on-tap="addItem"
                  value="{{item._id}}"
                  itemid="{{item._id}}"
-                 image="{{item.image}}">
+                 image="../images/items/{{item.image}}">
               <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
               <div class="item-name-top"><div>{{item.name}}</div></div>
             </div>
@@ -224,7 +224,7 @@
           <div>Efectos seleccionados</div>
           <div>
             <template is="dom-repeat" items="{{data.effects}}" as="effect" index-as="x">
-              <iron-icon on-tap="removeEffect" value="{{effect._id}}" src="{{effect.icon}}"></iron-icon>
+              <iron-icon on-tap="removeEffect" value="{{effect._id}}" src="../images/items/{{effect.icon}}"></iron-icon>
             </template>
           </div>
         </div>
@@ -232,7 +232,7 @@
         <div class="layout horizontal wrap center-center form-box">
           <template is="dom-repeat" items="[[effectsList]]" as="effect">
             <div class="item-box-form"
-                 style="background-image: url('{{effect.icon}}');"
+                 style="background-image: url('../images/items/{{effect.icon}}');"
                  on-tap="addEffect"
                  value="{{effect._id}}"
                  hastime="{{effect.hasTime}}"
@@ -274,7 +274,7 @@
           <paper-dropdown-menu label="¿Como se hace?" name="craftingType" value="[[data.craftingType]]">
             <paper-menu attr-for-selected="value" class="dropdown-content" selected="{{data.craftingType}}">
               <template is="dom-repeat" items="[[craftingList]]" as="crafting">
-                <paper-item on-tap="setCraftingIcon" icon="{{crafting.icon}}" value="{{crafting._id}}"><iron-icon src="{{crafting.icon}}"></iron-icon> {{crafting.type}}</paper-item>
+                <paper-item on-tap="setCraftingIcon" icon="../images/items/{{crafting.icon}}" value="{{crafting._id}}"><iron-icon src="../images/items/{{crafting.icon}}"></iron-icon> {{crafting.type}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
@@ -302,9 +302,9 @@
             <div class="v"></div>
             <div class="flex one food-box-two  self-start">
               <template is="dom-repeat" items="{{data.ingredients}}" as="ingredient" index-as="x">
-                <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="" class="img-ingredients" />
+                <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="" class="img-ingredients" />
               </template>
-              <iron-icon src="{{craftingIcon}}"></iron-icon>
+              <iron-icon src="../images/items/{{craftingIcon}}"></iron-icon>
             </div>
           </div>
         </div>
@@ -379,7 +379,7 @@
         },
         craftingIcon: {
           type: String,
-          value: "http://img.zelda.pepocivs.com/ic_fire.png"
+          value: "/ic_fire.png"
         },
         itemCount: {
           type: Object
@@ -421,7 +421,7 @@
       },
       selectImage: function(e) {
         this.data.image = e.target.value;
-        this.dishImage  = "http://img.zelda.pepocivs.com/"+e.target.value+".png";
+        this.dishImage  = "../images/items/"+e.target.value+".png";
         this.nDish      = 1;
       },
       getCount: function(_id) {

@@ -20,10 +20,10 @@
       <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
         <template is="dom-repeat-n" count="{{ingredient.howMany}}">
           <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
-            <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="Available"/>
+            <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="Available"/>
           </template>
           <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
-            <img src="{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="Not available"/>
+            <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="Not available"/>
           </template>
         </template>
       </template>
