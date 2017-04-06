@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "build/unbundled",
+    "public": "build/default",
     "ignore": [
       "bower.json"
     ],
