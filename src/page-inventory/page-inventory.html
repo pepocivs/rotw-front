@@ -2,10 +2,10 @@
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../component-items/component-items.html">
+<link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
 
-<dom-module id="btw-inventory">
+<dom-module id="page-inventory">
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
@@ -53,7 +53,7 @@
       </div>
       </div>
 
-      <component-items item-list="[[itemsResponse]]" inventory="{{inventory}}" class="over"></component-items>
+      <btw-items item-list="[[itemsResponse]]" inventory="{{inventory}}" class="over"></btw-items>
 
       </div>
 
@@ -61,7 +61,7 @@
 
     <script>
         Polymer({
-          is: 'btw-inventory',
+          is: 'page-inventory',
           properties: {
             inventory: {
               type: Object,

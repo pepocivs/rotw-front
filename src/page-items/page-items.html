@@ -1,16 +1,15 @@
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../component-items/component-items.html">
+<link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
 
-<dom-module id="btw-items">
+<dom-module id="page-items">
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
           display: block;
         }
-
       </style>
 
       <iron-ajax auto
@@ -19,13 +18,13 @@
                  handle-as="json"
                  last-response="{{itemsResponse}}"></iron-ajax>
 
-      <component-items item-list="[[itemsResponse]]" go-to="info"></component-items>
+      <btw-items item-list="[[itemsResponse]]" go-to="info"></btw-items>
 
     </template>
 
     <script>
         Polymer({
-          is: 'btw-items',
+          is: 'page-items',
           properties: {}
         });
     </script>

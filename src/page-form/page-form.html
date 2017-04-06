@@ -13,16 +13,19 @@
 <link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
-<link rel="import" href="../component-recipes/recipes-style.html">
+<link rel="import" href="../app-elements/btw-recipes-style.html">
 <link rel="import" href="../general-style.html">
 
-<dom-module id="btw-form">
+<dom-module id="page-form">
   <template>
-    <div class="layout vertical" style="height:100%;">
+    <div class="layout vertical max-height">
 
-      <style include="general-style recipes-style iron-flex iron-flex-alignment">
+      <style include="general-style btw-recipes-style iron-flex iron-flex-alignment">
         :host {
           display: block;
+        }
+        .max-height {
+          height: 100%;
         }
         .img-efects {
           float: left;
@@ -163,7 +166,7 @@
           <div style="width:100%; text-align:right;"> {{nDish}}/1 </div>
           <div>Plato seleccionado</div>
           <div>
-            <iron-icon src="{{dishImage}}"></iron-icon>
+            <iron-icon src="../images/items/{{dishImage}}"></iron-icon>
           </div>
         </div>
 
@@ -189,7 +192,7 @@
           <div>Ingredientes seleccionados</div>
           <div>
             <template is="dom-repeat" items="{{data.ingredients}}" as="ingredient" index-as="x">
-              <iron-icon on-tap="removeItem" value$="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
+              <iron-icon on-tap="removeItem" value="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
             </template>
           </div>
         </div>
@@ -201,19 +204,23 @@
                  on-tap="addItem"
                  value="{{item._id}}"
                  itemid="{{item._id}}"
-                 image="../images/items/{{item.image}}">
+                 image="{{item.image}}">
               <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
-              <div class="item-name-top"><div>{{item.name}}</div></div>
+              <div class="item-name-top"><div
+                value="{{item._id}}"
+                itemid="{{item._id}}"
+                image="{{item.image}}">{{item.name}}</div>
+              </div>
             </div>
           </template>
 
-          <template is="dom-repeat" items="{{itemTypes}}" as="itemType">
+          <!-- <template is="dom-repeat" items="{{itemTypes}}" as="itemType">
             <paper-button on-tap="addAllItem"
             value="all{{itemType}}"
             itemid="all{{itemType}}"
             image="">
             Todos l@s: {{itemType}}</paper-button>
-          </template>
+          </template> -->
 
         </div>
       </paper-dialog>
@@ -230,7 +237,7 @@
           <div>Efectos seleccionados</div>
           <div>
             <template is="dom-repeat" items="{{data.effects}}" as="effect" index-as="x">
-              <iron-icon on-tap="removeEffect" value$="{{effect._id}}" src="../images/items/{{effect.icon}}"></iron-icon>
+              <iron-icon on-tap="removeEffect" value="{{effect._id}}" src="{{effect.icon}}"></iron-icon>
             </template>
           </div>
         </div>
@@ -244,7 +251,12 @@
                  hastime="{{effect.hasTime}}"
                  timevalue="{{effect.value}}"
                  icon="{{effect.icon}}">
-                 <div class="item-name-top"><div>{{effect.effect}}</div></div>
+                 <div class="item-name-top"><div
+                   value="{{effect._id}}"
+                   hastime="{{effect.hasTime}}"
+                   timevalue="{{effect.value}}"
+                   icon="{{effect.icon}}">{{effect.effect}}</div>
+                 </div>
             </div>
           </template>
         </div>
@@ -253,11 +265,12 @@
       <paper-dialog id="effectValue" style="position:absolute; height: 65%;">
         <h2>¿Cuanto tiempo dura?</h2>
         <paper-input type="number" value="{{timeValue}}"></paper-input>
-        <paper-button on-tap="addEffect"
-                      value$="{{tempEffectId}}"
-                      hastime="0"
-                      timevalue$={{timeValue}}
-                      icon$="{{tempEffectIcon}}">Agregar</paper-button>
+        <div id="data-values"
+             value="{{tempEffectId}}"
+             hastime="0"
+             timevalue="{{timeValue}}"
+             icon="[[tempEffectIcon]]"></div>
+        <paper-button on-tap="addEffect">Agregar</paper-button>
 
       </paper-dialog>
 
@@ -280,7 +293,7 @@
           <paper-dropdown-menu label="¿Como se hace?" name="craftingType" value="[[data.craftingType]]">
             <paper-menu attr-for-selected="value" class="dropdown-content" selected="{{data.craftingType}}">
               <template is="dom-repeat" items="[[craftingList]]" as="crafting">
-                <paper-item on-tap="setCraftingIcon" icon="../images/items/{{crafting.icon}}" value$="{{crafting._id}}"><iron-icon src="../images/items/{{crafting.icon}}"></iron-icon> {{crafting.type}}</paper-item>
+                <paper-item on-tap="setCraftingIcon" icon="../images/items/{{crafting.icon}}" value="{{crafting._id}}"><iron-icon src="../images/items/{{crafting.icon}}"></iron-icon> {{crafting.type}}</paper-item>
               </template>
             </paper-menu>
           </paper-dropdown-menu>
@@ -296,7 +309,9 @@
         <div class="layout horizontal wrap center-center form-inform-boxs">
           <div class="food-box-form layout horizontal nowrap center-center justified" >
             <div  style="width: 24%;margin-right: 9px;">
-              <img src="{{dishImage}}" alt="{{data.name}}" class="foodprincipal">
+              <template is="dom-if" if="[[dishImage]]">
+                <img src="../images/items/{{dishImage}}" alt="{{data.name}}" class="foodprincipal">
+              </template>
             </div>
             <div class="food-box-one flex three wrap  self-start">
               <p>{{data.name}}</p>
@@ -322,7 +337,7 @@
 
   <script>
     Polymer({
-      is: 'btw-form',
+      is: 'page-form',
       properties: {
         data: {
           type: Object,
@@ -445,7 +460,7 @@
       },
       selectImage: function(e) {
         this.data.image = e.target.value;
-        this.dishImage  = "../images/items/"+e.target.value+".png";
+        this.dishImage  = e.target.value+".png";
         this.nDish      = 1;
       },
       getCount: function(_id) {
@@ -485,10 +500,13 @@
           this.tempEffectIcon = e.target.icon;
           this.$.effectValue.toggle();
         } else {
+          var icon      = (e.target.icon)      ? e.target.icon      : this.$$("#data-values").icon;
+          var value     = (e.target.value)     ? e.target.value     : this.$$("#data-values").value;
+          var timevalue = (e.target.timevalue) ? e.target.timevalue : this.$$("#data-values").timevalue;
           this.push('data.effects', {
-            "_id": e.target.value,
-            "icon": e.target.icon,
-            "value": e.target.timevalue
+            "_id": value,
+            "icon": "../images/items/"+icon,
+            "value": timevalue
           });
           this.tempEffectId   = 0;
           this.tempEffectIcon = 0;

@@ -1,9 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../component-infobar/component-infobar.html">
-<link rel="import" href="../component-recipes/component-recipes.html">
+<link rel="import" href="../app-elements/btw-infobar.html">
+<link rel="import" href="../app-elements/btw-recipes.html">
 
-<dom-module id="btw-recipes">
+<dom-module id="page-recipes">
     <template>
       <style>
         :host {
@@ -18,25 +18,25 @@
 
 
       <template is="dom-if" if="[[showTitle(recipeList.available)]]">
-        <component-infobar title="{{availableTitle}}"></component-infobar>
-        <component-recipes recipe-list="[[recipeList.available]]"></component-recipes>
+        <btw-infobar title="{{availableTitle}}"></btw-infobar>
+        <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
       </template>
 
       <template is="dom-if" if="[[showTitle(recipeList.possible)]]">
-        <component-infobar title="{{possibleTitle}}"></component-infobar>
-        <component-recipes recipe-list="[[recipeList.possible]]"></component-recipes>
+        <btw-infobar title="{{possibleTitle}}"></btw-infobar>
+        <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
       </template>
 
       <!-- <template is="dom-if" if="[[showTitle(recipeList.unavailable)]]">
-        <component-infobar title="{{unavailableTitle}}"></component-infobar>
-        <component-recipes recipe-list="[[recipeList.unavailable]]"></component-recipes>
+        <btw-infobar title="{{unavailableTitle}}"></btw-infobar>
+        <btw-recipes recipe-list="[[recipeList.unavailable]]"></btw-recipes>
       </template> -->
 
     </template>
 
     <script>
         Polymer({
-            is: 'btw-recipes',
+            is: 'page-recipes',
             properties: {
               recipesResponse: {
                 type: Object,

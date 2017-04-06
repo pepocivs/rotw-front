@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../general-style.html">
 
-<dom-module id="component-effects">
+<dom-module id="btw-effects">
     <template>
       <style include="general-style">
         :host {
@@ -45,7 +45,7 @@
 
     <script>
         Polymer({
-            is: 'component-effects',
+            is: 'btw-effects',
             properties: {
               effects: {
                 type: Object,
@@ -62,14 +62,14 @@
               this.preparedEffect = [];
               for (var x = 0; x < this.effects.length; x++) {
                 var effectIcon = this.effects[x].icon;
-                if (effectIcon.indexOf('/ic_heart_red_max.png') > 0) this.formatHearts(x);
-                if (effectIcon.indexOf('/ic_heart_red.png') > 0)     this.formatHearts(x);
-                if (effectIcon.indexOf('/ic_heart_yellow.png') > 0)  this.formatHearts(x);
-                if (effectIcon.indexOf('/ic_stamina_green_') > 0)    this.formatStamina(x);
-                if (effectIcon.indexOf('/ic_stamina_yellow_') > 0)   this.formatStamina(x);
+                if (effectIcon === 'ic_heart_red_max.png') this.formatHearts(x);
+                if (effectIcon === 'ic_heart_red.png')     this.formatHearts(x);
+                if (effectIcon === 'ic_heart_yellow.png')  this.formatHearts(x);
+                if (effectIcon === 'ic_stamina_green_')    this.formatStamina(x);
+                if (effectIcon === 'ic_stamina_yellow_')   this.formatStamina(x);
                 var timeEffects = this.getTimeEffects();
                 for (var index = 0; index < timeEffects.length; index++ ) {
-                  if (effectIcon.indexOf(timeEffects[index]) > 0) this.formatTime(x);
+                  if (effectIcon === timeEffects[index]) this.formatTime(x);
                 }
               }
               this.effectsToPrint = this.preparedEffect;
@@ -83,7 +83,7 @@
               this.preparedEffect.push({
                 "_id"       : this.effects[x]._id,
                 "name"      : this.effects[x].name || this.effects[x].effect,
-                "icon"      : this.effects[x].icon,
+                "icon"      : "../images/items/"+this.effects[x].icon,
                 "humanTime" : humanTime,
                 "value"     : time
               });
@@ -93,7 +93,7 @@
               }
             },
             formatStamina: function(x) {
-              var color        = (this.effects[x].icon.indexOf('ic_stamina_green_') > 0) ? 'green' : 'yellow';
+              var color        = (this.effects[x].icon.indexOf('ic_stamina_green_') === 0) ? 'green' : 'yellow';
               var staminaValue = this.effects[x].value;
               this.calculateStamina(x, staminaValue, 6, color);
             },
@@ -113,7 +113,7 @@
               else return false;
             },
             formatHearts: function(x) {
-              var color = (this.effects[x].icon.indexOf('heart_red') > 0) ? 'red' : 'yellow';
+              var color = (this.effects[x].icon.indexOf('heart_red') === 0) ? 'red' : 'yellow';
               var n = Math.floor(this.effects[x].value);
               var m = (this.effects[x].value - n);
               var fiveHearts = Math.floor(n/5);
@@ -130,7 +130,7 @@
                 this.preparedEffect.push({
                   "_id"   : this.effects[x]._id,
                   "name"  : this.effects[x].name || this.effects[x].effect,
-                  "icon"  : this.effects[x].icon,
+                  "icon"  : "../images/items/"+this.effects[x].icon,
                   "value" : "1"
                 });
               }
@@ -150,14 +150,22 @@
               }
             },
             getTimeEffects: function() {
-              return ['/ic_haste',
-                      '/ic_sneak',
-                      '/ic_snowflake',
-                      '/ic_fire',
-                      '/ic_hot',
-                      '/ic_bolt',
-                      '/ic_sword_plus',
-                      '/ic_sheild'];
+              return [
+                'ic_haste.png',
+                'ic_haste_2.png',
+                'ic_sneak.png',
+                'ic_sneak_2.png',
+                'ic_snowflake.png',
+                'ic_snowflake_2.png',
+                'ic_hot.png',
+                'ic_hot_2.png',
+                'ic_fire_blue.png',
+                'ic_bolt.png',
+                'ic_bolt_2.png',
+                'ic_sword_plus.png',
+                'ic_sheild.png',
+                'ic_sheild_plus.png'
+              ];
             }
         });
     </script>

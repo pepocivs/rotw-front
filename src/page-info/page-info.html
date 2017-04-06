@@ -1,13 +1,13 @@
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../component-effects/component-effects.html">
-<link rel="import" href="../component-infobar/component-infobar.html">
-<link rel="import" href="../component-locations/component-locations.html">
-<link rel="import" href="../component-recipes/component-recipes.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../app-elements/btw-effects.html">
+<link rel="import" href="../app-elements/btw-infobar.html">
+<link rel="import" href="../app-elements/btw-locations.html">
+<link rel="import" href="../app-elements/btw-recipes.html">
 
 <link rel="import" href="../general-style.html">
 
-<dom-module id="btw-info">
+<dom-module id="page-info">
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
@@ -58,29 +58,29 @@
       </iron-ajax>
         <div class="back">
           <template is="dom-repeat" items="[[ingredient]]">
-              <component-infobar title="{{item.name}}" icon="../images/items/{{item.image}}" rupees="{{item.sell_price}}"></component-infobar>
+              <btw-infobar title="{{item.name}}" icon="../images/items/{{item.image}}" rupees="{{item.sell_price}}"></btw-infobar>
 
               <div class="layout horizontal nowrap center-center info-comida" style="padding: 0 20px;">
                 <div class="icon-info-food"><img src="../images/items/{{item.image}}" alt="{{item.name}}"></div>
                 <div class="flex">
                   {{item.description}}
-                  <component-locations location-string="{{item.location}}"></component-locations>
+                  <btw-locations location-string="{{item.location}}"></btw-locations>
                 </div>
-                <component-effects effects="{{item.effects}}"></component-effects>
+                <btw-effects effects="{{item.effects}}"></btw-effects>
               </div>
             </template>
 
             <hr>
 
-            <component-recipes recipe-list="[[recipeList.available]]"></component-recipes>
-            <component-recipes recipe-list="[[recipeList.possible]]"></component-recipes>
+            <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
+            <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
 
           </template>
         </div>
 
     <script>
         Polymer({
-            is: 'btw-info',
+            is: 'page-info',
             properties: {
               itemResponse: {
                 type: Object,

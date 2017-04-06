@@ -14,7 +14,7 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<link rel="import" href="btw-icons/btw-icons.html">
+<link rel="import" href="app-elements/btw-icons.html">
 <link rel="import" href="general-style.html">
 
 <dom-module id="recipes-wild">
@@ -76,6 +76,13 @@
       .full-height {
         height: 100%;
       }
+      .menu-icon {
+        text-align: center;
+        height: 95px;
+        padding-bottom: 41px;
+        padding-top: 41px;
+        background-color: transparent;
+      }
     </style>
 
 
@@ -93,8 +100,8 @@
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
 
-        <a  style="text-align: center;height:95px;padding-bottom: 41px;padding-top:41px;background-color:transparent;"><img src="../images/pira.svg" style="height:100%;"></img></a>
-          <a name="initial"   href="/initial"><iron-icon src="../images/pira.svg" style="margin-right:24px;"></iron-icon>Inicio</a>
+          <a class="menu-icon"><img src="../images/pira.svg" style="height:100%;"></img></a>
+          <a name="home"      href="/home"><iron-icon src="../images/pira.svg" style="margin-right:24px;"></iron-icon>Inicio</a>
           <a name="inventory" href="/inventory"><iron-icon src="../images/menublanco.svg" style="margin-right:24px;"></iron-icon>Mi inventario</a>
           <a name="items"     href="/items"><iron-icon src="../images/manzanablanca.svg" style="margin-right:24px;"></iron-icon>Elementos</a>
           <a name="recipes"   href="/recipes"><iron-icon src="../images/foodblanco.svg" style="margin-right:24px;"></iron-icon>Recetas</a>
@@ -112,8 +119,6 @@
             <paper-icon-button icon="btw-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>Recipes of the wild</div>
             <iron-icon src="../images/pira.svg"></iron-icon>
-            <!-- <iron-icon icon="icons:search"></iron-icon> -->
-
           </app-toolbar>
         </app-header>
 
@@ -124,12 +129,12 @@
             role="main"
             style="height:100%;background-color:#33485c;">
 
-          <btw-form name="form" class="full-height"></btw-form>
-          <btw-info name="info" class="full-height"></btw-info>
-          <btw-initial name="initial" class="full-height"></btw-initial>
-          <btw-inventory name="inventory" class="full-height"></btw-inventory>
-          <btw-items name="items"></btw-items>
-          <btw-recipes name="recipes"></btw-recipes>
+          <page-form name="form" class="full-height"></page-form>
+          <page-info name="info" class="full-height"></page-info>
+          <page-home name="home" class="full-height"></page-home>
+          <page-inventory name="inventory" class="full-height"></page-inventory>
+          <page-items name="items"></page-items>
+          <page-recipes name="recipes"></page-recipes>
 
         </iron-pages>
       </app-header-layout>
@@ -157,18 +162,18 @@
         '_routePageChanged(routeData.page)',
       ],
       _routePageChanged: function(page) {
-        this.page = page || 'initial';
+        this.page = page || 'home';
 
         if (!this.$.drawer.persistent) {
           this.$.drawer.close();
         }
       },
       _pageChanged: function(page) {
-        var resolvedPageUrl = this.resolveUrl('btw-'+page+'/btw-'+ page + '.html');
+        var resolvedPageUrl = this.resolveUrl('page-'+page+'/page-'+ page + '.html');
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
       },
       _showPage404: function() {
-        this.page = 'initial';
+        this.page = 'home';
       },
     });
   </script>

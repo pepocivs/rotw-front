@@ -6,10 +6,10 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../component-items/component-items.html">
+<link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
 
-<dom-module id="btw-initial">
+<dom-module id="page-home">
     <template>
       <style include="general-style iron-flex iron-flex-alignment">
         :host {
@@ -39,12 +39,12 @@
           </a>
         </div>
 
-        <component-items
+        <btw-items
                 item-list="[[itemsResponse]]"
                 inventory="{{inventory}}"
                 tap="true"
                 item-limit="5"
-                custom-class="item-container-initial"></component-items>
+                custom-class="item-container-initial"></btw-items>
 
       </div>
 
@@ -52,8 +52,7 @@
 
     <script>
         Polymer({
-            is: 'btw-initial',
-
+            is: 'page-home',
             properties: {
               inventory: {
                 type: Object,
