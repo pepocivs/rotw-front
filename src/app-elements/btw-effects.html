@@ -62,11 +62,11 @@
               this.preparedEffect = [];
               for (var x = 0; x < this.effects.length; x++) {
                 var effectIcon = this.effects[x].icon;
-                if (effectIcon === 'ic_heart_red_max.png') this.formatHearts(x);
-                if (effectIcon === 'ic_heart_red.png')     this.formatHearts(x);
-                if (effectIcon === 'ic_heart_yellow.png')  this.formatHearts(x);
-                if (effectIcon === 'ic_stamina_green_')    this.formatStamina(x);
-                if (effectIcon === 'ic_stamina_yellow_')   this.formatStamina(x);
+                if (effectIcon.indexOf('ic_heart_red_max.png') === 0) this.formatHearts(x);
+                if (effectIcon.indexOf('ic_heart_red.png') === 0)     this.formatHearts(x);
+                if (effectIcon.indexOf('ic_heart_yellow.png') === 0)  this.formatHearts(x);
+                if (effectIcon.indexOf('ic_stamina_green_') === 0)    this.formatStamina(x);
+                if (effectIcon.indexOf('ic_stamina_yellow_') === 0)   this.formatStamina(x);
                 var timeEffects = this.getTimeEffects();
                 for (var index = 0; index < timeEffects.length; index++ ) {
                   if (effectIcon === timeEffects[index]) this.formatTime(x);
