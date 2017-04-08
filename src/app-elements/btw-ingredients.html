@@ -8,27 +8,33 @@
           display: block;
         }
         .img-ingredients {
-          width: 30%;
+          width: 54px;
         }
         .img-ingredients.not-available {
           opacity: 0.5;
           filter: alpha(opacity=50);
         }
+        .item-box{
+          width: 100%;
+          
+        }
       </style>
 
-      <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
-        <template is="dom-repeat-n" count="{{ingredient.howMany}}">
-          <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
-            <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="Available"/>
-          </template>
-          <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
-            <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="Not available"/>
+      <div class="item-box">
+        <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
+          <template is="dom-repeat-n" count="{{ingredient.howMany}}">
+            <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
+              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="Available"/>
+            </template>
+            <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
+              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="Not available"/>
+            </template>
           </template>
         </template>
-      </template>
+      </div>
 
-    </template>
-
+    </template>  
+      
     <script>
         Polymer({
             is: 'btw-ingredients',
