@@ -113,7 +113,7 @@
               else return false;
             },
             formatHearts: function(x) {
-              var color = (this.effects[x].icon.indexOf('heart_red') === 0) ? 'red' : 'yellow';
+              var color = (this.effects[x].icon.indexOf('heart_red') > 0) ? 'red' : 'yellow';
               var n = Math.floor(this.effects[x].value);
               var m = (this.effects[x].value - n);
               var fiveHearts = Math.floor(n/5);
