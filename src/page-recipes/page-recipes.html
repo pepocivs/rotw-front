@@ -3,9 +3,12 @@
 <link rel="import" href="../app-elements/btw-infobar.html">
 <link rel="import" href="../app-elements/btw-recipes.html">
 
+<link rel="import" href="../general-style.html">
+
+
 <dom-module id="page-recipes">
     <template>
-      <style>
+      <style include="general-style">
         :host {
           display: block;
         }
@@ -16,6 +19,9 @@
                  handle-as="json"
                  last-response="{{recipesResponse}}"></iron-ajax>
 
+      <template is="dom-if" if="[[!_checkHasrecipes()]]">
+        <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
+      </template>
 
       <template is="dom-if" if="[[showTitle(recipeList.available)]]">
         <btw-infobar title="{{availableTitle}}"></btw-infobar>
@@ -61,6 +67,10 @@
             },
             attributeChanged: function() {
               this._getParams();
+            },
+            _checkHasrecipes: function() {
+              return ((this.recipeList && this.recipeList.available && this.recipeList.available.length > 0) ||
+                      (this.recipeList && this.recipeList.possible && this.recipeList.possible.length > 0) );
             },
             _recipesResponse: function(response) {
               this.recipeList = response;

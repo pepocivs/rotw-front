@@ -94,7 +94,7 @@
             <template  is="dom-if" if="[[!isLink]]"><div>Ingredientes:</div></template>
             <div>
               <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
-                <iron-icon on-tap="removeElement" value="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
+                <iron-icon on-tap="removeElement" value$="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
               </template>
             </div>
           </div>
@@ -142,7 +142,7 @@
           <div>{{tempName}}</div>
           <paper-input type="number" value="{{tempCount}}"></paper-input>
           <paper-button on-tap="addElementByNumber"
-                        item="{{targetItem}}">Agregar</paper-button>
+                        item$="{{targetItem}}">Agregar</paper-button>
 
         </paper-dialog>
 
@@ -237,7 +237,7 @@
             var removed = false;
             var itemId  = 0;
             for (var i = 0; i < this.ingredients.length; i++) {
-              if (e.target.value === this.ingredients[i]._id && !removed) {
+              if (parseInt(e.target.getAttribute('value')) === this.ingredients[i]._id && !removed) {
                 itemId  = this.ingredients[i]._id;
                 this.set('itemList', this._updateItemList(this.ingredients[i]._id));
                 this.splice('ingredients', i, 1);
@@ -249,9 +249,9 @@
             this.updateCountList(itemId);
           },
           addElementByNumber: function(e) {
-            e.target.set('item.count', this.tempCount);
+            this.set('targetItem.count', this.tempCount);
             this.inventory = this._updateInventory();
-            this.updateCountList(e.target.item._id);
+            this.updateCountList(JSON.parse(e.target.getAttribute('item'))._id);
             this.$.addByNumber.close();
           },
           openDialog: function(e) {
