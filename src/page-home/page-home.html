@@ -20,6 +20,11 @@
           color: #FFFFFF;
           text-align: center;
         }
+        .page-style {
+          height: 100%;
+          background: #ecf0f1;
+          color: #2c3e50;
+        }
       </style>
       <iron-ajax auto
                  url="https://zelda.pepocivs.com/items"
@@ -28,7 +33,7 @@
                  last-response="{{itemsResponse}}">
       </iron-ajax>
 
-      <div class="layout vertical " style="height:100%;background:#ecf0f1;color:#2c3e50;">
+      <div class="layout vertical page-style">
 
         <div class="flex layout horizontal center-center box-initial">
           <a href$="{{jsonSend}}" class="indigo">

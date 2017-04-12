@@ -117,6 +117,17 @@
           color: white;
           font-weight: 800;
         }
+        .modal-adjust {
+          position:absolute;
+          height: 65%;
+        }
+        .item-count {
+          width: 100%;
+          text-align: right;
+        }
+        .white-background {
+          background-color: white;
+        }
       </style>
 
       <!-- AJAX CALLS -->
@@ -161,14 +172,14 @@
       </template>
 
       <!-- DISHES MODAL -->
-      <paper-dialog id="dish" style="position:absolute; height: 65%;">
+      <paper-dialog id="dish" class="modal-adjust">
         <div class="layout horizontal wrap center">
           <h2 class="flex">PLATO</h2>
           <paper-button dialog-confirm autofocus raised class="accept-button">Aceptar</paper-button>
         </div>
 
         <div class="layout horizontal wrap center justified">
-          <div style="width:100%; text-align:right;"> {{nDish}}/1 </div>
+          <div class="item-count"> {{nDish}}/1 </div>
           <div>Plato seleccionado</div>
           <div>
             <template is="dom-if" if="[[dishImage]]">
@@ -188,14 +199,14 @@
       </paper-dialog>
 
       <!-- INGREDIENTS MODAL -->
-      <paper-dialog id="ingredients" style="position:absolute; height: 65%;">
+      <paper-dialog id="ingredients" class="modal-adjust">
         <div class="layout horizontal wrap center">
           <h2 class="flex">INGREDIENTES</h2>
           <paper-button dialog-confirm autofocus raised class="accept-button">Aceptar</paper-button>
         </div>
 
         <div class="layout horizontal wrap center justified">
-          <div style="width:100%; text-align:right;"> {{nIngredients}}/5 </div>
+          <div class="item-count"> {{nIngredients}}/5 </div>
           <div>Ingredientes seleccionados</div>
           <div>
             <template is="dom-repeat" items="{{data.ingredients}}" as="ingredient" index-as="x">
@@ -233,14 +244,14 @@
       </paper-dialog>
 
       <!-- EFFECTS MODAL -->
-      <paper-dialog id="effects" style="position:absolute; height: 65%;">
+      <paper-dialog id="effects" class="modal-adjust">
         <div class="layout horizontal wrap center">
           <h2 class="flex">EFECTOS</h2>
           <paper-button dialog-confirm autofocus raised class="accept-button">Aceptar</paper-button>
         </div>
 
         <div class="layout horizontal wrap center justified">
-          <div style="width:100%; text-align:right;">-</div>
+          <div class="item-count">-</div>
           <div>Efectos seleccionados</div>
           <div>
             <template is="dom-repeat" items="{{data.effects}}" as="effect" index-as="x">
@@ -269,7 +280,7 @@
         </div>
       </paper-dialog>
 
-      <paper-dialog id="effectValue" style="position:absolute; height: 65%;">
+      <paper-dialog id="effectValue" class="modal-adjust">
         <h2>¿Cuanto tiempo dura?</h2>
         <paper-input type="number" value="{{timeValue}}"></paper-input>
         <div id="data-values"
@@ -283,7 +294,7 @@
 
 
       <!-- FORM -->
-      <div class="flex layout horizontal center-center box-initial" style="background-color:white;" >
+      <div class="flex layout horizontal center-center box-initial white-background" >
         <form is="iron-form" method="get" action="/" id="basic">
           <paper-input name="name"
                        label="Nombre de la receta"
@@ -315,7 +326,7 @@
       <div>
         <div class="layout horizontal wrap center-center form-inform-boxs">
           <div class="food-box-form layout horizontal nowrap center-center justified" >
-            <div  style="width: 24%;margin-right: 9px;">
+            <div class="recipe-image">
               <template is="dom-if" if="[[dishImage]]">
                 <img src="../images/items/{{dishImage}}" alt="{{data.name}}" class="foodprincipal">
               </template>
