@@ -15,11 +15,11 @@
         }
       </style>
 
-      <div class="layout horizontal wrap center-center" style="background-color:#34495e;;">
+      <div class="layout horizontal wrap center-center" class="recipes-container">
 
         <template is="dom-repeat" items="[[recipeList]]">
             <div class="food-box-form layout horizontal nowrap center-center justified" >
-              <div  style="width: 24%;margin-right: 9px;">
+              <div class="recipe-image">
                 <img src="../images/items/{{item.image}}" alt="{{item.name}}" class="foodprincipal">
               </div>
               <div class="food-box-one flex three wrap  self-start">

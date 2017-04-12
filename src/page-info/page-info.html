@@ -33,6 +33,7 @@
           color: #323642;
           font-size: 12px;
           font-weight: 400;
+          padding: 0 20px;
         }
         hr{
           margin-top: 0;
@@ -60,7 +61,7 @@
           <template is="dom-repeat" items="[[ingredient]]">
               <btw-infobar title="{{item.name}}" icon="../images/items/{{item.image}}" rupees="{{item.sell_price}}"></btw-infobar>
 
-              <div class="layout horizontal nowrap center-center info-comida" style="padding: 0 20px;">
+              <div class="layout horizontal nowrap center-center info-comida">
                 <div class="icon-info-food"><img src="../images/items/{{item.image}}" alt="{{item.name}}"></div>
                 <div class="flex">
                   {{item.description}}

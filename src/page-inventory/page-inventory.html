@@ -27,7 +27,9 @@
         .flat-back-principal{
           background-color: #ecf0f1;
         }
-
+        .full-height {
+          height:100%;
+        }
         .over{
           height: 100vh;
           overflow: scroll;
@@ -40,7 +42,7 @@
                  handle-as="json"
                  last-response="{{itemsResponse}}"></iron-ajax>
 
-      <div class="layout vertical " style="height:100%;">
+      <div class="layout vertical full-height">
 
       <div>
         <div class="layout horizontal wrap around-justified flat-back-principal">

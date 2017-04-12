@@ -39,6 +39,10 @@
           position: absolute;
           bottom: 0px;
         }
+        .item-general-count {
+          text-align:right;
+          width: 100%;
+        }
         #addByNumber {
           text-align: center;
         }
@@ -86,7 +90,7 @@
       <template is="dom-if" if="[[!isDialog]]">
         <div class="flex layout horizontal center-center box-initial">
           <div class="information layout horizontal wrap center justified " >
-            <div style="width:100%; text-align:right;"> {{nIngredients}}/{{itemLimit}} </div>
+            <div class="item-general-count"> {{nIngredients}}/{{itemLimit}} </div>
             <template  is="dom-if" if="[[!isLink]]"><div>Ingredientes:</div></template>
             <div>
               <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
