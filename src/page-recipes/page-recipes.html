@@ -15,9 +15,12 @@
       </style>
       <iron-ajax auto
                  url="https://zelda.pepocivs.com/recipes"
-                 params="{{params}}"
+                 content-type="application/json"
+                 body="{{params}}"
+                 method="POST"
                  handle-as="json"
                  last-response="{{recipesResponse}}"></iron-ajax>
+
 
       <template is="dom-if" if="[[!_checkHasrecipes()]]">
         <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
@@ -60,12 +63,18 @@
               },
               possibleTitle: {
                 type: String
+              },
+              inventory: {
+                type: Object,
+                notify: true
               }
             },
             ready: function() {
+              console.log(this.inventory);
               this._getParams();
             },
             attributeChanged: function() {
+              console.log(this.inventory);
               this._getParams();
             },
             _checkHasrecipes: function() {
