@@ -63,18 +63,12 @@
               },
               possibleTitle: {
                 type: String
-              },
-              inventory: {
-                type: Object,
-                notify: true
               }
             },
             ready: function() {
-              console.log(this.inventory);
               this._getParams();
             },
             attributeChanged: function() {
-              console.log(this.inventory);
               this._getParams();
             },
             _checkHasrecipes: function() {
@@ -110,8 +104,9 @@
           for ( i in pairs ) {
             if ( pairs[i] === "" ) continue;
             pair = pairs[i].split("=");
-            obj[ decodeURIComponent( pair[0] ) ] = decodeURIComponent( pair[1] );
+            obj[ decodeURIComponent( pair[0] ) ] = JSON.parse(decodeURIComponent( pair[1] ));
           }
+          console.log(obj);
           return obj;
         }
     </script>
