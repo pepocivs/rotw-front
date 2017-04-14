@@ -22,7 +22,7 @@
                  last-response="{{recipesResponse}}"></iron-ajax>
 
 
-      <template is="dom-if" if="[[!_checkHasrecipes()]]">
+      <template is="dom-if" if="[[!hasRecipes]]">
         <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
       </template>
 
@@ -63,6 +63,10 @@
               },
               possibleTitle: {
                 type: String
+              },
+              hasRecipes: {
+                type: Boolean,
+                value: true
               }
             },
             ready: function() {
@@ -71,12 +75,15 @@
             attributeChanged: function() {
               this._getParams();
             },
-            _checkHasrecipes: function() {
-              return ((this.recipeList && this.recipeList.available && this.recipeList.available.length > 0) ||
-                      (this.recipeList && this.recipeList.possible && this.recipeList.possible.length > 0) );
+            _checkHasrecipes: function(response) {
+              this.hasRecipes = (
+                (response && response.available && response.available.length > 0) ||
+                (response && response.possible && response.possible.length > 0)
+              );
             },
             _recipesResponse: function(response) {
               this.recipeList = response;
+              this._checkHasrecipes(response);
               if (this.recipeList.available.length === 1)
                 this.availableTitle = "Puedes hacer esta receta";
               else
