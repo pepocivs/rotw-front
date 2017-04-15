@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
 
@@ -16,16 +17,30 @@
                  url="https://zelda.pepocivs.com/items"
                  params='{}'
                  handle-as="json"
+                 loading="{{loading}}"
                  last-response="{{itemsResponse}}"></iron-ajax>
 
+    <template is="dom-if" if="{{loading}}">
+      <div class="spinner-block">
+        <paper-spinner active></paper-spinner>
+      </div>
+    </template>
+    <template is="dom-if" if="{{!loading}}">
       <btw-items item-list="[[itemsResponse]]" go-to="info"></btw-items>
+    </template>
 
     </template>
 
     <script>
         Polymer({
           is: 'page-items',
-          properties: {}
+          properties: {
+            loading: {
+              type: Boolean,
+              notify: true,
+              value: true
+            }
+          }
         });
     </script>
 </dom-module>

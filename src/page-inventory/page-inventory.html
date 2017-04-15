@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
 
@@ -40,24 +41,25 @@
                  url="https://zelda.pepocivs.com/items"
                  params='{}'
                  handle-as="json"
+                 loading="{{loading}}"
                  last-response="{{itemsResponse}}"></iron-ajax>
 
-      <div class="layout vertical full-height">
+      <template is="dom-if" if="{{loading}}">
+       <div class="spinner-block">
+         <paper-spinner active></paper-spinner>
+       </div>
+      </template>
 
-      <div>
-        <div class="layout horizontal wrap around-justified flat-back-principal">
-        <!-- <a href$="" class="invisible-a">
-          <paper-button class="flat-button">Reset</paper-button>
-        </a> -->
-        <a href$="{{jsonSend}}" class="invisible-a">
-          <paper-button class="flat-button">¿Qué puedo cocinar?</paper-button>
-        </a>
-      </div>
-      </div>
-
-      <btw-items item-list="[[itemsResponse]]" inventory="{{inventory}}" class="over"></btw-items>
-
-      </div>
+      <template is="dom-if" if="{{!loading}}">
+        <div class="layout vertical full-height">
+          <div class="layout horizontal wrap around-justified flat-back-principal">
+            <a href$="{{jsonSend}}" class="invisible-a">
+              <paper-button class="flat-button">¿Qué puedo cocinar?</paper-button>
+            </a>
+          </div>
+          <btw-items item-list="[[itemsResponse]]" inventory="{{inventory}}" class="over"></btw-items>
+        </div>
+      </template>
 
     </template>
 
@@ -73,6 +75,11 @@
             jsonSend: {
               type: String,
               value: 'recipes'
+            },
+            loading: {
+              type: Boolean,
+              notify: true,
+              value: true
             }
           },
           setJsonParam: function(e) {

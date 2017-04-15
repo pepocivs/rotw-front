@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../app-elements/btw-infobar.html">
 <link rel="import" href="../app-elements/btw-recipes.html">
 
@@ -18,28 +19,35 @@
                  content-type="application/json"
                  body="{{params}}"
                  method="POST"
+                 loading="{{loading}}"
                  handle-as="json"
                  last-response="{{recipesResponse}}"></iron-ajax>
 
+     <template is="dom-if" if="{{loading}}">
+       <div class="spinner-block">
+         <paper-spinner active></paper-spinner>
+       </div>
+     </template>
+     <template is="dom-if" if="{{!loading}}">
+        <template is="dom-if" if="[[!hasRecipes]]">
+          <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
+        </template>
 
-      <template is="dom-if" if="[[!hasRecipes]]">
-        <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
+        <template is="dom-if" if="[[showTitle(recipeList.available)]]">
+          <btw-infobar title="{{availableTitle}}"></btw-infobar>
+          <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
+        </template>
+
+        <template is="dom-if" if="[[showTitle(recipeList.possible)]]">
+          <btw-infobar title="{{possibleTitle}}"></btw-infobar>
+          <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
+        </template>
+
+        <!-- <template is="dom-if" if="[[showTitle(recipeList.unavailable)]]">
+          <btw-infobar title="{{unavailableTitle}}"></btw-infobar>
+          <btw-recipes recipe-list="[[recipeList.unavailable]]"></btw-recipes>
+        </template> -->
       </template>
-
-      <template is="dom-if" if="[[showTitle(recipeList.available)]]">
-        <btw-infobar title="{{availableTitle}}"></btw-infobar>
-        <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
-      </template>
-
-      <template is="dom-if" if="[[showTitle(recipeList.possible)]]">
-        <btw-infobar title="{{possibleTitle}}"></btw-infobar>
-        <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
-      </template>
-
-      <!-- <template is="dom-if" if="[[showTitle(recipeList.unavailable)]]">
-        <btw-infobar title="{{unavailableTitle}}"></btw-infobar>
-        <btw-recipes recipe-list="[[recipeList.unavailable]]"></btw-recipes>
-      </template> -->
 
     </template>
 
@@ -66,6 +74,11 @@
               },
               hasRecipes: {
                 type: Boolean,
+                value: true
+              },
+              loading: {
+                type: Boolean,
+                notify: true,
                 value: true
               }
             },

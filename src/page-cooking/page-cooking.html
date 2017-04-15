@@ -6,6 +6,7 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
 
@@ -30,29 +31,38 @@
                  url="https://zelda.pepocivs.com/items"
                  params='{}'
                  handle-as="json"
+                 loading="{{loading}}"
                  last-response="{{itemsResponse}}">
       </iron-ajax>
 
-      <div class="layout vertical page-style">
+      <template is="dom-if" if="{{loading}}">
+       <div class="spinner-block">
+         <paper-spinner active></paper-spinner>
+       </div>
+      </template>
 
-        <div class="flex layout horizontal center-center box-initial">
-          <a href$="{{jsonSend}}" class="indigo">
-            <paper-button class="icon-initial" raised>
-                <img src="../../images/pira.svg" alt=""/>
-                <div>Cocinar</div>
-            </paper-button>
-          </a>
+      <template is="dom-if" if="{{!loading}}">
+        <div class="layout vertical page-style">
+
+          <div class="flex layout horizontal center-center box-initial">
+            <a href$="{{jsonSend}}" class="indigo">
+              <paper-button class="icon-initial" raised>
+                  <img src="../../images/pira.svg" alt=""/>
+                  <div>Cocinar</div>
+              </paper-button>
+            </a>
+          </div>
+
+          <btw-items
+                  item-list="[[itemsResponse]]"
+                  inventory="{{inventory}}"
+                  tap="true"
+                  item-limit="5"
+                  custom-class="item-container-initial"></btw-items>
+
         </div>
 
-        <btw-items
-                item-list="[[itemsResponse]]"
-                inventory="{{inventory}}"
-                tap="true"
-                item-limit="5"
-                custom-class="item-container-initial"></btw-items>
-
-      </div>
-
+      </template>
     </template>
 
     <script>
@@ -66,6 +76,11 @@
               jsonSend: {
                 type: String,
                 value: 'recipes'
+              },
+              loading: {
+                type: Boolean,
+                notify: true,
+                value: true
               }
             },
             setJsonParam: function(e) {
