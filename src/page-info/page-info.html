@@ -48,8 +48,10 @@
       </style>
       <iron-ajax auto
                  url="https://zelda.pepocivs.com/recipes"
-                 params="{{params}}"
+                 body="{{params}}"
                  handle-as="json"
+                 content-type="application/json"
+                 method="POST"
                  loading="{{loadingRecipes}}"
                  last-response="{{recipesResponse}}">
       </iron-ajax>
@@ -62,41 +64,34 @@
       </iron-ajax>
 
 
+      <template is="dom-if" if="{{loading}}">
+        <div class="spinner-block">
+          <paper-spinner active></paper-spinner>
+        </div>
+      </template>
+      <template is="dom-if" if="{{!loading}}">
         <div class="back">
-          <template is="dom-if" if="{{loadingItemInfo}}">
-            <div class="spinner-block">
-              <paper-spinner active></paper-spinner>
-            </div>
-          </template>
-          <template is="dom-if" if="{{!loadingItemInfo}}">
-            <template is="dom-repeat" items="[[ingredient]]">
-              <btw-infobar title="{{item.name}}" icon="../images/items/{{item.image}}" rupees="{{item.sell_price}}"></btw-infobar>
+          <template is="dom-repeat" items="[[ingredient]]">
+            <btw-infobar title="{{item.name}}" icon="../images/items/{{item.image}}" rupees="{{item.sell_price}}"></btw-infobar>
 
-              <div class="layout horizontal nowrap center-center info-comida">
-                <div class="icon-info-food"><img src="../images/items/{{item.image}}" alt="{{item.name}}"></div>
-                <div class="flex">
-                  {{item.description}}
-                  <btw-locations location-string="{{item.location}}"></btw-locations>
-                </div>
-                <btw-effects effects="{{item.effects}}"></btw-effects>
+            <div class="layout horizontal nowrap center-center info-comida">
+              <div class="icon-info-food"><img src="../images/items/{{item.image}}" alt="{{item.name}}"></div>
+              <div class="flex">
+                {{item.description}}
+                <btw-locations location-string="{{item.location}}"></btw-locations>
               </div>
-            </template>
+              <btw-effects effects="{{item.effects}}"></btw-effects>
+            </div>
           </template>
 
           <hr>
 
-          <template is="dom-if" if="{{loadingRecipes}}">
-            <div class="spinner-block">
-              <paper-spinner active></paper-spinner>
-            </div>
-          </template>
-          <template is="dom-if" if="{{!loadingRecipes}}">
-            <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
-            <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
-          </template>
+          <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
+          <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
 
-        </template>
-      </div>
+        </div>
+      </template>
+    </template>
 
     <script>
         Polymer({
@@ -127,11 +122,17 @@
               loadingRecipes: {
                 type: Boolean,
                 notify: true,
-                value: true
+                value: true,
+                observer: '_checkLoader'
               },
               loadingItemInfo: {
                 type: Boolean,
                 notify: true,
+                value: true,
+                observer: '_checkLoader'
+              },
+              loading: {
+                type: Boolean,
                 value: true
               }
             },
@@ -140,6 +141,9 @@
             },
             attributeChanged: function() {
               this._getParams();
+            },
+            _checkLoader: function() {
+              this.loading = (this.loadingItemInfo && this.loadingRecipes);
             },
             _getItemResponse: function(response) {
               this.ingredient = response;
@@ -152,7 +156,7 @@
               this.itemId = itemId.itemId;
               this.params = {};
               if (this.itemId && this.itemId.length > 0) {
-                this.params = {'inventory': '[{"itemId":'+this.itemId+',"count":"99999"}]'};
+                this.params = {'inventory': [{"itemId":this.itemId,"count":"99999"}]};
               }
             }
         });
