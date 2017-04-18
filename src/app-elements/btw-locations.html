@@ -1,0 +1,45 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/dom-repeat-n/dom-repeat-n.html">
+<link rel="import" href="../general-style.html">
+
+<dom-module id="btw-locations">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .item-location {
+          background-color: #95a5a6;
+          color: white;
+          float: left;
+          margin: 0px 10px 0px 0px;
+          padding: 5px;
+        }
+      </style>
+
+      <b>Localizado en:</b>
+      <br />
+      <template is="dom-repeat" items="{{locations}}" as="location">
+        <div class="item-location">{{location}}</div>
+      </template>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'btw-locations',
+            properties: {
+              locationString: {
+                type: String,
+                observer: '_formatLocations'
+              },
+              locations: {
+                type: Object
+              }
+            },
+            _formatLocations: function() {
+              this.locations = this.locationString.split(", ");
+            }
+        });
+    </script>
+</dom-module>

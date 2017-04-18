@@ -1,0 +1,132 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../app-elements/btw-infobar.html">
+<link rel="import" href="../app-elements/btw-recipes.html">
+
+<link rel="import" href="../general-style.html">
+
+
+<dom-module id="page-recipes">
+    <template>
+      <style include="general-style">
+        :host {
+          display: block;
+        }
+      </style>
+      <iron-ajax auto
+                 url="https://zelda.pepocivs.com/recipes"
+                 content-type="application/json"
+                 body="{{params}}"
+                 method="POST"
+                 loading="{{loading}}"
+                 handle-as="json"
+                 last-response="{{recipesResponse}}"></iron-ajax>
+
+     <template is="dom-if" if="{{loading}}">
+       <div class="spinner-block">
+         <paper-spinner active></paper-spinner>
+       </div>
+     </template>
+     <template is="dom-if" if="{{!loading}}">
+        <template is="dom-if" if="[[!hasRecipes]]">
+          <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
+        </template>
+
+        <template is="dom-if" if="[[showTitle(recipeList.available)]]">
+          <btw-infobar title="{{availableTitle}}"></btw-infobar>
+          <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
+        </template>
+
+        <template is="dom-if" if="[[showTitle(recipeList.possible)]]">
+          <btw-infobar title="{{possibleTitle}}"></btw-infobar>
+          <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
+        </template>
+
+        <!-- <template is="dom-if" if="[[showTitle(recipeList.unavailable)]]">
+          <btw-infobar title="{{unavailableTitle}}"></btw-infobar>
+          <btw-recipes recipe-list="[[recipeList.unavailable]]"></btw-recipes>
+        </template> -->
+      </template>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'page-recipes',
+            properties: {
+              recipesResponse: {
+                type: Object,
+                observer: '_recipesResponse'
+              },
+              params: {
+                type: Object,
+                value: {}
+              },
+              recipeList: {
+                type: Object
+              },
+              availableTitle: {
+                type: String
+              },
+              possibleTitle: {
+                type: String
+              },
+              hasRecipes: {
+                type: Boolean,
+                value: true
+              },
+              loading: {
+                type: Boolean,
+                notify: true,
+                value: true
+              }
+            },
+            ready: function() {
+              this._getParams();
+            },
+            attributeChanged: function() {
+              this._getParams();
+            },
+            _checkHasrecipes: function(response) {
+              this.hasRecipes = (
+                (response && response.available && response.available.length > 0) ||
+                (response && response.possible && response.possible.length > 0)
+              );
+            },
+            _recipesResponse: function(response) {
+              this.recipeList = response;
+              this._checkHasrecipes(response);
+              if (this.recipeList.available.length === 1)
+                this.availableTitle = "Puedes hacer esta receta";
+              else
+                this.availableTitle  = "Puedes hacer estas "+this.recipeList.available.length+" recetas";
+
+              if (this.recipeList.possible.length === 1)
+                this.possibleTitle = "Te falta algún ingrediente para hacer esta receta";
+              else
+                this.possibleTitle  = "Te falta algún ingrediente para hacer estas "+this.recipeList.possible.length+" recetas";
+
+              if (this.recipeList.unavailable.length === 1)
+                this.unavailableTitle = "No tienes ningún ingrediente para esta receta";
+              else
+                this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas";
+            },
+            showTitle: function(list) {
+              return (list.length > 0);
+            },
+            _getParams: function() {
+              this.params = searchToObject();
+            }
+        });
+        function searchToObject() {
+          var pairs = window.location.search.substring(1).split("&"), obj = {}, pair, i;
+          for ( i in pairs ) {
+            if ( pairs[i] === "" ) continue;
+            pair = pairs[i].split("=");
+            obj[ decodeURIComponent( pair[0] ) ] = JSON.parse(decodeURIComponent( pair[1] ));
+          }
+          return obj;
+        }
+    </script>
+</dom-module>

@@ -1,0 +1,82 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="btw-infobar">
+    <template>
+      <style include="iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .info-black {
+          width: 100%;
+          height: 65px;
+          background-color: #95a5a6;
+          color: white;
+        }
+        .info-black>iron-icon {
+          margin: 0 24px;
+        }
+        .info-black>img{
+          height: 37%;
+          margin: 0 9px;
+        }
+        iron-icon.iconinfo {
+          margin-right: 0;
+        }
+        .rupiainfo{
+          margin-right: 20px;
+        }
+      </style>
+
+      <div class="info-black layout horizontal wrap center around-justified">
+        <iron-icon src="../../images/pira.svg"></iron-icon>
+        <template is="dom-if" if="[[hasIcon]]">
+          <img src="{{icon}}">
+        </template>
+        <span class="flex">{{title}}</span>
+
+        <template is="dom-if" if="[[hasRupees]]">
+          <iron-icon class="iconinfo" src="../../images/rupee_wh.png"></iron-icon>
+          <span class="rupiainfo">{{rupees}}</span>
+        </template>
+      </div>
+
+
+    </template>
+
+    <script>
+        Polymer({
+            is: 'btw-infobar',
+            properties: {
+              title: {
+                type: String
+              },
+              icon: {
+                type: String,
+                value: '',
+                observer: '_checkIcon'
+              },
+              hasIcon: {
+                type: Boolean,
+                value: false
+              },
+              rupees: {
+                type: Number,
+                value: 0,
+                observer: '_checkRupees'
+              },
+              hasRupees: {
+                type: Boolean,
+                value: false
+              }
+            },
+            _checkIcon: function() {
+              this.hasIcon = (this.icon.length > 0);
+            },
+            _checkRupees: function() {
+              this.hasRupees = (this.rupees > 0);
+            }
+        });
+    </script>
+</dom-module>

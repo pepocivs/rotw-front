@@ -1,0 +1,100 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../app-elements/btw-items.html">
+<link rel="import" href="../general-style.html">
+
+<dom-module id="page-cooking">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .indigo {
+          text-decoration: none;
+          color: #FFFFFF;
+          text-align: center;
+        }
+        .page-style {
+          height: 100%;
+          background: #ecf0f1;
+          color: #2c3e50;
+        }
+      </style>
+      <iron-ajax auto
+                 url="https://zelda.pepocivs.com/items"
+                 params='{}'
+                 handle-as="json"
+                 loading="{{loading}}"
+                 last-response="{{itemsResponse}}">
+      </iron-ajax>
+
+      <template is="dom-if" if="{{loading}}">
+       <div class="spinner-block">
+         <paper-spinner active></paper-spinner>
+       </div>
+      </template>
+
+      <template is="dom-if" if="{{!loading}}">
+        <div class="layout vertical page-style">
+
+          <div class="flex layout horizontal center-center box-initial">
+            <a href$="{{jsonSend}}" class="indigo">
+              <paper-button class="icon-initial" raised>
+                  <img src="../../images/pira.svg" alt=""/>
+                  <div>Cocinar</div>
+              </paper-button>
+            </a>
+          </div>
+
+          <btw-items
+                  item-list="[[itemsResponse]]"
+                  inventory="{{inventory}}"
+                  tap="true"
+                  item-limit="5"
+                  custom-class="item-container-initial"></btw-items>
+
+        </div>
+
+      </template>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'page-cooking',
+            properties: {
+              inventory: {
+                type: Object,
+                observer: 'setJsonParam'
+              },
+              jsonSend: {
+                type: String,
+                value: 'recipes'
+              },
+              loading: {
+                type: Boolean,
+                notify: true,
+                value: true
+              }
+            },
+            setJsonParam: function(e) {
+              var inventory = [];
+              this.inventory.forEach(function(inv) {
+                if(inv.count > 0) {
+                  inventory.push({
+                    'itemId': inv.itemId,
+                    'count': inv.count
+                  });
+                }
+              })
+              this.jsonSend = 'recipes?inventory='+JSON.stringify(inventory);
+            }
+        });
+    </script>
+</dom-module>

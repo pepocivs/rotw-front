@@ -1,0 +1,189 @@
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="app-elements/btw-icons.html">
+<link rel="import" href="general-style.html">
+
+<dom-module id="recipes-wild">
+  <template>
+
+    <style include="general-style">
+      :host {
+        --app-primary-color: #4285f4;
+        --app-secondary-color: black;
+
+        display: block;
+      }
+
+      app-header {
+        box-shadow: 0 3px 0px 2px rgb(22, 23, 29);
+        background: #323642;
+        color: white;
+        font-weight: 100;
+      }
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+      .drawer-list {
+        margin: 0 20px;
+      }
+      .drawer-list a {
+        display: block;
+        padding: 0 16px;
+        text-decoration: none;
+        color: var(--app-secondary-color);
+        line-height: 40px;
+      }
+      .drawer-list a.iron-selected {
+        color: black;
+        font-weight: bold;
+      }
+      body{
+        background-color: rgba(249, 249, 249, 0.48);
+      }
+      .drawer-list a {
+          display: block;
+          text-transform: uppercase;
+          padding: 0 29px;
+          text-decoration: none;
+          color: #ffffff;
+          line-height: 40px;
+          font-weight: 100;
+
+          font-size: 12px;
+          background-color: rgba(0, 0, 0, 0.33);
+      }
+      .drawer-list a.iron-selected {
+          color: white;
+          font-weight: bold;
+          background-color: rgba(255, 255, 255, 0.14);
+          font-size: 16px;
+          text-transform: uppercase;
+      }
+      .full-height {
+        height: 100%;
+      }
+      .menu-icon {
+        text-align: center;
+        height: 95px;
+        padding-bottom: 41px !important;
+        padding-top: 41px !important;
+        background-color: transparent !important;
+      }
+      .item-icon {
+        margin-right: 24px;
+      }
+      .full-height {
+        height:100%;
+      }
+      .custom-background {
+        background-color: #33485c;
+      }
+    </style>
+
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subRoute}}"></app-route>
+
+    <app-drawer-layout fullbleed>
+      <!-- Drawer content -->
+      <app-drawer id="drawer">
+
+        <app-toolbar>Menu</app-toolbar>
+        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+
+          <a class="menu-icon"><img src="../images/pira.svg" class="full-height"></img></a>
+          <a name="recipes"   href="/recipes"><iron-icon src="../images/foodblanco.svg" class="item-icon"></iron-icon>Recetas</a>
+          <a name="cooking"   href="/cooking"><iron-icon src="../images/pira.svg" class="item-icon"></iron-icon>Cocinar</a>
+          <a name="inventory" href="/inventory"><iron-icon src="../images/menublanco.svg" class="item-icon"></iron-icon>Mi inventario</a>
+          <a name="items"     href="/items"><iron-icon src="../images/manzanablanca.svg" class="item-icon"></iron-icon>Elementos</a>
+          <!-- <a name="form"      href="/form">Insertar recetas nuevas</a> -->
+
+
+        </iron-selector>
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout has-scrolling-region>
+
+        <app-header condenses reveals effects="waterfall">
+          <app-toolbar>
+            <paper-icon-button icon="btw-icons:menu" drawer-toggle></paper-icon-button>
+            <div main-title>Recipes of the wild</div>
+            <!-- <iron-icon src="../images/pira.svg"></iron-icon> -->
+          </app-toolbar>
+        </app-header>
+
+        <iron-pages
+            selected="[[page]]"
+            class="full-height custom-background"
+            attr-for-selected="name"
+            fallback-selection="items"
+            role="main">
+
+          <page-recipes name="recipes"></page-recipes>
+          <page-cooking name="cooking" class="full-height"></page-cooking>
+          <page-inventory name="inventory" class="full-height"></page-inventory>
+          <page-info name="info" class="full-height"></page-info>
+          <page-items name="items"></page-items>
+          <!-- <page-form name="form" class="full-height"></page-form> -->
+
+        </iron-pages>
+      </app-header-layout>
+    </app-drawer-layout>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'recipes-wild',
+
+      properties: {
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged',
+        },
+        routeData: {
+          type: Object
+        },
+        subRoute: {
+          type: Object
+        }
+      },
+      observers: [
+        '_routePageChanged(routeData.page)',
+      ],
+      _routePageChanged: function(page) {
+        this.page = page || 'recipes';
+
+        if (!this.$.drawer.persistent) {
+          this.$.drawer.close();
+        }
+      },
+      _pageChanged: function(page) {
+        var resolvedPageUrl = this.resolveUrl('page-'+page+'/page-'+ page + '.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+      _showPage404: function() {
+        this.page = 'recipes';
+      },
+    });
+  </script>
+</dom-module>

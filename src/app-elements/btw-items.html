@@ -1,0 +1,309 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../general-style.html">
+
+<dom-module id="btw-items">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .item-container {
+          background-color: #34495e;
+        }
+        .item-box {
+          background-color: #FFFFFF;
+          width: 100px;
+          height: 100px;
+          border-radius: 14px;
+          margin: 5px;
+          position: relative;
+          border: 2px solid #424754;
+          box-shadow: 1px 3px 1px 2px #323640;
+        }
+        .item-box img {
+          width: 76%;
+          margin: 12%;
+        }
+        .item-box.small {
+          font-size: 10px;
+        }
+        .item-box.small img {
+          width: 60%;
+          margin: 12% 20% 20% 20%;
+        }
+        .item-count {
+          position: absolute;
+          bottom: 0px;
+          left: 5px;
+        }
+        .item-general-count {
+          text-align:right;
+          width: 100%;
+        }
+        #addByNumber {
+          text-align: center;
+        }
+        #addByNumber div{
+          margin: auto;
+        }
+        .item-name, .item-name-top{
+          font-weight: 800;
+          text-transform: uppercase;
+          text-align: center;
+          background-color: rgb(189, 195, 199);
+          position: absolute;
+          color: #323642;
+          width: 100%;
+          left: 0;
+        }
+        .item-name>div, .item-name-top>div{
+          word-wrap: normal;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 85px;
+          margin: auto;
+        }
+        .item-name {
+          box-shadow: 0px -4px 0px 0px #a6a6a7;
+          bottom: 0;
+        }
+        .item-name-top{
+          border-radius: 16px 16px 0px 0px;
+          box-shadow: 0px 3px 0px 0px #a6a6a7;
+          top: 0;
+          font-size: 9px;
+        }
+        .item-box-overflow{
+          overflow: hidden;
+          background-position-y: 12px;
+        }
+        .item-box-number{
+            border: none !important;
+            box-shadow: none !important;
+        }
+      </style>
+
+      <template is="dom-if" if="[[!isDialog]]">
+        <div class="flex layout horizontal center-center box-initial no-padding">
+          <div class="information layout horizontal wrap center justified " >
+            <div class="item-general-count"> {{nIngredients}}/{{itemLimit}} </div>
+            <template  is="dom-if" if="[[!isLink]]"><div>Ingredientes:</div></template>
+            <div>
+              <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
+                <iron-icon on-tap="removeElement" value$="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
+              </template>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <div class$="layout horizontal wrap center-center [[customClass]]">
+
+
+        <template is="dom-if" if="[[isLink]]">
+          <template is="dom-repeat" items="[[itemList]]">
+            <a href$="{{goTo}}?itemId={{item._id}}" class="invisible-a">
+              <div class="item-box item-box-overflow small">
+                <img src="../images/items/{{item.image}}" />
+                <div class="item-name"><div>{{item.name}}</div></div>
+              </div>
+            </a>
+          </template>
+        </template>
+
+        <template is="dom-if" if="[[isTap]]">
+          <template is="dom-repeat" items="[[itemList]]">
+              <div class="item-box">
+                  <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
+                  <div class="item-name-top"><div>{{item.name}}</div></div>
+                  <img on-tap="addElement" itemid="{{item._id}}" src="../images/items/{{item.image}}" />
+              </div>
+          </template>
+        </template>
+
+        <template is="dom-if" if="[[isDialog]]">
+          <template is="dom-repeat" items="{{itemList}}">
+              <div class="item-box">
+                <img src="../images/items/{{item.image}}"
+                     on-tap="openDialog"
+                     item="{{item}}" />
+                <div class="item-count" id="count[[item._id]]">x{{item.count}}</div>
+                <div class="item-name-top"><div>{{item.name}}</div></div>
+              </div>
+          </template>
+        </template>
+
+
+        <paper-dialog id="addByNumber">
+          <h2>¿Cuantos elementos de este tipo tienes?</h2>
+          <div class="item-box-number item-box">
+            <img src="../images/items/{{targetItem.image}}" />
+          </div>
+          <div>{{tempName}}</div>
+          <paper-input type="number" value="{{tempCount}}"></paper-input>
+          <paper-button on-tap="addElementByNumber"
+                        item$="{{targetItem}}">Agregar</paper-button>
+
+        </paper-dialog>
+
+      </div>
+
+    </template>
+
+    <script>
+        Polymer({
+          is: 'btw-items',
+          properties: {
+            itemList: {
+              type: Object,
+              observer: '_formatItems'
+            },
+            inventory: {
+              type: Object,
+              notify: true,
+              observer: '_formatIngredients'
+            },
+            customClass: {
+              type: String,
+              value: 'item-container'
+            },
+            itemLimit: {
+              type: Number,
+              value: 0
+            },
+            isLink: {
+              type: Boolean,
+              value: false
+            },
+            goTo: {
+              type: String,
+              value: '',
+              observer: '_isGoTo'
+            },
+            tap: {
+              type: String,
+              value: 'false',
+              observer: '_isTap'
+            },
+            nIngredients: {
+              type: Number,
+              value: 0
+            },
+            isDialog: {
+              type: Boolean
+            },
+            ingredients: {
+              type: Object
+            },
+            isTap: {
+              Type: Boolean
+            },
+            tempName: {
+              type: String
+            },
+            tempCount: {
+              type: Number
+            }
+          },
+          _formatIngredients: function() {
+              var ingredients = [];
+              this.inventory.forEach(function(itm){
+                for (var x = 0; x < itm.count; x++ ){
+                  ingredients.push({
+                    '_id':  itm.itemId,
+                    'image':  itm.image
+                  });
+                }
+              });
+              this.nIngredients = ingredients.length;
+              this.ingredients  = ingredients;
+          },
+          _formatItems: function(response) {
+              for (var x = 0; x < response.length; x++) {
+                if (!response[x].count) response[x].count = 0;
+              }
+              this.itemList = response;
+          },
+          addElement: function(e) {
+            if (this.itemLimit === 0 || this.nIngredients < this.itemLimit) {
+              var model = e.model;
+              model.set('item.count', model.item.count+1);
+              this.inventory = this._updateInventory();
+            }
+            this.updateCountList(e.target.itemid);
+          },
+          removeElement: function(e) {
+            var model   = e.model;
+            var removed = false;
+            var itemId  = 0;
+            for (var i = 0; i < this.ingredients.length; i++) {
+              if (parseInt(e.target.getAttribute('value')) === this.ingredients[i]._id && !removed) {
+                itemId  = this.ingredients[i]._id;
+                this.set('itemList', this._updateItemList(this.ingredients[i]._id));
+                this.splice('ingredients', i, 1);
+                removed = true;
+              }
+            }
+            this.inventory    = this._updateInventory();
+            this.nIngredients = this.ingredients.length;
+            this.updateCountList(itemId);
+          },
+          addElementByNumber: function(e) {
+            this.set('targetItem.count', this.tempCount);
+            this.inventory = this._updateInventory();
+            this.updateCountList(JSON.parse(e.target.getAttribute('item'))._id);
+            this.$.addByNumber.close();
+          },
+          openDialog: function(e) {
+            this.tempCount   = (e.target.item.count > 0) ? e.target.item.count : '';
+            this.targetItem  = e.target.item;
+            this.$.addByNumber.toggle();
+          },
+          _isTap: function() {
+            this.isTap    = (this.tap === 'true' && !this.isLink);
+            this.isDialog = (this.tap !== 'true' && !this.isLink);
+          },
+          _updateInventory: function() {
+            var inventory = [];
+            this.itemList.forEach(function(item) {
+              if (item.count > 0) inventory.push({
+                'itemId': item._id,
+                'count': item.count,
+                'image': item.image
+              });
+            });
+            return inventory;
+          },
+          _updateItemList: function(itemId) {
+            var itemList = this.itemList;
+            itemList.forEach(function(item) {
+              if (item._id === itemId) item.count --;
+            });
+            return itemList;
+          },
+          updateCountList: function(itemId) {
+            if (itemId > 0 && this.$$("#count"+itemId)) {
+              this.$$("#count"+itemId).textContent = 'x'+this.getCount(itemId);
+            }
+          },
+          getCount: function(itemId) {
+            var count = 0;
+            this.inventory.forEach(function(item){
+              if (item.itemId === itemId) count = item.count;
+            });
+            return count;
+          },
+          _isGoTo: function() {
+              this.isLink = (this.goTo.length > 0);
+          }
+        });
+    </script>
+</dom-module>

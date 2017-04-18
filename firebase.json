@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "public": "build/default",
+    "ignore": [
+      "bower.json"
+    ],
+    "rewrites": [
+      {
+        "source": "**/!(*.js|*.html|*.css|*.json|*.svg|*.png|*.jpg|*.jpeg)",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

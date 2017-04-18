@@ -1,0 +1,51 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../general-style.html">
+
+<dom-module id="btw-ingredients">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .img-ingredients {
+          width: 54px;
+        }
+        .img-ingredients.not-available {
+          opacity: 0.5;
+          filter: alpha(opacity=50);
+        }
+        .item-box{
+          width: 100%;
+          
+        }
+      </style>
+
+      <div class="item-box">
+        <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
+          <template is="dom-repeat-n" count="{{ingredient.howMany}}">
+            <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
+              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="Available"/>
+            </template>
+            <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
+              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="Not available"/>
+            </template>
+          </template>
+        </template>
+      </div>
+
+    </template>  
+      
+    <script>
+        Polymer({
+            is: 'btw-ingredients',
+            properties: {
+              ingredients: {
+                type: Object
+              }
+            },
+            _isAvailable: function(index, available) {
+              return (index < available);
+            }
+        });
+    </script>
+</dom-module>
