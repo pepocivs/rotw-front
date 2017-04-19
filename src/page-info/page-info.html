@@ -47,7 +47,7 @@
         }
       </style>
       <iron-ajax auto
-                 url="https://zelda.pepocivs.com/recipes"
+                 url="https://api.recipeswild.com/recipes"
                  body="{{params}}"
                  handle-as="json"
                  content-type="application/json"
@@ -56,7 +56,7 @@
                  last-response="{{recipesResponse}}">
       </iron-ajax>
       <iron-ajax auto
-                 url="https://zelda.pepocivs.com/items/{{itemId}}"
+                 url="https://api.recipeswild.com/items/{{itemId}}"
                  params="{}"
                  handle-as="json"
                  loading="{{loadingItemInfo}}"
