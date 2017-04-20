@@ -102,7 +102,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       ga('require', 'linker');
       ga('linker:autoLink', ['*'] );
       ga('send', 'pageview');
+    </script>
 
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      function onLoad() {
+          document.addEventListener("deviceready", onDeviceReady, false);
+      }
+
+      function onDeviceReady() {
+          window.ga.startTrackerWithId('UA-97747072-1');
+      }
     </script>
 
     <link rel="import" href="/src/recipes-wild.html">
@@ -117,7 +127,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
   </head>
-  <body>
+  <body onload="onLoad()">
     <recipes-wild></recipes-wild>
   </body>
 </html>
