@@ -16,7 +16,7 @@
         }
         .item-box{
           width: 100%;
-          
+
         }
       </style>
 
@@ -24,17 +24,17 @@
         <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
           <template is="dom-repeat-n" count="{{ingredient.howMany}}">
             <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
-              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="Available"/>
+              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="{{ingredient.name}}"/>
             </template>
             <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
-              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="Not available"/>
+              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="NA - {{ingredient.name}}"/>
             </template>
           </template>
         </template>
       </div>
 
-    </template>  
-      
+    </template>
+
     <script>
         Polymer({
             is: 'btw-ingredients',
