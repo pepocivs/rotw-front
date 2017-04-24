@@ -26,11 +26,12 @@
       </style>
 
       <div class="layout horizontal wrap center-center" class="recipes-container">
-        <div class="filter-label">Filtrar por:</div>
+
+        <div class="filter-label">Ordenar por:</div>
         <br />
         <div>
           <template is="dom-repeat" items="[[effectList]]">
-            <paper-icon-button class="filter-button" src="../images/items/{{item.value}}.png"></paper-icon-button>
+            <paper-icon-button on-tap="setFilter" id="{{item.key}}" class="filter-button" src="../images/items/{{item.value}}.png"></paper-icon-button>
           </template>
         </div>
 
@@ -44,6 +45,7 @@
               effectList: {
                 type: Object,
                 value: [
+                  { "key": "total",              "value": "reset" },
                   { "key": "hearts",             "value": "ic_heart_red" },
                   { "key": "stamina",            "value": "ic_stamina_green_6" },
                   { "key": "haste",              "value": "ic_haste" },
@@ -55,6 +57,15 @@
                   { "key": "attack",             "value": "ic_sword_plus" },
                   { "key": "defence",            "value": "ic_sheild_plus" }
                 ]
+              },
+              filter: {
+                type: Object,
+                notify: true
+              },
+            },
+            setFilter: function(e) {
+              this.filter = {
+                "sort": e.target.id
               }
             }
         });

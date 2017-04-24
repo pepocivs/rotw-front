@@ -15,11 +15,11 @@
           display: block;
         }
       </style>
-      <iron-ajax auto
+      <iron-ajax id="getRecipes"
                  url="https://api.recipeswild.com/recipes"
                  content-type="application/json"
                  body="{{params}}"
-                 param="{{filter}}"
+                 params="{{filter}}"
                  method="POST"
                  loading="{{loading}}"
                  handle-as="json"
@@ -35,14 +35,14 @@
           <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
         </template>
 
-        <template is="dom-if" if="[[showTitle(recipeList.available)]]">
-          <btw-btnfilter filter="{{filter}}"></btw-btnfilter>
+        <btw-btnfilter filter="{{filter}}"></btw-btnfilter>
+
+        <template is="dom-if" if="[[showTitle('available')]]" id="resultListAvailable">
           <btw-infobar title="{{availableTitle}}"></btw-infobar>
           <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
         </template>
 
-        <template is="dom-if" if="[[showTitle(recipeList.possible)]]">
-          <btw-btnfilter></btw-btnfilter>
+        <template is="dom-if" if="[[showTitle('possible')]]" id="resultListPossible">
           <btw-infobar title="{{possibleTitle}}"></btw-infobar>
           <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
         </template>
@@ -84,13 +84,24 @@
                 type: Boolean,
                 notify: true,
                 value: true
+              },
+              filter: {
+                type: Object,
+                notify: true,
+                value: {},
+                observer: '_onFilterChange'
               }
             },
             ready: function() {
               this._getParams();
+              this.$$("#getRecipes").generateRequest();
             },
             attributeChanged: function() {
               this._getParams();
+            },
+            _onFilterChange: function() {
+              var ajaxRequest = this.$$("#getRecipes");
+              ajaxRequest.generateRequest();
             },
             _checkHasrecipes: function(response) {
               this.hasRecipes = (
@@ -99,6 +110,7 @@
               );
             },
             _recipesResponse: function(response) {
+              this.set('recipeList', {});
               this.recipeList = response;
               this._checkHasrecipes(response);
               var maxRecipes = 50;
@@ -123,8 +135,8 @@
               else
                 this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas";
             },
-            showTitle: function(list) {
-              return (list.length > 0);
+            showTitle: function(where) {
+              return (this.recipeList && this.recipeList[where].length > 0);
             },
             _getParams: function() {
               this.params = searchToObject();
