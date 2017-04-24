@@ -1,0 +1,62 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="btw-effects.html">
+<link rel="import" href="btw-ingredients.html">
+<link rel="import" href="../general-style.html">
+
+<dom-module id="btw-btnfilter">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .filter-button {
+          background-color: #FFFFFF;
+          margin: 7px;
+          width: 50px;
+          height: 50px;
+        }
+        .filter-label {
+          color: white;
+          text-transform: uppercase;
+          font-weight: bold;
+          margin-top: 7px;
+        }
+      </style>
+
+      <div class="layout horizontal wrap center-center" class="recipes-container">
+        <div class="filter-label">Filtrar por:</div>
+        <br />
+        <div>
+          <template is="dom-repeat" items="[[effectList]]">
+            <paper-icon-button class="filter-button" src="../images/items/{{item.value}}.png"></paper-icon-button>
+          </template>
+        </div>
+
+      </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'btw-btnfilter',
+            properties: {
+              effectList: {
+                type: Object,
+                value: [
+                  { "key": "hearts",             "value": "ic_heart_red" },
+                  { "key": "stamina",            "value": "ic_stamina_green_6" },
+                  { "key": "haste",              "value": "ic_haste" },
+                  { "key": "sneak",              "value": "ic_sneak" },
+                  { "key": "coldresistance",     "value": "ic_snowflake" },
+                  { "key": "fireresistance",     "value": "ic_hot" },
+                  { "key": "electricresistance", "value": "ic_bolt" },
+                  { "key": "fireproof",          "value": "ic_fire_blue" },
+                  { "key": "attack",             "value": "ic_sword_plus" },
+                  { "key": "defence",            "value": "ic_sheild_plus" }
+                ]
+              }
+            }
+        });
+    </script>
+</dom-module>
