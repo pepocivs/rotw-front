@@ -12,10 +12,16 @@
           display: block;
         }
         .filter-button {
-          background-color: #FFFFFF;
+          background-color: #FFF;
           margin: 7px;
           width: 50px;
           height: 50px;
+          border-radius: 8px;
+          box-shadow: 1px 3px 1px 2px #323640;
+        }
+        .filter-button-high {
+            border: 1px solid #333;
+            background-color: #CCC;
         }
         .filter-label {
           color: white;
@@ -67,6 +73,13 @@
               this.filter = {
                 "sort": e.target.id
               }
+              this.addSelected(e.target.id);
+            },
+            addSelected(id) {
+              if(this.$$('.filter-button-high'))
+              this.$$('.filter-button-high').classList.remove('filter-button-high');
+
+              this.$$('#'+id).classList.add('filter-button-high');
             }
         });
     </script>
