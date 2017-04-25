@@ -156,7 +156,7 @@
               this.itemId = itemId.itemId;
               this.params = {};
               if (this.itemId && this.itemId.length > 0) {
-                this.params = {'inventory': [{"itemId":this.itemId,"count":"99999"}]};
+                this.params = {'inventory': [{"itemId": parseInt(this.itemId),"count": 5 }]};
               }
             }
         });
