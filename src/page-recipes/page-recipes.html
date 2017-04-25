@@ -25,6 +25,8 @@
                  handle-as="json"
                  last-response="{{recipesResponse}}"></iron-ajax>
 
+     <btw-btnfilter filter="{{filter}}"></btw-btnfilter>
+     
      <template is="dom-if" if="{{loading}}">
        <div class="spinner-block">
          <paper-spinner active></paper-spinner>
@@ -35,7 +37,6 @@
           <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
         </template>
 
-        <btw-btnfilter filter="{{filter}}"></btw-btnfilter>
 
         <template is="dom-if" if="[[showTitle('available')]]" id="resultListAvailable">
           <btw-infobar title="{{availableTitle}}"></btw-infobar>
