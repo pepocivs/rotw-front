@@ -29,13 +29,16 @@
           font-weight: bold;
           margin-top: 7px;
         }
+        .filter-button-container {
+          text-align: center;
+        }
       </style>
 
       <div class="layout horizontal wrap center-center" class="recipes-container">
 
         <div class="filter-label">Ordenar por:</div>
         <br />
-        <div>
+        <div class="filter-button-container">
           <template is="dom-repeat" items="[[effectList]]">
             <paper-icon-button on-tap="setFilter" id="{{item.key}}" class="filter-button" src="../images/items/{{item.value}}.png"></paper-icon-button>
           </template>
