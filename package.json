@@ -6,12 +6,8 @@
     "eslint-config-google": "^0.7.1",
     "eslint-plugin-html": "^1.7.0",
     "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-jshint": "^2.0.4",
-    "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
-    "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^2.1.2",
+    "gulp-run": "^1.7.1",
     "jshint": "^2.9.4"
   },
   "scripts": {
