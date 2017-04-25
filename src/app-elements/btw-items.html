@@ -94,8 +94,10 @@
       <template is="dom-if" if="[[!isDialog]]">
         <div class="flex layout horizontal center-center box-initial no-padding">
           <div class="information layout horizontal wrap center justified " >
-            <div class="item-general-count"> {{nIngredients}}/{{itemLimit}} </div>
-            <template  is="dom-if" if="[[!isLink]]"><div>Ingredientes:</div></template>
+            <template  is="dom-if" if="[[!isLink]]">
+              <div class="item-general-count"> {{nIngredients}}/{{itemLimit}} </div>
+              <div>Ingredientes:</div>
+            </template>
             <div>
               <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
                 <iron-icon on-tap="removeElement" value$="{{ingredient._id}}" src="../images/items/{{ingredient.image}}"></iron-icon>
