@@ -4,14 +4,14 @@ var replace = require('gulp-replace');
 var run     = require('gulp-run');
 
 gulp.task('set-analytics', function() {
-    run('git checkout feature/cordova-analytics').exec();
+    return run('git checkout feature/cordova-analytics').exec();
 });
 gulp.task('polymer-build', function() {
-    run('polymer build').exec();
+    return run('polymer build').exec();
 });
 
 gulp.task('replace', function(){
-  gulp.src([
+  return gulp.src([
       './build/default/service-worker.js',
       './build/default/index.html',
       './build/default/**/*.html'
@@ -23,4 +23,4 @@ gulp.task('replace', function(){
     .pipe(gulp.dest('./build/default'));
 });
 
-gulp.task('build-cordova', ['set-analytics', 'polymer-build', 'replace']);
+gulp.task('build-cordova', gulp.series('set-analytics', 'polymer-build', 'replace'));
