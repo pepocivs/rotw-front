@@ -1,0 +1,86 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="btw-effects.html">
+<link rel="import" href="btw-ingredients.html">
+<link rel="import" href="../general-style.html">
+
+<dom-module id="btw-btnfilter">
+    <template>
+      <style include="general-style iron-flex iron-flex-alignment">
+        :host {
+          display: block;
+        }
+        .filter-button {
+          background-color: #FFF;
+          margin: 7px;
+          width: 50px;
+          height: 50px;
+          border-radius: 8px;
+          box-shadow: 1px 3px 1px 2px #323640;
+        }
+        .filter-button-high {
+            border: 1px solid #333;
+            background-color: #CCC;
+        }
+        .filter-label {
+          color: white;
+          text-transform: uppercase;
+          font-weight: bold;
+          margin-top: 7px;
+        }
+      </style>
+
+      <div class="layout horizontal wrap center-center" class="recipes-container">
+
+        <div class="filter-label">Ordenar por:</div>
+        <br />
+        <div>
+          <template is="dom-repeat" items="[[effectList]]">
+            <paper-icon-button on-tap="setFilter" id="{{item.key}}" class="filter-button" src="../images/items/{{item.value}}.png"></paper-icon-button>
+          </template>
+        </div>
+
+      </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'btw-btnfilter',
+            properties: {
+              effectList: {
+                type: Object,
+                value: [
+                  { "key": "total",              "value": "reset" },
+                  { "key": "hearts",             "value": "ic_heart_red" },
+                  { "key": "stamina",            "value": "ic_stamina_green_6" },
+                  { "key": "haste",              "value": "ic_haste" },
+                  { "key": "sneak",              "value": "ic_sneak" },
+                  { "key": "coldresistance",     "value": "ic_snowflake" },
+                  { "key": "fireresistance",     "value": "ic_hot" },
+                  { "key": "electricresistance", "value": "ic_bolt" },
+                  { "key": "fireproof",          "value": "ic_fire_blue" },
+                  { "key": "attack",             "value": "ic_sword_plus" },
+                  { "key": "defence",            "value": "ic_sheild_plus" }
+                ]
+              },
+              filter: {
+                type: Object,
+                notify: true
+              },
+            },
+            setFilter: function(e) {
+              this.filter = {
+                "sort": e.target.id
+              }
+              this.addSelected(e.target.id);
+            },
+            addSelected(id) {
+              if(this.$$('.filter-button-high'))
+              this.$$('.filter-button-high').classList.remove('filter-button-high');
+
+              this.$$('#'+id).classList.add('filter-button-high');
+            }
+        });
+    </script>
+</dom-module>

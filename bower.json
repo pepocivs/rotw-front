@@ -27,7 +27,6 @@
     "paper-menu": "^1.2.2",
     "paper-dropdown-menu": "^1.5.0",
     "paper-item": "^1.2.1",
-    "dom-repeat-n": "^1.0.5",
     "paper-spinner": "^1.2.1"
   },
   "devDependencies": {
