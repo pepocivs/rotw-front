@@ -21,14 +21,12 @@
       </style>
 
       <div class="item-box">
-        <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
-          <template is="dom-repeat-n" count="{{ingredient.howMany}}">
-            <template is="dom-if" if="[[_isAvailable(index, ingredient.available)]]">
-              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="{{ingredient.name}}"/>
-            </template>
-            <template is="dom-if" if="[[!_isAvailable(index, ingredient.available)]]">
-              <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="NA - {{ingredient.name}}"/>
-            </template>
+        <template is="dom-repeat" items="{{newIngredients}}" as="ingredient">
+          <template is="dom-if" if="[[ingredient.isAvailable]]">
+            <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients" title="{{ingredient.name}}"/>
+          </template>
+          <template is="dom-if" if="[[!ingredient.isAvailable]]">
+            <img src="../images/items/{{ingredient.image}}" value="{{ingredient._id}}" alt="{{ingredient.name}}" class="img-ingredients not-available" title="NA - {{ingredient.name}}"/>
           </template>
         </template>
       </div>
@@ -40,11 +38,27 @@
             is: 'btw-ingredients',
             properties: {
               ingredients: {
+                type: Object,
+                observer: '_expandObject'
+              },
+              newIngredients: {
                 type: Object
               }
             },
-            _isAvailable: function(index, available) {
-              return (index < available);
+            _expandObject: function() {
+              var newIngredients = [];
+              this.ingredients.forEach(function(ingredient) {
+                for (var x = 0; x < ingredient.howMany; x ++) {
+                  var newIngredient = {
+                    "_id": ingredient._id,
+                    "name": ingredient.name,
+                    "image": ingredient.image,
+                    "isAvailable": (ingredient.available > x)
+                  }
+                  newIngredients.push(newIngredient);
+                }
+              });
+              this.newIngredients = newIngredients;
             }
         });
     </script>

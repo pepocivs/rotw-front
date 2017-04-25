@@ -15,8 +15,8 @@
           display: block;
         }
       </style>
-      <iron-ajax id="getRecipes"
-                 url="https://api.recipeswild.com/recipes"
+      <iron-ajax auto
+                 url="http://localhost:4040/recipes"
                  content-type="application/json"
                  body="{{params}}"
                  params="{{filter}}"
@@ -87,21 +87,14 @@
               },
               filter: {
                 type: Object,
-                notify: true,
-                value: {},
-                observer: '_onFilterChange'
+                notify: true
               }
             },
             ready: function() {
               this._getParams();
-              this.$$("#getRecipes").generateRequest();
             },
             attributeChanged: function() {
               this._getParams();
-            },
-            _onFilterChange: function() {
-              var ajaxRequest = this.$$("#getRecipes");
-              ajaxRequest.generateRequest();
             },
             _checkHasrecipes: function(response) {
               this.hasRecipes = (
@@ -110,7 +103,6 @@
               );
             },
             _recipesResponse: function(response) {
-              this.set('recipeList', {});
               this.recipeList = response;
               this._checkHasrecipes(response);
               var maxRecipes = 50;
