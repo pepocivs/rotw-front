@@ -14,31 +14,31 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>page-home</title>
+    <title>page-recipes</title>
 
     <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../bower_components/web-component-tester/browser.js"></script>
 
     <!-- Import the element to test -->
-    <link rel="import" href="../src/page-home/page-home.html">
+    <link rel="import" href="../src/page-recipes/page-recipes.html">
   </head>
   <body>
     <test-fixture id="basic">
       <template>
-        <page-home></page-home>
+        <page-recipes></page-recipes>
       </template>
     </test-fixture>
 
     <script>
-      suite('page-home tests', function() {
-        var home;
+      suite('page-recipes tests', function() {
+        var recipes;
 
         setup(function() {
-          home = fixture('basic');
+          recipes = fixture('basic');
         });
 
         test('Number in circle should be 1', function() {
-          var circle = Polymer.dom(home.root).querySelector('.circle');
+          var circle = Polymer.dom(recipes.root).querySelector('.circle');
           assert.equal(circle.textContent, '1');
         });
       });
