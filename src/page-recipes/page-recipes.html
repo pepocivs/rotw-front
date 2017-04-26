@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../app-elements/btw-btnfilter.html">
 <link rel="import" href="../app-elements/btw-infobar.html">
 <link rel="import" href="../app-elements/btw-recipes.html">
 
@@ -15,14 +16,17 @@
         }
       </style>
       <iron-ajax auto
-                 url="https://zelda.pepocivs.com/recipes"
+                 url="https://api.recipeswild.com/recipes"
                  content-type="application/json"
                  body="{{params}}"
+                 params="{{filter}}"
                  method="POST"
                  loading="{{loading}}"
                  handle-as="json"
                  last-response="{{recipesResponse}}"></iron-ajax>
 
+     <btw-btnfilter filter="{{filter}}"></btw-btnfilter>
+     
      <template is="dom-if" if="{{loading}}">
        <div class="spinner-block">
          <paper-spinner active></paper-spinner>
@@ -33,12 +37,13 @@
           <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
         </template>
 
-        <template is="dom-if" if="[[showTitle(recipeList.available)]]">
+
+        <template is="dom-if" if="[[showTitle('available')]]" id="resultListAvailable">
           <btw-infobar title="{{availableTitle}}"></btw-infobar>
           <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
         </template>
 
-        <template is="dom-if" if="[[showTitle(recipeList.possible)]]">
+        <template is="dom-if" if="[[showTitle('possible')]]" id="resultListPossible">
           <btw-infobar title="{{possibleTitle}}"></btw-infobar>
           <btw-recipes recipe-list="[[recipeList.possible]]"></btw-recipes>
         </template>
@@ -80,6 +85,10 @@
                 type: Boolean,
                 notify: true,
                 value: true
+              },
+              filter: {
+                type: Object,
+                notify: true
               }
             },
             ready: function() {
@@ -97,23 +106,30 @@
             _recipesResponse: function(response) {
               this.recipeList = response;
               this._checkHasrecipes(response);
+              var maxRecipes = 50;
               if (this.recipeList.available.length === 1)
                 this.availableTitle = "Puedes hacer esta receta";
+              else if (this.recipeList.available.length === maxRecipes)
+                this.availableTitle  = "Puedes hacer estas "+this.recipeList.available.length+" recetas, aunque puedes hacer más!";
               else
                 this.availableTitle  = "Puedes hacer estas "+this.recipeList.available.length+" recetas";
 
               if (this.recipeList.possible.length === 1)
                 this.possibleTitle = "Te falta algún ingrediente para hacer esta receta";
+              else if (this.recipeList.possible.length === maxRecipes)
+                this.possibleTitle  = "Te falta algún ingrediente para hacer estas "+this.recipeList.possible.length+" recetas, aunque puedes hacer más!";
               else
                 this.possibleTitle  = "Te falta algún ingrediente para hacer estas "+this.recipeList.possible.length+" recetas";
 
               if (this.recipeList.unavailable.length === 1)
                 this.unavailableTitle = "No tienes ningún ingrediente para esta receta";
+              else if (this.recipeList.unavailable.length === maxRecipes)
+                this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas, aunque puedes hacer más!";
               else
                 this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas";
             },
-            showTitle: function(list) {
-              return (list.length > 0);
+            showTitle: function(where) {
+              return (this.recipeList && this.recipeList[where].length > 0);
             },
             _getParams: function() {
               this.params = searchToObject();
