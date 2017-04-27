@@ -413,7 +413,7 @@ food.carne-de-caza-xl-helada;Carne de caza xl helada
 food.lubina-helada;Lubina Helada
 food.carne-de-caza-xxl-helada;Carne de caza xxl helada
 food.lubina-vivaz-helada;Lubina vivaz helada
-food.salmón-vivaz-helado;Salmón vivaz helado
+food.salmon-vivaz-helado;Salmón vivaz helado
 food.carne-de-helada;carne de helada
 food.carne-de-ave-xl-helada;Carne de ave xl helada 
 food.trucha-helada;trucha helada
@@ -422,7 +422,7 @@ food.lubina-de-hyrule-asada;lubina de hyrule asada
 food.carpa-helada;carpa helada
 food.lubina-vivaz-asada;lubina vivaz asada
 food.dorada-helada;dorada helada
-food.salmón-vivaz-asado;salmón vivaz asado
+food.salmon-vivaz-asado;salmón vivaz asado
 food.cangrejo-helado;cangrejo helado
 food.trucha-asada;trucha asada
 food.caracol-sigiloso-helado;caracol sigiloso helado
@@ -430,17 +430,17 @@ food.carpa-asada;carpa asada
 food.caracol-vivaz-helado;caracol vivaz helado
 food.dorada-asada;dorada asada
 food.carne-de-caza-helada;carne de caza helada
-food.fruto-de-árbol-asado;fruto de árbol asado
+food.fruto-de-arbol-asado;fruto de árbol asado
 food.caracol-sigiloso-asado;caracol sigiloso asado
-food.durián-vivaz-asado;durián vivaz asado
+food.durian-vivaz-asado;durián vivaz asado
 food.caracol-vivaz-asado;caracol vivaz asado
-food.sandía-gélida-asada;sandía gélida asada
+food.sandia-gelida-asada;sandía gélida asada
 food.cangrejo-asado;cangrejo asado
-food.baya-ígnea-asada;baya ígnea asada
+food.baya-ignea-asada;baya ígnea asada
 food.fruta-electro-asada;fruta electro asada
 food.huevo-frito;huevo frito
 food.semilla-de-loto-asada;semilla de loto asada
-food.plátanos-recios-asados;plátanos recios asados
+food.platanos-recios-asados;plátanos recios asados
 food.carne-de-caza-asada;carne de caza asada
 food.carne-de-caza-xl-asada;carne de caza xl asada
 food.huevo-cocido;huevo cocido
@@ -452,31 +452,31 @@ food.carne-de-ave-xl-asada;carne de ave xl asada
 food.seta-rauda-asada;seta rauda asada
 food.frambuesa-asada;frambuesa asada
 food.bellota-asada;bellota asada
-food.seta-recía-asada;seta recía asada
+food.seta-recia-asada;seta recía asada
 food.seta-robusta-asada;seta robusta asada
 food.seta-sigilosa-asada;seta sigilosa asada
 food.carne-de-ave-xxl-asada;carne de ave xxl asada
 food.seta-de-hyrule-asada;seta de Hyrule asada
-food.rábano-asado;rábano asado
-food.rábano-grande-asado;rábano grande asado
+food.rabano-asado;rábano asado
+food.rabano-grande-asado;rábano grande asado
 food.seta-vigorosa-asada;seta vigorosa asada
-food.zanahoría-rauda-asada;zanahoría rauda asada
+food.zanahoria-rauda-asada;zanahoría rauda asada
 food.seta-briosa-asada;seta briosa asada
 food.trufa-vivaz-asada;trufa vivaz asada
-food.zanahoría-briosa-asada;zanahoría briosa asada
-food.trufón-vivaz-asado;trufón vivaz asado
+food.zanahoria-briosa-asada;zanahoría briosa asada
+food.trufon-vivaz-asado;trufón vivaz asado
 food.calabaza-robusta-asada;calabaza robusta asada
-food.seta-gélida-asada;seta gélida asada
-food.bulbo-recío-asado;bulbo recío asado
-food.seta-ígnea-asada;seta ígnea asada
+food.seta-gelida-asada;seta gélida asada
+food.bulbo-recio-asado;bulbo recío asado
+food.seta-ignea-asada;seta ígnea asada
 food.seta-electro-asada;seta electro asada
 food.bulbo-robusto-asado;bulbo robusto asado
-food.plátano-frito-recio;Plátano frito recio
+food.platano-frito-recio;Plátano frito recio
 food.brochetas-de-setas-vivaz;brochetas de setas vivaz
 food.frutas-pochadas-vivaces;frutas pochadas vivaces
-food.salteado-de-montaña-vivaz;salteado de montaña vivaz
-food.salteado-de-montaña-potector;salteado de montaña potector
-food.salteado-de-montaña;salteado de montaña
+food.salteado-de-montana-vivaz;salteado de montaña vivaz
+food.salteado-de-montana-potector;salteado de montaña potector
+food.salteado-de-montana;salteado de montaña
 food.frutas-pochadas-recias;frutas pochadas recias
 food.torta-con-miel-vigorosa;Torta con Miel Vigorosa
 food.guiso-de-carne;guiso de carne
@@ -502,11 +502,11 @@ food.pastel-de-zanahoria;pastel de zanahoria
 food.torta-con-frambuesas;torta con frambuesas
 food.torta-con-miel;torta con miel
 food.pescado-asado-picante;Pescado asado picante
-food.salteado-de-montaña-gélido;salteado de montaña gélido
-food.salteado-de-montaña-picante;salteado de montaña picante
-food.salteado-de-montaña-electrizante;salteado de montaña electrizante
+food.salteado-de-montana-gelido;salteado de montaña gélido
+food.salteado-de-montana-picante;salteado de montaña picante
+food.salteado-de-montana-electrizante;salteado de montaña electrizante
 food.pastel-de-frutas-vivaz;Pastel de Frutas Vivaz
-food.pastel-de-frutas-gélido;Pastel de Frutas Gélido
+food.pastel-de-frutas-gelido;Pastel de Frutas Gélido
 food.pastel-de-frutas-picante;Pastel de Frutas Picante
 food.pastel-de-frutas-electrizante;Pastel de Frutas Electrizante
 food.pastel-de-frutas-recio;Pastel de Frutas Recio
@@ -515,7 +515,7 @@ food.brocheta-de-carne-y-setas-vivaz;Brocheta de carne y setas Vivaz
 food.brocheta-de-carne-y-setas;Brocheta de carne y setas
 food.brocheta-de-carne-y-setas-tonificante;Brocheta de carne y setas Tonificante
 food.brocheta-de-carne-y-setas-vigorizante;Brocheta de carne y setas Vigorizante
-food.brocheta-de-carne-y-setas-gélido;Brocheta de carne y setas Gélido
+food.brocheta-de-carne-y-setas-gelido;Brocheta de carne y setas Gélido
 food.brocheta-de-carne-y-setas-picante;Brocheta de carne y setas Picante
 food.brocheta-de-carne-y-setas-electrizante;Brocheta de carne y setas Electrizante
 food.brocheta-de-carne-y-setas-raudo;Brocheta de carne y setas Raudo
@@ -525,13 +525,13 @@ food.brocheta-de-carne-y-setas-sigiloso;Brocheta de carne y setas Sigiloso
 food.estofado-de-monstruo-vivaz;Estofado de monstruo Vivaz
 food.estofado-de-monstruo;Estofado de monstruo
 food.estofado-de-monstruo-vigorizante;Estofado de monstruo Vigorizante
-food.estofado-de-monstruo-gélido;Estofado de monstruo Gélido
+food.estofado-de-monstruo-gelido;Estofado de monstruo Gélido
 food.estofado-de-monstruo-picante;Estofado de monstruo Picante
 food.estofado-de-monstruo-electrizante;Estofado de monstruo Electrizante
 food.estofado-de-monstruo-sigiloso;Estofado de monstruo Sigiloso
 food.estofado-de-monstruo-recio;Estofado de monstruo Recio
 food.estofado-de-monstruo-protector;Estofado de monstruo Protector
-food.crema-de-la-pasión;Crema de la pasión
+food.crema-de-la-pasion;Crema de la pasión
 food.arroz-especiado-con-marisco-vivaz;Arroz especiado con marisco Vivaz
 food.arroz-especiado-con-marisco-recio;Arroz especiado con marisco Recio
 food.arroz-especiado-con-marisco-protector;Arroz especiado con marisco Protector
@@ -543,13 +543,13 @@ food.tartaleta-de-huevo;Tartaleta de huevo
 food.flan-de-huevo;Flan de huevo
 food.pastelito-de-frutas-vivaz;Pastelito de frutas Vivaz
 food.pastelito-de-frutas;Pastelito de frutas
-food.pastelito-de-frutas-gélido;Pastelito de frutas Gélido
+food.pastelito-de-frutas-gelido;Pastelito de frutas Gélido
 food.pastelito-de-frutas-picante;Pastelito de frutas Picante
 food.pastelito-de-frutas-electrizante;Pastelito de frutas Electrizante
 food.pastelito-de-frutas-recio;Pastelito de frutas Recio
 food.hojaldre-de-carne;Hojaldre de carne
-food.salmón-con-salsa-vivaz;Salmón con salsa Vivaz
-food.arroz-con-salmón-vivaz;Arroz con salmón Vivaz
+food.salmon-con-salsa-vivaz;Salmón con salsa Vivaz
+food.arroz-con-salmon-vivaz;Arroz con salmón Vivaz
 food.arroz-con-cangrejo-recio;Arroz con cangrejo Recio
 food.arroz-con-cangrejo-protector;Arroz con cangrejo Protector
 food.arroz-con-cangrejo-vigorizante;Arroz con cangrejo Vigorizante
@@ -560,7 +560,7 @@ food.arroz-con-setas-vivaz;Arroz con setas Vivaz
 food.arroz-con-setas;Arroz con setas
 food.arroz-con-setas-tonificante;Arroz con setas Tonificante
 food.arroz-con-setas-vigorizante;Arroz con setas Vigorizante
-food.arroz-con-setas-gélido;Arroz con setas Gélido
+food.arroz-con-setas-gelido;Arroz con setas Gélido
 food.arroz-con-setas-picante;Arroz con setas Picante
 food.arroz-con-setas-electrizante;Arroz con setas Electrizante
 food.arroz-con-setas-raudo;Arroz con setas Raudo
@@ -572,7 +572,7 @@ food.sopa-de-setas-vivaz;Sopa de setas Vivaz
 food.sopa-de-setas-raudo;Sopa de setas Raudo
 food.sopa-de-setas-tonificante;Sopa de setas Tonificante
 food.sopa-de-setas-protector;Sopa de setas Protector
-food.sopa-de-setas-gélido;Sopa de setas Gélido
+food.sopa-de-setas-gelido;Sopa de setas Gélido
 food.sopa-de-setas-picante;Sopa de setas Picante
 food.sopa-de-setas-electrizante;Sopa de setas Electrizante
 food.sopa-de-setas-sigiloso;Sopa de setas Sigiloso
@@ -586,7 +586,7 @@ food.sopa-de-carne-vivaz;Sopa de carne Vivaz
 food.sopa-de-carne-tonificante;Sopa de carne Tonificante
 food.sopa-de-carne;Sopa de carne
 food.sopa-de-carne-protector;Sopa de carne Protector
-food.sopa-de-carne-gélido;Sopa de carne Gélido
+food.sopa-de-carne-gelido;Sopa de carne Gélido
 food.sopa-de-carne-picante;Sopa de carne Picante
 food.sopa-de-carne-electrizante;Sopa de carne Electrizante
 food.sopa-de-carne-sigiloso;Sopa de carne Sigiloso
@@ -596,7 +596,7 @@ food.crema-de-verduras-vivaz;Crema de verduras Vivaz
 food.crema-de-verduras-tonificante;Crema de verduras Tonificante
 food.crema-de-verduras;Crema de verduras
 food.crema-de-verduras-protector;Crema de verduras Protector
-food.crema-de-verduras-gélido;Crema de verduras Gélido
+food.crema-de-verduras-gelido;Crema de verduras Gélido
 food.crema-de-verduras-picante;Crema de verduras Picante
 food.crema-de-verduras-electrizante;Crema de verduras Electrizante
 food.crema-de-verduras-sigiloso;Crema de verduras Sigiloso
@@ -607,7 +607,7 @@ food.tortilla-de-setas-vivaz;Tortilla de setas Vivaz
 food.tortilla-de-setas;Tortilla de setas
 food.tortilla-de-setas-tonificante;Tortilla de setas Tonificante
 food.tortilla-de-setas-vigorizante;Tortilla de setas Vigorizante
-food.tortilla-de-setas-gélido;Tortilla de setas Gélido
+food.tortilla-de-setas-gelido;Tortilla de setas Gélido
 food.tortilla-de-setas-picante;Tortilla de setas Picante
 food.tortilla-de-setas-electrizante;Tortilla de setas Electrizante
 food.tortilla-de-setas-raudo;Tortilla de setas Raudo
@@ -625,7 +625,7 @@ food.tortilla-vegetal-vivaz;Tortilla vegetal Vivaz
 food.tortilla-vegetal-tonificante;Tortilla vegetal Tonificante
 food.tortilla-vegetal;Tortilla vegetal
 food.tortilla-vegetal-protector;Tortilla vegetal Protector
-food.tortilla-vegetal-gélido;Tortilla vegetal Gélido
+food.tortilla-vegetal-gelido;Tortilla vegetal Gélido
 food.tortilla-vegetal-picante;Tortilla vegetal Picante
 food.tortilla-vegetal-electrizante;Tortilla vegetal Electrizante
 food.tortilla-vegetal-sigiloso;Tortilla vegetal Sigiloso
@@ -635,7 +635,7 @@ food.dorada-con-salsa-protector;Dorada con salsa Protector
 food.pescado-con-salsa-vivaz;Pescado con salsa Vivaz
 food.pescado-con-salsa;Pescado con salsa
 food.pescado-con-salsa-vigorizante;Pescado con salsa Vigorizante
-food.pescado-con-salsa-gélido;Pescado con salsa Gélido
+food.pescado-con-salsa-gelido;Pescado con salsa Gélido
 food.pescado-con-salsa-picante;Pescado con salsa Picante
 food.pescado-con-salsa-electrizante;Pescado con salsa Electrizante
 food.pescado-con-salsa-sigiloso;Pescado con salsa Sigiloso
@@ -653,7 +653,7 @@ food.bolas-de-arroz-con-carne;Bolas de arroz con carne
 food.bolas-de-arroz-con-pescado-vivaz;Bolas de arroz con pescado Vivaz
 food.bolas-de-arroz-con-pescado;Bolas de arroz con pescado
 food.bolas-de-arroz-con-pescado-vigorizante;Bolas de arroz con pescado Vigorizante
-food.bolas-de-arroz-con-pescado-gélido;Bolas de arroz con pescado Gélido
+food.bolas-de-arroz-con-pescado-gelido;Bolas de arroz con pescado Gélido
 food.bolas-de-arroz-con-pescado-picante;Bolas de arroz con pescado Picante
 food.bolas-de-arroz-con-pescado-electrizante;Bolas de arroz con pescado Electrizante
 food.bolas-de-arroz-con-pescado-sigiloso;Bolas de arroz con pescado Sigiloso
@@ -663,7 +663,7 @@ food.bolas-de-arroz-con-setas-vivaz;Bolas de arroz con setas Vivaz
 food.bolas-de-arroz-con-setas;Bolas de arroz con setas
 food.bolas-de-arroz-con-setas-tonificante;Bolas de arroz con setas Tonificante
 food.bolas-de-arroz-con-setas-vigorizante;Bolas de arroz con setas Vigorizante
-food.bolas-de-arroz-con-setas-gélido;Bolas de arroz con setas Gélido
+food.bolas-de-arroz-con-setas-gelido;Bolas de arroz con setas Gélido
 food.bolas-de-arroz-con-setas-picante;Bolas de arroz con setas Picante
 food.bolas-de-arroz-con-setas-electrizante;Bolas de arroz con setas Electrizante
 food.bolas-de-arroz-con-setas-raudo;Bolas de arroz con setas Raudo
@@ -675,7 +675,7 @@ food.bolas-de-arroz-con-verdura-vivaz;Bolas de arroz con verdura Vivaz
 food.bolas-de-arroz-con-verdura-tonificante;Bolas de arroz con verdura Tonificante
 food.bolas-de-arroz-con-verdura;Bolas de arroz con verdura
 food.bolas-de-arroz-con-verdura-protector;Bolas de arroz con verdura Protector
-food.bolas-de-arroz-con-verdura-gélido;Bolas de arroz con verdura Gélido
+food.bolas-de-arroz-con-verdura-gelido;Bolas de arroz con verdura Gélido
 food.bolas-de-arroz-con-verdura-picante;Bolas de arroz con verdura Picante
 food.bolas-de-arroz-con-verdura-electrizante;Bolas de arroz con verdura Electrizante
 food.bolas-de-arroz-con-verdura-sigiloso;Bolas de arroz con verdura Sigiloso
@@ -697,7 +697,7 @@ food.pincho-de-carne;Pincho de carne
 food.pescado-de-hojaldre-vivaz;Pescado de Hojaldre Vivaz
 food.pescado-de-hojaldre;Pescado de Hojaldre
 food.pescado-de-hojaldre-vigorizante;Pescado de Hojaldre Vigorizante
-food.pescado-de-hojaldre-gélido;Pescado de Hojaldre Gélido
+food.pescado-de-hojaldre-gelido;Pescado de Hojaldre Gélido
 food.pescado-de-hojaldre-picante;Pescado de Hojaldre Picante
 food.pescado-de-hojaldre-electrizante;Pescado de Hojaldre Electrizante
 food.pescado-de-hojaldre-sigiloso;Pescado de Hojaldre Sigiloso
@@ -706,33 +706,33 @@ food.pescado-de-hojaldre-protector;Pescado de Hojaldre Protector
 food.sopa-de-pescado-vivaz;Sopa de pescado Vivaz
 food.sopa-de-pescado;Sopa de pescado
 food.sopa-de-pescado-vigorizante;Sopa de pescado Vigorizante
-food.sopa-de-pescado-gélido;Sopa de pescado Gélido
+food.sopa-de-pescado-gelido;Sopa de pescado Gélido
 food.sopa-de-pescado-picante;Sopa de pescado Picante
 food.sopa-de-pescado-electrizante;Sopa de pescado Electrizante
 food.sopa-de-pescado-sigiloso;Sopa de pescado Sigiloso
 food.sopa-de-pescado-recio;Sopa de pescado Recio
 food.sopa-de-pescado-protector;Sopa de pescado Protector
-food.salteado-aromático-de-setas-vivaz;Salteado aromático de setas Vivaz
-food.salteado-aromático-de-setas;Salteado aromático de setas
-food.salteado-aromático-de-setas-tonificante;Salteado aromático de setas Tonificante
-food.salteado-aromático-de-setas-vigorizante;Salteado aromático de setas Vigorizante
-food.salteado-aromático-de-setas-gélido;Salteado aromático de setas Gélido
-food.salteado-aromático-de-setas-picante;Salteado aromático de setas Picante
-food.salteado-aromático-de-setas-electrizante;Salteado aromático de setas Electrizante
-food.salteado-aromático-de-setas-raudo;Salteado aromático de setas Raudo
-food.salteado-aromático-de-setas-recio;Salteado aromático de setas Recio
-food.salteado-aromático-de-setas-protector;Salteado aromático de setas Protector
-food.salteado-aromático-de-setas-sigiloso;Salteado aromático de setas Sigiloso
-food.salteado-aromático-de-hierbas-raudo;Salteado aromático de hierbas Raudo
-food.salteado-aromático-de-hierbas-vivaz;Salteado aromático de hierbas Vivaz
-food.salteado-aromático-de-hierbas-tonificante;Salteado aromático de hierbas Tonificante
-food.salteado-aromático-de-hierbas;Salteado aromático de hierbas
-food.salteado-aromático-de-hierbas-protector;Salteado aromático de hierbas Protector
-food.salteado-aromático-de-hierbas-gélido;Salteado aromático de hierbas Gélido
-food.salteado-aromático-de-hierbas-picante;Salteado aromático de hierbas Picante
-food.salteado-aromático-de-hierbas-electrizante;Salteado aromático de hierbas Electrizante
-food.salteado-aromático-de-hierbas-sigiloso;Salteado aromático de hierbas Sigiloso
-food.salteado-aromático-de-hierbas-recio;Salteado aromático de hierbas Recio
+food.salteado-aromatico-de-setas-vivaz;Salteado aromático de setas Vivaz
+food.salteado-aromatico-de-setas;Salteado aromático de setas
+food.salteado-aromatico-de-setas-tonificante;Salteado aromático de setas Tonificante
+food.salteado-aromatico-de-setas-vigorizante;Salteado aromático de setas Vigorizante
+food.salteado-aromatico-de-setas-gelido;Salteado aromático de setas Gélido
+food.salteado-aromatico-de-setas-picante;Salteado aromático de setas Picante
+food.salteado-aromatico-de-setas-electrizante;Salteado aromático de setas Electrizante
+food.salteado-aromatico-de-setas-raudo;Salteado aromático de setas Raudo
+food.salteado-aromatico-de-setas-recio;Salteado aromático de setas Recio
+food.salteado-aromatico-de-setas-protector;Salteado aromático de setas Protector
+food.salteado-aromatico-de-setas-sigiloso;Salteado aromático de setas Sigiloso
+food.salteado-aromatico-de-hierbas-raudo;Salteado aromático de hierbas Raudo
+food.salteado-aromatico-de-hierbas-vivaz;Salteado aromático de hierbas Vivaz
+food.salteado-aromatico-de-hierbas-tonificante;Salteado aromático de hierbas Tonificante
+food.salteado-aromatico-de-hierbas;Salteado aromático de hierbas
+food.salteado-aromatico-de-hierbas-protector;Salteado aromático de hierbas Protector
+food.salteado-aromatico-de-hierbas-gelido;Salteado aromático de hierbas Gélido
+food.salteado-aromatico-de-hierbas-picante;Salteado aromático de hierbas Picante
+food.salteado-aromatico-de-hierbas-electrizante;Salteado aromático de hierbas Electrizante
+food.salteado-aromatico-de-hierbas-sigiloso;Salteado aromático de hierbas Sigiloso
+food.salteado-aromatico-de-hierbas-recio;Salteado aromático de hierbas Recio
 food.carne-a-la-parrilla-xxl;Carne a la parrilla XXL
 food.carne-a-la-parrilla-xl;Carne a la parrilla XL
 food.carne-a-la-parrilla;Carne a la parrilla
@@ -745,7 +745,7 @@ food.cangrejo-a-la-parrilla-vigorizante;Cangrejo a la parrilla Vigorizante
 food.pescado-a-la-parrilla-vivaz;Pescado a la parrilla Vivaz
 food.pescado-a-la-parrilla;Pescado a la parrilla
 food.pescado-a-la-parrilla-vigorizante;Pescado a la parrilla Vigorizante
-food.pescado-a-la-parrilla-gélido;Pescado a la parrilla Gélido
+food.pescado-a-la-parrilla-gelido;Pescado a la parrilla Gélido
 food.pescado-a-la-parrilla-picante;Pescado a la parrilla Picante
 food.pescado-a-la-parrilla-electrizante;Pescado a la parrilla Electrizante
 food.pescado-a-la-parrilla-sigiloso;Pescado a la parrilla Sigiloso
@@ -756,7 +756,7 @@ food.verduras-a-la-parrilla-vivaz;Verduras a la parrilla Vivaz
 food.verduras-a-la-parrilla-tonificante;Verduras a la parrilla Tonificante
 food.verduras-a-la-parrilla;Verduras a la parrilla
 food.verduras-a-la-parrilla-protector;Verduras a la parrilla Protector
-food.verduras-a-la-parrilla-gélido;Verduras a la parrilla Gélido
+food.verduras-a-la-parrilla-gelido;Verduras a la parrilla Gélido
 food.verduras-a-la-parrilla-picante;Verduras a la parrilla Picante
 food.verduras-a-la-parrilla-electrizante;Verduras a la parrilla Electrizante
 food.verduras-a-la-parrilla-sigiloso;Verduras a la parrilla Sigiloso
@@ -765,7 +765,7 @@ food.setas-a-la-parrilla-vivaz;Setas a la parrilla Vivaz
 food.setas-a-la-parrilla;Setas a la parrilla
 food.setas-a-la-parrilla-tonificante;Setas a la parrilla Tonificante
 food.setas-a-la-parrilla-vigorizante;Setas a la parrilla Vigorizante
-food.setas-a-la-parrilla-gélido;Setas a la parrilla Gélido
+food.setas-a-la-parrilla-gelido;Setas a la parrilla Gélido
 food.setas-a-la-parrilla-picante;Setas a la parrilla Picante
 food.setas-a-la-parrilla-electrizante;Setas a la parrilla Electrizante
 food.setas-a-la-parrilla-raudo;Setas a la parrilla Raudo
@@ -774,20 +774,20 @@ food.setas-a-la-parrilla-protector;Setas a la parrilla Protector
 food.setas-a-la-parrilla-sigiloso;Setas a la parrilla Sigiloso
 food.pan-de-trigo;Pan de trigo
 food.brochetas-de-carne-variada;Brochetas de carne variada
-food.salteado-de-montaña-variado;Salteado de montaña variado
-food.salteado-de-montaña-variado-gélido;Salteado de montaña variado Gélido
-food.salteado-de-montaña-variado-picante;Salteado de montaña variado Picante
-food.salteado-de-montaña-variado-electrizante;Salteado de montaña variado Electrizante
-food.salteado-de-montaña-variado-sigiloso;Salteado de montaña variado Sigiloso
+food.salteado-de-montana-variado;Salteado de montaña variado
+food.salteado-de-montana-variado-gelido;Salteado de montaña variado Gélido
+food.salteado-de-montana-variado-picante;Salteado de montaña variado Picante
+food.salteado-de-montana-variado-electrizante;Salteado de montaña variado Electrizante
+food.salteado-de-montana-variado-sigiloso;Salteado de montaña variado Sigiloso
 food.frutas-variadas-pochadas-vivaz;Frutas variadas pochadas Vivaz
 food.frutas-variadas-pochadas;Frutas variadas pochadas
-food.frutas-variadas-pochadas-gélido;Frutas variadas pochadas Gélido
+food.frutas-variadas-pochadas-gelido;Frutas variadas pochadas Gélido
 food.frutas-variadas-pochadas-picante;Frutas variadas pochadas Picante
 food.frutas-variadas-pochadas-electrizante;Frutas variadas pochadas Electrizante
 food.frutas-variadas-pochadas-recio;Frutas variadas pochadas Recio
 food.frutas-pochadas-vivaz;Frutas pochadas Vivaz
 food.frutas-pochadas;Frutas pochadas
-food.frutas-pochadas-gélido;Frutas pochadas Gélido
+food.frutas-pochadas-gelido;Frutas pochadas Gélido
 food.frutas-pochadas-picante;Frutas pochadas Picante
 food.frutas-pochadas-electrizante;Frutas pochadas Electrizante
 food.frutas-pochadas-recio;Frutas pochadas Recio
@@ -797,7 +797,7 @@ food.brochetas-de-setas-variadas-vivaz;Brochetas de setas variadas Vivaz
 food.brochetas-de-setas-variadas;Brochetas de setas variadas
 food.brochetas-de-setas-variadas-tonificante;Brochetas de setas variadas Tonificante
 food.brochetas-de-setas-variadas-vigorizante;Brochetas de setas variadas Vigorizante
-food.brochetas-de-setas-variadas-gélido;Brochetas de setas variadas Gélido
+food.brochetas-de-setas-variadas-gelido;Brochetas de setas variadas Gélido
 food.brochetas-de-setas-variadas-picante;Brochetas de setas variadas Picante
 food.brochetas-de-setas-variadas-electrizante;Brochetas de setas variadas Electrizante
 food.brochetas-de-setas-variadas-raudo;Brochetas de setas variadas Raudo
@@ -807,17 +807,17 @@ food.brochetas-de-setas-variadas-sigiloso;Brochetas de setas variadas Sigiloso
 food.brochetas-de-pescado-variado-vivaz;Brochetas de pescado variado Vivaz
 food.brochetas-de-pescado-variado;Brochetas de pescado variado
 food.brochetas-de-pescado-variado-vigorizante;Brochetas de pescado variado Vigorizante
-food.brochetas-de-pescado-variado-gélido;Brochetas de pescado variado Gélido
+food.brochetas-de-pescado-variado-gelido;Brochetas de pescado variado Gélido
 food.brochetas-de-pescado-variado-picante;Brochetas de pescado variado Picante
 food.brochetas-de-pescado-variado-electrizante;Brochetas de pescado variado Electrizante
 food.brochetas-de-pescado-variado-sigiloso;Brochetas de pescado variado Sigiloso
 food.brochetas-de-pescado-variado-recio;Brochetas de pescado variado Recio
 food.brochetas-de-pescado-variado-protector;Brochetas de pescado variado Protector
-food.salteado-de-montaña-sigiloso;Salteado de montaña Sigiloso
+food.salteado-de-montana-sigiloso;Salteado de montaña Sigiloso
 food.carne-con-pescado-xxl-vivaz;Carne con pescado XXL Vivaz
 food.carne-con-pescado-xxl;Carne con pescado XXL
 food.carne-con-pescado-xxl-vigorizante;Carne con pescado XXL Vigorizante
-food.carne-con-pescado-xxl-gélido;Carne con pescado XXL Gélido
+food.carne-con-pescado-xxl-gelido;Carne con pescado XXL Gélido
 food.carne-con-pescado-xxl-picante;Carne con pescado XXL Picante
 food.carne-con-pescado-xxl-electrizante;Carne con pescado XXL Electrizante
 food.carne-con-pescado-xxl-sigiloso;Carne con pescado XXL Sigiloso
@@ -826,7 +826,7 @@ food.carne-con-pescado-xxl-protector;Carne con pescado XXL Protector
 food.carne-con-pescado-xl-vivaz;Carne con pescado XL Vivaz
 food.carne-con-pescado-xl;Carne con pescado XL
 food.carne-con-pescado-xl-vigorizante;Carne con pescado XL Vigorizante
-food.carne-con-pescado-xl-gélido;Carne con pescado XL Gélido
+food.carne-con-pescado-xl-gelido;Carne con pescado XL Gélido
 food.carne-con-pescado-xl-picante;Carne con pescado XL Picante
 food.carne-con-pescado-xl-electrizante;Carne con pescado XL Electrizante
 food.carne-con-pescado-xl-sigiloso;Carne con pescado XL Sigiloso
@@ -835,7 +835,7 @@ food.carne-con-pescado-xl-protector;Carne con pescado XL Protector
 food.carne-con-pescado-vivaz;Carne con pescado Vivaz
 food.carne-con-pescado;Carne con pescado
 food.carne-con-pescado-vigorizante;Carne con pescado Vigorizante
-food.carne-con-pescado-gélido;Carne con pescado Gélido
+food.carne-con-pescado-gelido;Carne con pescado Gélido
 food.carne-con-pescado-picante;Carne con pescado Picante
 food.carne-con-pescado-electrizante;Carne con pescado Electrizante
 food.carne-con-pescado-sigiloso;Carne con pescado Sigiloso
@@ -844,14 +844,14 @@ food.carne-con-pescado-protector;Carne con pescado Protector
 food.carne-asada-picante;Carne asada Picante
 food.pescado-asado;Pescado asado
 food.carne-al-vapor;Carne al vapor
-food.carne-al-vapor-gélido;Carne al vapor Gélido
+food.carne-al-vapor-gelido;Carne al vapor Gélido
 food.carne-al-vapor-picante;Carne al vapor Picante
 food.carne-al-vapor-electrizante;Carne al vapor Electrizante
 food.carne-al-vapor-sigiloso;Carne al vapor Sigiloso
 food.pescado-al-vapor-vivaz;Pescado al vapor Vivaz
 food.pescado-al-vapor;Pescado al vapor
 food.pescado-al-vapor-vigorizante;Pescado al vapor Vigorizante
-food.pescado-al-vapor-gélido;Pescado al vapor Gélido
+food.pescado-al-vapor-gelido;Pescado al vapor Gélido
 food.pescado-al-vapor-picante;Pescado al vapor Picante
 food.pescado-al-vapor-electrizante;Pescado al vapor Electrizante
 food.pescado-al-vapor-sigiloso;Pescado al vapor Sigiloso
@@ -861,7 +861,7 @@ food.setas-al-vapor-vivaz;Setas al vapor Vivaz
 food.setas-al-vapor;Setas al vapor
 food.setas-al-vapor-tonificante;Setas al vapor Tonificante
 food.setas-al-vapor-vigorizante;Setas al vapor Vigorizante
-food.setas-al-vapor-gélido;Setas al vapor Gélido
+food.setas-al-vapor-gelido;Setas al vapor Gélido
 food.setas-al-vapor-picante;Setas al vapor Picante
 food.setas-al-vapor-electrizante;Setas al vapor Electrizante
 food.setas-al-vapor-raudo;Setas al vapor Raudo
@@ -870,7 +870,7 @@ food.setas-al-vapor-protector;Setas al vapor Protector
 food.setas-al-vapor-sigiloso;Setas al vapor Sigiloso
 food.frutas-al-vapor-vivaz;Frutas al vapor Vivaz
 food.frutas-al-vapor;Frutas al vapor
-food.frutas-al-vapor-gélido;Frutas al vapor Gélido
+food.frutas-al-vapor-gelido;Frutas al vapor Gélido
 food.frutas-al-vapor-picante;Frutas al vapor Picante
 food.frutas-al-vapor-electrizante;Frutas al vapor Electrizante
 food.frutas-al-vapor-recio;Frutas al vapor Recio
@@ -879,7 +879,7 @@ food.brocheta-de-pescado-y-setas-vivaz;Brocheta de pescado y setas Vivaz
 food.brocheta-de-pescado-y-setas;Brocheta de pescado y setas
 food.brocheta-de-pescado-y-setas-tonificante;Brocheta de pescado y setas Tonificante
 food.brocheta-de-pescado-y-setas-vigorizante;Brocheta de pescado y setas Vigorizante
-food.brocheta-de-pescado-y-setas-gélido;Brocheta de pescado y setas Gélido
+food.brocheta-de-pescado-y-setas-gelido;Brocheta de pescado y setas Gélido
 food.brocheta-de-pescado-y-setas-picante;Brocheta de pescado y setas Picante
 food.brocheta-de-pescado-y-setas-electrizante;Brocheta de pescado y setas Electrizante
 food.brocheta-de-pescado-y-setas-raudo;Brocheta de pescado y setas Raudo
@@ -890,7 +890,7 @@ food.salteado-de-frutas-y-setas-vivaz;Salteado de frutas y setas Vivaz
 food.salteado-de-frutas-y-setas;Salteado de frutas y setas
 food.salteado-de-frutas-y-setas-tonificante;Salteado de frutas y setas Tonificante
 food.salteado-de-frutas-y-setas-vigorizante;Salteado de frutas y setas Vigorizante
-food.salteado-de-frutas-y-setas-gélido;Salteado de frutas y setas Gélido
+food.salteado-de-frutas-y-setas-gelido;Salteado de frutas y setas Gélido
 food.salteado-de-frutas-y-setas-picante;Salteado de frutas y setas Picante
 food.salteado-de-frutas-y-setas-electrizante;Salteado de frutas y setas Electrizante
 food.salteado-de-frutas-y-setas-raudo;Salteado de frutas y setas Raudo
@@ -901,7 +901,7 @@ food.brocheta-de-carne;Brocheta de carne
 food.brocheta-de-pescado-vivaz;Brocheta de pescado Vivaz
 food.brocheta-de-pescado;Brocheta de pescado
 food.brocheta-de-pescado-vigorizante;Brocheta de pescado Vigorizante
-food.brocheta-de-pescado-gélido;Brocheta de pescado Gélido
+food.brocheta-de-pescado-gelido;Brocheta de pescado Gélido
 food.brocheta-de-pescado-picante;Brocheta de pescado Picante
 food.brocheta-de-pescado-electrizante;Brocheta de pescado Electrizante
 food.brocheta-de-pescado-sigiloso;Brocheta de pescado Sigiloso
@@ -911,7 +911,7 @@ food.brocheta-de-setas-vivaz;Brocheta de setas Vivaz
 food.brocheta-de-setas;Brocheta de setas
 food.brocheta-de-setas-tonificante;Brocheta de setas Tonificante
 food.brocheta-de-setas-vigorizante;Brocheta de setas Vigorizante
-food.brocheta-de-setas-gélido;Brocheta de setas Gélido
+food.brocheta-de-setas-gelido;Brocheta de setas Gélido
 food.brocheta-de-setas-picante;Brocheta de setas Picante
 food.brocheta-de-setas-electrizante;Brocheta de setas Electrizante
 food.brocheta-de-setas-raudo;Brocheta de setas Raudo
@@ -927,23 +927,23 @@ food.tortilla;Tortilla
 food.leche-caliente;Leche caliente
 food.bayas-salteadas-picante;Bayas salteadas Picante
 food.dulce-de-miel-vigorizante;Dulce de miel Vigorizante
-food.tónico-feérico;Tónico Feérico
-food.tónico-feérico-raudo;Tónico Feérico Raudo
-food.tónico-feérico-tonificante;Tónico Feérico Tonificante
-food.tónico-feérico-vivaz;Tónico Feérico Vivaz
-food.tónico-feérico-antillamas;Tónico Feérico Antillamas
+food.tonico-feerico;Tónico Feérico
+food.tonico-feerico-raudo;Tónico Feérico Raudo
+food.tonico-feerico-tonificante;Tónico Feérico Tonificante
+food.tonico-feerico-vivaz;Tónico Feérico Vivaz
+food.tonico-feerico-antillamas;Tónico Feérico Antillamas
 food.elixir-raudo;Elixir Raudo
 food.elixir-tonificante;Elixir Tonificante
 food.elixir-vivaz;Elixir Vivaz
 food.elixir-antillamas;Elixir Antillamas
-food.tónico-feérico-gélido;Tónico Feérico Gélido
-food.tónico-feérico-picante;Tónico Feérico Picante
-food.tónico-feérico-electrizante;Tónico Feérico Electrizante
-food.tónico-feérico-vigorizante;Tónico Feérico Vigorizante
-food.tónico-feérico-recio;Tónico Feérico Recio
-food.tónico-feérico-protector;Tónico Feérico Protector
-food.tónico-feérico-sigiloso;Tónico Feérico Sigiloso
-food.elixir-gélido;Elixir Gélido
+food.tonico-feerico-gelido;Tónico Feérico Gélido
+food.tonico-feerico-picante;Tónico Feérico Picante
+food.tonico-feerico-electrizante;Tónico Feérico Electrizante
+food.tonico-feerico-vigorizante;Tónico Feérico Vigorizante
+food.tonico-feerico-recio;Tónico Feérico Recio
+food.tonico-feerico-protector;Tónico Feérico Protector
+food.tonico-feerico-sigiloso;Tónico Feérico Sigiloso
+food.elixir-gelido;Elixir Gélido
 food.elixir-picante;Elixir Picante
 food.elixir-electrizante;Elixir Electrizante
 food.elixir-vigorizante;Elixir Vigorizante
