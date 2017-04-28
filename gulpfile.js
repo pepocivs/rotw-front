@@ -3,19 +3,19 @@ var gulp = require('gulp');
 var replace = require('gulp-replace');
 var run     = require('gulp-run');
 
-gulp.task('set-analytics', function() {
-    return run('git checkout feature/cordova-analytics').exec();
-});
 gulp.task('polymer-build', function() {
     return run('polymer build').exec();
 });
 
-gulp.task('replace', function(){
+gulp.task('cordova-replace', function() {
   return gulp.src([
       './build/default/service-worker.js',
       './build/default/index.html',
       './build/default/**/*.html'
     ])
+    .pipe(replace("ga('send', 'pageview');", 'ga("send", "pageview");</script><script type="text/javascript" charset="utf-8">function onLoad() { document.addEventListener("deviceready", onDeviceReady, false);} function onDeviceReady() { window.ga.startTrackerWithId("UA-97747072-1"); }'))
+    .pipe(replace('</head><body><recipes-wild>', '</head><body onload="onLoad()"><recipes-wild>'))
+    .pipe(replace('<a href="https://play.google.com/store/apps/details?id=com.pepocivs.recipesofthewild" target="_blank"><img class="see-on-store" src="../images/google_play.png"></a>', ''))
     .pipe(replace('/src/', 'src/'))
     .pipe(replace('../images/items', '/android_asset/www/images/items'))
     .pipe(replace('https://api.', 'http://api.'))
@@ -23,4 +23,5 @@ gulp.task('replace', function(){
     .pipe(gulp.dest('./build/default'));
 });
 
-gulp.task('build-cordova', gulp.series('set-analytics', 'polymer-build', 'replace'));
+
+gulp.task('cordova-build', gulp.series('polymer-build', 'cordova-replace'));
