@@ -25,8 +25,9 @@
                  handle-as="json"
                  last-response="{{recipesResponse}}"></iron-ajax>
 
+
      <btw-btnfilter filter="{{filter}}"></btw-btnfilter>
-     
+
      <template is="dom-if" if="{{loading}}">
        <div class="spinner-block">
          <paper-spinner active></paper-spinner>
@@ -34,7 +35,7 @@
      </template>
      <template is="dom-if" if="{{!loading}}">
         <template is="dom-if" if="[[!hasRecipes]]">
-          <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
+          <paper-item class="info">{{localize('message.notFound')}}</paper-item>
         </template>
 
 
@@ -59,7 +60,13 @@
     <script>
         Polymer({
             is: 'page-recipes',
+            behaviors: [
+              Polymer.AppLocalizeBehavior
+            ],
             properties: {
+              language: {
+                value: 'es'
+              },
               recipesResponse: {
                 type: Object,
                 observer: '_recipesResponse'
@@ -93,6 +100,9 @@
             },
             ready: function() {
               this._getParams();
+            },
+            attached: function() {
+              this.loadResources(this.resolveUrl('../locales.json'));
             },
             attributeChanged: function() {
               this._getParams();

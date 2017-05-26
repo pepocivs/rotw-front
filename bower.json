@@ -27,7 +27,8 @@
     "paper-menu": "^1.2.2",
     "paper-dropdown-menu": "^1.5.0",
     "paper-item": "^1.2.1",
-    "paper-spinner": "^1.2.1"
+    "paper-spinner": "^1.2.1",
+    "app-localize-behavior": "PolymerElements/app-localize-behavior#^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
