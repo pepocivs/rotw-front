@@ -117,26 +117,18 @@
               this.recipeList = response;
               this._checkHasrecipes(response);
               var maxRecipes = 50;
-              if (this.recipeList.available.length === 1)
-                this.availableTitle = "Puedes hacer esta receta";
-              else if (this.recipeList.available.length === maxRecipes)
-                this.availableTitle  = "Puedes hacer estas "+this.recipeList.available.length+" recetas, aunque puedes hacer más!";
+              if (this.recipeList.available.length === maxRecipes)
+                this.availableTitle  = this.localize('recipe.availableMore', 'num', this.recipeList.available.length);
               else
-                this.availableTitle  = "Puedes hacer estas "+this.recipeList.available.length+" recetas";
+                this.availableTitle  = this.localize('recipe.available', 'num', this.recipeList.available.length);
 
-              if (this.recipeList.possible.length === 1)
-                this.possibleTitle = "Te falta algún ingrediente para hacer esta receta";
-              else if (this.recipeList.possible.length === maxRecipes)
-                this.possibleTitle  = "Te falta algún ingrediente para hacer estas "+this.recipeList.possible.length+" recetas, aunque puedes hacer más!";
+              if (this.recipeList.possible.length === maxRecipes)
+                this.possibleTitle  = this.localize('recipe.possibleMore', 'num', this.recipeList.possible.length);
               else
-                this.possibleTitle  = "Te falta algún ingrediente para hacer estas "+this.recipeList.possible.length+" recetas";
+                this.possibleTitle  = this.localize('recipe.possible', 'num', this.recipeList.possible.length);
 
-              if (this.recipeList.unavailable.length === 1)
-                this.unavailableTitle = "No tienes ningún ingrediente para esta receta";
-              else if (this.recipeList.unavailable.length === maxRecipes)
-                this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas, aunque puedes hacer más!";
-              else
-                this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas";
+              this.unavailableTitle  = this.localize('recipe.unavailable', 'num', this.recipeList.unavailable.length);
+
             },
             showTitle: function(where) {
               return (this.recipeList && this.recipeList[where].length > 0);

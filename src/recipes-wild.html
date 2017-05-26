@@ -96,6 +96,15 @@
       .see-on-store {
         width: 100%;
       }
+      .lang-flag {
+        height: initial;
+        margin: 0px 10px;
+        cursor: pointer;
+        opacity: 0.5;
+      }
+      .lang-flag.selected {
+        opacity: 1;
+      }
     </style>
 
 
@@ -134,8 +143,9 @@
           <app-toolbar>
             <paper-icon-button icon="btw-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>Recipes of the wild</div>
-            <iron-icon src="../images/locale/es.png"></iron-icon>
-            <iron-icon src="../images/locale/en.png"></iron-icon>
+            <iron-icon class$="lang-flag {{selectedStyle('es')}}" on-tap="selectLang" lang="es" src="../images/locale/es.png"></iron-icon>
+            <iron-icon class$="lang-flag {{selectedStyle('en')}}" on-tap="selectLang" lang="en" src="../images/locale/en.png"></iron-icon>
+            <iron-icon class$="lang-flag {{selectedStyle('fr')}}" on-tap="selectLang" lang="fr" src="../images/locale/fr.png"></iron-icon>
           </app-toolbar>
         </app-header>
 
@@ -173,6 +183,9 @@
         },
         subRoute: {
           type: Object
+        },
+        language: {
+          value: 'es'
         }
       },
       observers: [
@@ -192,8 +205,13 @@
       _showPage404: function() {
         this.page = 'recipes';
       },
-      _toggle: function() {
-        this.language = this.$.switch.checked ? 'fr' : 'en';
+      selectLang: function(e) {
+        console.log('Change language to: '+e.target.lang);
+        this.language = e.target.lang;
+      },
+      selectedStyle: function(lang) {
+        if (!this.language) this.language = 'es';
+        return (lang === this.language) ? 'selected' : '';
       }
     });
   </script>

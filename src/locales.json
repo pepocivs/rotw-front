@@ -1,34 +1,25 @@
 {
   "en": {
-    "hello": "Translation and localization",
-    "header_2": "Plurals and genders",
-    "greeting": "Hello!",
-    "intro": "My name is {name}",
-    "cats": "I have {numCats, number} cats. Almost {pctBlack, number, percent} of them are black.",
-    "sale": "Sale begins {start, date, medium}, at {time, time, short}. Everything is {price, number, USD}.",
-    "fruit": "{num, plural, =0 {no apples} =1 {one apple} other {# apples}}",
-    "bananas": "{name} ate {num, plural, =0 {no bananas} =1 {a banana} other {# bananas}} {gender, select, male {at his house.} female {at her house.} other {at their house.}}"
+    "message.notFound": "No se han encontrado recetas con los elementos seleccionados",
+    "recipe.available": "Yo can craft {num, plural, =1 {this recipe} other {this {num} recipes}}",
+    "recipe.availableMore": "You can craft {num} recipes, even though you can craft more!",
+    "recipe.possible": "Some ingredient is missing to craft this {num, plural, =1 {recipe} other {{num} recipes}}",
+    "recipe.possibleMore": "Some ingredient is missing to craft this {num} recipes, even though you can craft more!",
+    "recipe.unavailable": "You don't have any ingredient to do this {num, plural, =1 {recipes} other {{num} recipess}}"
   },
   "fr": {
-    "hello": "Traduction et localisation",
-    "header_2": "Pluriels et les sexes",
-    "greeting": "Bonjour!",
-    "intro": "Je m'appelle {name}",
-    "cats": "J'ai {numCats, number} chats. Près de {pctBlack, number, percent} d'entre eux sont noirs.",
-    "sale": "La vente commence le {start, date, medium} à {time, time, short}. Tout est à {price, number, USD}.",
-    "fruit": "{num, plural, =0 {pas de pommes} =1 {une pomme} other {# pommes}}",
-    "bananas": "{name} {num, plural, =0 {ne} =1 {} other {}} mange {num, plural, =0 {pas de bananes} =1 {une banane} other {# bananes}} {gender, select, male {chez lui.} female {chez elle.} other {chez eux.}}"
+    "message.notFound": "No se han encontrado recetas con los elementos seleccionados",
+    "recipe.available": "Puedes hacer {num, plural, =1 {esta receta} other {estas recetas}}",
+    "recipe.availableMore": "Puedes hacer estas {num} recetas, aunque puedes hacer más!",
+    "recipe.possible": "Te falta algún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}",
+    "recipe.possibleMore": "Te falta algún ingrediente para hacer estas {num} recetas, aunque puedes hacer más!"
   },
   "es": {
-    "message": {
-        "notFound": "No se han encontrado recetas con los elementos seleccionados"
-    },
-    "header_2": "Pluriels et les sexes",
-    "greeting": "Bonjour!",
-    "intro": "Je m'appelle {name}",
-    "cats": "J'ai {numCats, number} chats. Près de {pctBlack, number, percent} d'entre eux sont noirs.",
-    "sale": "La vente commence le {start, date, medium} à {time, time, short}. Tout est à {price, number, USD}.",
-    "fruit": "{num, plural, =0 {pas de pommes} =1 {une pomme} other {# pommes}}",
-    "bananas": "{name} {num, plural, =0 {ne} =1 {} other {}} mange {num, plural, =0 {pas de bananes} =1 {une banane} other {# bananes}} {gender, select, male {chez lui.} female {chez elle.} other {chez eux.}}"
+    "message.notFound": "No se han encontrado recetas con los elementos seleccionados",
+    "recipe.available": "Puedes hacer {num, plural, =1 {esta receta} other {estas recetas}}",
+    "recipe.availableMore": "Puedes hacer estas {num} recetas, aunque puedes hacer más!",
+    "recipe.possible": "Te falta algún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}",
+    "recipe.possibleMore": "Te falta algún ingrediente para hacer estas {num} recetas, aunque puedes hacer más!",
+    "recipe.unavailable": "No tienes ningún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}"
   }
 }
