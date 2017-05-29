@@ -60,13 +60,7 @@
     <script>
         Polymer({
             is: 'page-recipes',
-            behaviors: [
-              Polymer.AppLocalizeBehavior
-            ],
             properties: {
-              language: {
-                value: 'es'
-              },
               recipesResponse: {
                 type: Object,
                 observer: '_recipesResponse'
@@ -101,9 +95,6 @@
             ready: function() {
               this._getParams();
             },
-            attached: function() {
-              this.loadResources(this.resolveUrl('../locales.json'));
-            },
             attributeChanged: function() {
               this._getParams();
             },
@@ -118,16 +109,16 @@
               this._checkHasrecipes(response);
               var maxRecipes = 50;
               if (this.recipeList.available.length === maxRecipes)
-                this.availableTitle  = this.localize('recipe.availableMore', 'num', this.recipeList.available.length);
+                this.availableTitle = this.localize('recipe.availableMore', 'num', this.recipeList.available.length);
               else
-                this.availableTitle  = this.localize('recipe.available', 'num', this.recipeList.available.length);
+                this.availableTitle = this.localize('recipe.available', 'num', this.recipeList.available.length);
 
               if (this.recipeList.possible.length === maxRecipes)
-                this.possibleTitle  = this.localize('recipe.possibleMore', 'num', this.recipeList.possible.length);
+                this.possibleTitle = this.localize('recipe.possibleMore', 'num', this.recipeList.possible.length);
               else
-                this.possibleTitle  = this.localize('recipe.possible', 'num', this.recipeList.possible.length);
+                this.possibleTitle = this.localize('recipe.possible', 'num', this.recipeList.possible.length);
 
-              this.unavailableTitle  = this.localize('recipe.unavailable', 'num', this.recipeList.unavailable.length);
+              this.unavailableTitle = this.localize('recipe.unavailable', 'num', this.recipeList.unavailable.length);
 
             },
             showTitle: function(where) {

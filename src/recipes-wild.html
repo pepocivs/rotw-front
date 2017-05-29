@@ -171,7 +171,6 @@
   <script>
     Polymer({
       is: 'recipes-wild',
-
       properties: {
         page: {
           type: String,
@@ -191,6 +190,12 @@
       observers: [
         '_routePageChanged(routeData.page)',
       ],
+      behaviors: [
+        Polymer.AppLocalizeBehavior
+      ],
+      attached: function() {
+        this.loadResources(this.resolveUrl('./locales.json'));
+      },
       _routePageChanged: function(page) {
         this.page = page || 'recipes';
 
