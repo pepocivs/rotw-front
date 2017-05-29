@@ -213,6 +213,7 @@
       selectLang: function(e) {
         console.log('Change language to: '+e.target.lang);
         this.language = e.target.lang;
+        console.log('Translated message: '+this.localize('recipe.availableMore', 'num', 5));
       },
       selectedStyle: function(lang) {
         if (!this.language) this.language = 'es';
