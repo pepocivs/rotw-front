@@ -31,6 +31,7 @@
                  url="https://api.recipeswild.com/items"
                  params='{}'
                  handle-as="json"
+                 headers="{{headers}}"
                  loading="{{loading}}"
                  last-response="{{itemsResponse}}">
       </iron-ajax>
@@ -48,12 +49,13 @@
             <a href$="{{jsonSend}}" class="indigo">
               <paper-button class="icon-initial" raised>
                   <img src="../../images/pira.svg" alt=""/>
-                  <div>Cocinar</div>
+                  <div>{{localize('menu.cooking')}}</div>
               </paper-button>
             </a>
           </div>
 
           <btw-items
+                  language="{{language}}"
                   item-list="[[itemsResponse]]"
                   inventory="{{inventory}}"
                   tap="true"
@@ -82,6 +84,17 @@
                 notify: true,
                 value: true
               }
+            },
+            observers: [
+              '_executeRequest(language)',
+            ],
+            behaviors: [Polymer.AppLocalizeBehavior],
+            ready: function() {
+              this.loadResources(this.resolveUrl('../locales.json'));
+              this._executeRequest();
+            },
+            _executeRequest: function() {
+              this.headers = { 'Accept-Language': this.language };
             },
             setJsonParam: function(e) {
               var inventory = [];

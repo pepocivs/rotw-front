@@ -16,7 +16,7 @@
         }
       </style>
 
-      <b>Localizado en:</b>
+      <b>{{localize('component.locatedIn')}}:</b>
       <br />
       <template is="dom-repeat" items="{{locations}}" as="location">
         <div class="item-location">{{location}}</div>
@@ -35,6 +35,10 @@
               locations: {
                 type: Object
               }
+            },
+            behaviors: [Polymer.AppLocalizeBehavior],
+            ready: function() {
+              this.loadResources(this.resolveUrl('../locales.json'));
             },
             _formatLocations: function() {
               this.locations = this.locationString.split(", ");
