@@ -143,9 +143,9 @@
           <app-toolbar>
             <paper-icon-button icon="btw-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>Recipes of the wild</div>
-            <iron-icon class$="lang-flag {{selectedStyle('es')}}" on-tap="selectLang" lang="es" src="../images/locale/es.png"></iron-icon>
-            <iron-icon class$="lang-flag {{selectedStyle('en')}}" on-tap="selectLang" lang="en" src="../images/locale/en.png"></iron-icon>
-            <iron-icon class$="lang-flag {{selectedStyle('fr')}}" on-tap="selectLang" lang="fr" src="../images/locale/fr.png"></iron-icon>
+            <template is="dom-repeat" items="{{languages}}" as="lang" id="langbar">
+              <iron-icon id="lang{{lang}}" class="lang-flag" on-tap="selectLang" lang="{{lang}}" src="../images/locale/{{lang}}.png"></iron-icon>
+            </template>
           </app-toolbar>
         </app-header>
 
@@ -182,12 +182,15 @@
         },
         subRoute: {
           type: Object
-        }
-        ,
+        },
         language: {
           value: 'es',
           notify: true,
           reflectToAttribute: true
+        },
+        languages: {
+          type: Object,
+          value: ['es', 'en', 'fr']
         }
       },
       observers: [
@@ -208,12 +211,12 @@
         this.page = 'recipes';
       },
       selectLang: function(e) {
-        console.log('Change language to: '+e.target.lang);
+        var toolBar   = e.target.parentElement;
         this.language = e.target.lang;
-      },
-      selectedStyle: function(lang) {
-        if (!this.language) this.language = 'es';
-        return (lang === this.language) ? 'selected' : '';
+        this.languages.forEach(function(lang) {
+          toolBar.querySelector('#lang'+lang).classList.remove('selected');
+        });
+        e.target.classList.add('selected');
       }
     });
   </script>

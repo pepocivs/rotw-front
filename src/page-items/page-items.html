@@ -18,6 +18,7 @@
                  params='{}'
                  handle-as="json"
                  loading="{{loading}}"
+                 headers="{{headers}}"
                  last-response="{{itemsResponse}}"></iron-ajax>
 
     <template is="dom-if" if="{{loading}}">
@@ -40,6 +41,15 @@
               notify: true,
               value: true
             }
+          },
+          observers: [
+            '_executeRequest(language)',
+          ],
+          ready: function() {
+            this._executeRequest();
+          },
+          _executeRequest: function() {
+            this.headers = { 'Accept-Language': this.language };
           }
         });
     </script>
