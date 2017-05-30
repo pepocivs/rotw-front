@@ -1,25 +1,43 @@
 {
   "en": {
-    "message.notFound": "No se han encontrado recetas con los elementos seleccionados",
-    "recipe.available": "Yo can craft {num, plural, =1 {this recipe} other {this {num} recipes}}",
+    "menu.name": "Recipes of the wild",
+    "menu.recipes": "Recipes",
+    "menu.cooking": "Cooking",
+    "menu.inventory": "My inventory",
+    "menu.elements": "Elements",
+    "message.notFound": "No recipes found with selected items",
+    "recipe.available": "You can craft {num, plural, =1 {this recipe} other {this {num} recipes}}",
     "recipe.availableMore": "You can craft {num} recipes, even though you can craft more!",
     "recipe.possible": "Some ingredient is missing to craft this {num, plural, =1 {recipe} other {{num} recipes}}",
     "recipe.possibleMore": "Some ingredient is missing to craft this {num} recipes, even though you can craft more!",
-    "recipe.unavailable": "You don't have any ingredient to do this {num, plural, =1 {recipes} other {{num} recipess}}"
+    "recipe.unavailable": "You don't have any ingredient to do this {num, plural, =1 {recipes} other {{num} recipess}}",
+    "inventory.whatcook": "What can I cook?"
   },
   "fr": {
-    "message.notFound": "No se han encontrado recetas con los elementos seleccionados",
+    "menu.name": "Recettes sauvages",
+    "menu.recipes": "Recettes",
+    "menu.cooking": "Cuisiner",
+    "menu.inventory": "Mon inventaire",
+    "menu.elements": "Éléments",
+    "message.notFound": "Aucune recette trouvée sur certains articles",
     "recipe.available": "Vous pouvez faire {num, plural, =1 {cette recette} other {ces recettes}}",
     "recipe.availableMore": "Vous pouvez faire ces {num} recettes, mais vous pouvez en faire plus!",
-    "recipe.possible": "Te falta algún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}",
-    "recipe.possibleMore": "Te falta algún ingrediente para hacer estas {num} recetas, aunque puedes hacer más!"
+    "recipe.possible": "Il vous manque un ingrédient pour rendre {num, plural, =1 {cette recette} other {ces {num} recettes}}",
+    "recipe.possibleMore": "Il vous manque un ingrédient pour rendre ces {num} recettes, mais vous pouvez en faire plus!",
+    "inventory.whatcook": "Ce que je peux cuisiner?"
   },
   "es": {
+    "menu.name": "Recetas salvajes",
+    "menu.recipes": "Recetas",
+    "menu.cooking": "Cocinar",
+    "menu.inventory": "Mi inventario",
+    "menu.elements": "Elementos",
     "message.notFound": "No se han encontrado recetas con los elementos seleccionados",
     "recipe.available": "Puedes hacer {num, plural, =1 {esta receta} other {estas recetas}}",
     "recipe.availableMore": "Puedes hacer estas {num} recetas, aunque puedes hacer más!",
     "recipe.possible": "Te falta algún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}",
     "recipe.possibleMore": "Te falta algún ingrediente para hacer estas {num} recetas, aunque puedes hacer más!",
-    "recipe.unavailable": "No tienes ningún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}"
+    "recipe.unavailable": "No tienes ningún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}",
+    "inventory.whatcook": "¿Qué puedo cocinar?"
   }
 }
