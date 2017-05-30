@@ -11,7 +11,12 @@
     "recipe.possible": "Some ingredient is missing to craft this {num, plural, =1 {recipe} other {{num} recipes}}",
     "recipe.possibleMore": "Some ingredient is missing to craft this {num} recipes, even though you can craft more!",
     "recipe.unavailable": "You don't have any ingredient to do this {num, plural, =1 {recipes} other {{num} recipess}}",
-    "inventory.whatcook": "What can I cook?"
+    "inventory.whatcook": "What can I cook?",
+    "component.sortby": "Sort by",
+    "component.howmany": "How many elements of this type do you have?",
+    "component.add": "Add",
+    "component.ingredients": "Ingredients",
+    "component.locatedIn": "Located in"
   },
   "fr": {
     "menu.name": "Recettes sauvages",
@@ -24,7 +29,12 @@
     "recipe.availableMore": "Vous pouvez faire ces {num} recettes, mais vous pouvez en faire plus!",
     "recipe.possible": "Il vous manque un ingrédient pour rendre {num, plural, =1 {cette recette} other {ces {num} recettes}}",
     "recipe.possibleMore": "Il vous manque un ingrédient pour rendre ces {num} recettes, mais vous pouvez en faire plus!",
-    "inventory.whatcook": "Ce que je peux cuisiner?"
+    "inventory.whatcook": "Ce que je peux cuisiner?",
+    "component.sortby": "Trier par",
+    "component.howmany": "Combien de ces éléments ont?",
+    "component.add": "Ajouter",
+    "component.ingredients": "Ingrédients",
+    "component.locatedIn": "Situé dans"
   },
   "es": {
     "menu.name": "Recetas salvajes",
@@ -38,6 +48,11 @@
     "recipe.possible": "Te falta algún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}",
     "recipe.possibleMore": "Te falta algún ingrediente para hacer estas {num} recetas, aunque puedes hacer más!",
     "recipe.unavailable": "No tienes ningún ingrediente para hacer {num, plural, =1 {esta receta} other {estas {num} recetas}}",
-    "inventory.whatcook": "¿Qué puedo cocinar?"
+    "inventory.whatcook": "¿Qué puedo cocinar?",
+    "component.sortby": "Ordenar por",
+    "component.howmany": "¿Cuantos elementos de este tipo tienes?",
+    "component.add": "Agregar",
+    "component.ingredients": "Ingredientes",
+    "component.locatedIn": "Localizado en"
   }
 }

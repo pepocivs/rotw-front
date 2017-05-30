@@ -36,7 +36,7 @@
 
       <div class="layout horizontal wrap center-center" class="recipes-container">
 
-        <div class="filter-label">Ordenar por:</div>
+        <div class="filter-label">{{localize('component.sortby')}}:</div>
         <br />
         <div class="filter-button-container">
           <template is="dom-repeat" items="[[effectList]]">
@@ -71,6 +71,10 @@
                 type: Object,
                 notify: true
               },
+            },
+            behaviors: [Polymer.AppLocalizeBehavior],
+            ready: function() {
+              this.loadResources(this.resolveUrl('../locales.json'));
             },
             setFilter: function(e) {
               this.filter = {
