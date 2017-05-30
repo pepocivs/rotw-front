@@ -23,6 +23,7 @@
                  method="POST"
                  loading="{{loading}}"
                  handle-as="json"
+                 headers='{{headers}}'
                  last-response="{{recipesResponse}}"></iron-ajax>
 
 
@@ -33,11 +34,11 @@
          <paper-spinner active></paper-spinner>
        </div>
      </template>
+
      <template is="dom-if" if="{{!loading}}">
         <template is="dom-if" if="[[!hasRecipes]]">
           <paper-item class="info">{{localize('message.notFound')}}</paper-item>
         </template>
-
 
         <template is="dom-if" if="[[showTitle('available')]]" id="resultListAvailable">
           <btw-infobar title="{{availableTitle}}"></btw-infobar>
@@ -90,9 +91,18 @@
               filter: {
                 type: Object,
                 notify: true
+              },
+              headers: {
+                type: Object
               }
             },
+            observers: [
+              '_executeRequest(language)',
+            ],
+            behaviors: [Polymer.AppLocalizeBehavior],
             ready: function() {
+              this.headers = { 'Accept-Language': this.language };
+              this.loadResources(this.resolveUrl('../locales.json'));
               this._getParams();
             },
             attributeChanged: function() {
@@ -126,6 +136,9 @@
             },
             _getParams: function() {
               this.params = searchToObject();
+            },
+            _executeRequest: function() {
+              this.headers = { 'Accept-Language': this.language };
             }
         });
         function searchToObject() {

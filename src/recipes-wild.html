@@ -156,11 +156,11 @@
             fallback-selection="items"
             role="main">
 
-          <page-recipes name="recipes"></page-recipes>
-          <page-cooking name="cooking" class="full-height"></page-cooking>
-          <page-inventory name="inventory" class="full-height"></page-inventory>
-          <page-info name="info" class="full-height"></page-info>
-          <page-items name="items"></page-items>
+          <page-recipes   language="{{language}}" name="recipes"></page-recipes>
+          <page-cooking   language="{{language}}" name="cooking"   class="full-height"></page-cooking>
+          <page-inventory language="{{language}}" name="inventory" class="full-height"></page-inventory>
+          <page-info      language="{{language}}" name="info"      class="full-height"></page-info>
+          <page-items     language="{{language}}" name="items"></page-items>
           <!-- <page-form name="form" class="full-height"></page-form> -->
 
         </iron-pages>
@@ -182,20 +182,17 @@
         },
         subRoute: {
           type: Object
-        },
+        }
+        ,
         language: {
-          value: 'es'
+          value: 'es',
+          notify: true,
+          reflectToAttribute: true
         }
       },
       observers: [
         '_routePageChanged(routeData.page)',
       ],
-      behaviors: [
-        Polymer.AppLocalizeBehavior
-      ],
-      attached: function() {
-        this.loadResources(this.resolveUrl('./locales.json'));
-      },
       _routePageChanged: function(page) {
         this.page = page || 'recipes';
 
@@ -213,7 +210,6 @@
       selectLang: function(e) {
         console.log('Change language to: '+e.target.lang);
         this.language = e.target.lang;
-        console.log('Translated message: '+this.localize('recipe.availableMore', 'num', 5));
       },
       selectedStyle: function(lang) {
         if (!this.language) this.language = 'es';
