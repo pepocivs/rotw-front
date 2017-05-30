@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
+<link rel="import" href="../reduxStore.html">
 
 <dom-module id="page-inventory">
     <template>
@@ -67,6 +68,7 @@
     <script>
         Polymer({
           is: 'page-inventory',
+          behaviors: [ ReduxBehavior ],
           properties: {
             inventory: {
               type: Object,
@@ -81,6 +83,9 @@
               type: Boolean,
               notify: true,
               value: true
+            },
+            language: {
+            	statePath: 'language'
             }
           },
           setJsonParam: function(e) {
@@ -90,7 +95,7 @@
                 'itemId': inv.itemId,
                 'count': inv.count
               })
-            })
+            });
             this.jsonSend = 'recipes?inventory='+JSON.stringify(inventory);
           }
         });

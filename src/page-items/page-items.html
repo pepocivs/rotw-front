@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
+<link rel="import" href="../reduxStore.html">
 
 <dom-module id="page-items">
     <template>
@@ -34,11 +35,15 @@
     <script>
         Polymer({
           is: 'page-items',
+          behaviors: [ ReduxBehavior ],
           properties: {
             loading: {
               type: Boolean,
               notify: true,
               value: true
+            },
+            language: {
+            	statePath: 'language'
             }
           }
         });

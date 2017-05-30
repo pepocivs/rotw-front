@@ -14,6 +14,8 @@
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="reduxStore.html">
 
 <link rel="import" href="app-elements/btw-icons.html">
 <link rel="import" href="general-style.html">
@@ -171,7 +173,7 @@
   <script>
     Polymer({
       is: 'recipes-wild',
-
+      behaviors: [ ReduxBehavior, Polymer.AppLocalizeBehavior ],
       properties: {
         page: {
           type: String,
@@ -185,7 +187,16 @@
           type: Object
         },
         language: {
-          value: 'es'
+          statePath: 'language',
+          observer: 'selectedStyle'
+        }
+      },
+      actions: {
+      	changeLanguage: function(lang) {
+      		return {
+      			type: 'CHANGE_LANG',
+                payload: lang
+            }
         }
       },
       observers: [
@@ -206,12 +217,15 @@
         this.page = 'recipes';
       },
       selectLang: function(e) {
-        console.log('Change language to: '+e.target.lang);
-        this.language = e.target.lang;
+        /*this.language = e.target.lang;*/
+        this.dispatch('changeLanguage', e.target ? e.target.lang : 'es');
       },
       selectedStyle: function(lang) {
         if (!this.language) this.language = 'es';
         return (lang === this.language) ? 'selected' : '';
+      },
+      attached: function() {
+        this.loadResources(this.resolveUrl('locales.json'));
       }
     });
   </script>

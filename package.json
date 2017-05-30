@@ -13,5 +13,8 @@
   "scripts": {
     "lint": "eslint . --ext js,html --ignore-path .gitignore",
     "test": "npm run lint && polymer test"
+  },
+  "dependencies": {
+    "redux": "^3.6.0"
   }
 }

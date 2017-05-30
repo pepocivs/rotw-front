@@ -1,0 +1,21 @@
+<link rel="import" href="../bower_components/polymer-redux/polymer-redux.html">
+
+<script>
+    const initialState = {
+    	language: 'es'
+    };
+
+    var reducers = function(state, action) {
+    	if (!state) return initialState;
+
+    	switch (action.type) {
+            case 'CHANGE_LANG':
+            	return Object.assign({}, initialState, { language: action.payload });
+            default:
+            	return state;
+        }
+    };
+
+    var store = Redux.createStore(reducers);
+    var ReduxBehavior = PolymerRedux(store);
+</script>

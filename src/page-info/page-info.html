@@ -5,6 +5,7 @@
 <link rel="import" href="../app-elements/btw-infobar.html">
 <link rel="import" href="../app-elements/btw-locations.html">
 <link rel="import" href="../app-elements/btw-recipes.html">
+<link rel="import" href="../reduxStore.html">
 
 <link rel="import" href="../general-style.html">
 
@@ -96,6 +97,7 @@
     <script>
         Polymer({
             is: 'page-info',
+            behaviors: [ ReduxBehavior ],
             properties: {
               itemResponse: {
                 type: Object,
@@ -134,6 +136,9 @@
               loading: {
                 type: Boolean,
                 value: true
+              },
+              language: {
+              	statePath: 'language'
               }
             },
             ready: function() {

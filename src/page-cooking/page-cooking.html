@@ -9,6 +9,7 @@
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
+<link rel="import" href="../reduxStore.html">
 
 <dom-module id="page-cooking">
     <template>
@@ -68,6 +69,7 @@
     <script>
         Polymer({
             is: 'page-cooking',
+            behaviors: [ ReduxBehavior ],
             properties: {
               inventory: {
                 type: Object,
@@ -81,6 +83,10 @@
                 type: Boolean,
                 notify: true,
                 value: true
+              },
+              language: {
+              	type: String,
+              	statePath: 'language'
               }
             },
             setJsonParam: function(e) {

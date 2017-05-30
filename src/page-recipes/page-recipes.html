@@ -4,6 +4,7 @@
 <link rel="import" href="../app-elements/btw-btnfilter.html">
 <link rel="import" href="../app-elements/btw-infobar.html">
 <link rel="import" href="../app-elements/btw-recipes.html">
+<link rel="import" href="../reduxStore.html">
 
 <link rel="import" href="../general-style.html">
 
@@ -61,11 +62,13 @@
         Polymer({
             is: 'page-recipes',
             behaviors: [
-              Polymer.AppLocalizeBehavior
+              Polymer.AppLocalizeBehavior,
+              ReduxBehavior
             ],
             properties: {
               language: {
-                value: 'es'
+              	statePath: 'language',
+                observer: 'languageChanged'
               },
               recipesResponse: {
                 type: Object,
@@ -135,6 +138,14 @@
             },
             _getParams: function() {
               this.params = searchToObject();
+            },
+            languageChanged(e) {
+            	const elem = this.$$('#page-recipes');
+
+            	if (elem) {
+            		console.log('changed');
+					elem.render()
+                }
             }
         });
         function searchToObject() {
