@@ -1,6 +1,7 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../app-elements/btw-effects.html">
 <link rel="import" href="../app-elements/btw-infobar.html">
 <link rel="import" href="../app-elements/btw-locations.html">
@@ -50,6 +51,7 @@
                  url="https://api.recipeswild.com/recipes"
                  body="{{params}}"
                  handle-as="json"
+                 headers="{{headers}}"
                  content-type="application/json"
                  method="POST"
                  loading="{{loadingRecipes}}"
@@ -59,6 +61,7 @@
                  url="https://api.recipeswild.com/items/{{itemId}}"
                  params="{}"
                  handle-as="json"
+                 headers="{{headers}}"
                  loading="{{loadingItemInfo}}"
                  last-response="{{itemResponse}}">
       </iron-ajax>
@@ -78,7 +81,7 @@
               <div class="icon-info-food"><img src="../images/items/{{item.image}}" alt="{{item.name}}"></div>
               <div class="flex">
                 {{item.description}}
-                <btw-locations location-string="{{item.location}}"></btw-locations>
+                <btw-locations language="{{language}}" location-string="{{item.location}}"></btw-locations>
               </div>
               <btw-effects effects="{{item.effects}}"></btw-effects>
             </div>
@@ -136,8 +139,15 @@
                 value: true
               }
             },
+            observers: [
+              '_executeRequest(language)',
+            ],
             ready: function() {
               this._getParams();
+              this._executeRequest();
+            },
+            _executeRequest: function() {
+              this.headers = { 'Accept-Language': this.language };
             },
             attributeChanged: function() {
               this._getParams();

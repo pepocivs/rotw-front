@@ -1,3 +1,4 @@
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
@@ -18,6 +19,7 @@
                  params='{}'
                  handle-as="json"
                  loading="{{loading}}"
+                 headers="{{headers}}"
                  last-response="{{itemsResponse}}"></iron-ajax>
 
     <template is="dom-if" if="{{loading}}">
@@ -26,7 +28,7 @@
       </div>
     </template>
     <template is="dom-if" if="{{!loading}}">
-      <btw-items item-list="[[itemsResponse]]" go-to="info"></btw-items>
+      <btw-items language="{{language}}" item-list="[[itemsResponse]]" go-to="info"></btw-items>
     </template>
 
     </template>
@@ -39,7 +41,19 @@
               type: Boolean,
               notify: true,
               value: true
+            },
+            headers: {
+              type: Object
             }
+          },
+          observers: [
+            '_executeRequest(language)',
+          ],
+          ready: function() {
+            this._executeRequest();
+          },
+          _executeRequest: function() {
+            this.headers = { 'Accept-Language': this.language };
           }
         });
     </script>

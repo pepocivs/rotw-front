@@ -1,5 +1,6 @@
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">ç
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="btw-effects.html">
 <link rel="import" href="btw-ingredients.html">
@@ -36,7 +37,7 @@
 
       <div class="layout horizontal wrap center-center" class="recipes-container">
 
-        <div class="filter-label">Ordenar por:</div>
+        <div class="filter-label">{{localize('component.sortby')}}:</div>
         <br />
         <div class="filter-button-container">
           <template is="dom-repeat" items="[[effectList]]">
@@ -71,6 +72,10 @@
                 type: Object,
                 notify: true
               },
+            },
+            behaviors: [Polymer.AppLocalizeBehavior],
+            ready: function() {
+              this.loadResources(this.resolveUrl('../locales.json'));
             },
             setFilter: function(e) {
               this.filter = {

@@ -1,11 +1,12 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../general-style.html">
 
 <dom-module id="btw-items">
@@ -96,7 +97,7 @@
           <div class="information layout horizontal wrap center justified " >
             <template  is="dom-if" if="[[!isLink]]">
               <div class="item-general-count"> {{nIngredients}}/{{itemLimit}} </div>
-              <div>Ingredientes:</div>
+              <div>{{localize('component.ingredients')}}:</div>
             </template>
             <div>
               <template is="dom-repeat" items="{{ingredients}}" as="ingredient" index-as="x">
@@ -145,14 +146,14 @@
 
 
         <paper-dialog id="addByNumber">
-          <h2>¿Cuantos elementos de este tipo tienes?</h2>
+          <h2>{{localize('component.howmany')}}</h2>
           <div class="item-box-number item-box">
             <img src="../images/items/{{targetItem.image}}" />
           </div>
           <div>{{tempName}}</div>
           <paper-input type="number" value="{{tempCount}}"></paper-input>
           <paper-button on-tap="addElementByNumber"
-                        item$="{{targetItem}}">Agregar</paper-button>
+                        item$="{{targetItem}}">{{localize('component.add')}}</paper-button>
 
         </paper-dialog>
 
@@ -214,6 +215,10 @@
             tempCount: {
               type: Number
             }
+          },
+          behaviors: [Polymer.AppLocalizeBehavior],
+          ready: function() {
+            this.loadResources(this.resolveUrl('../locales.json'));
           },
           _formatIngredients: function() {
               var ingredients = [];

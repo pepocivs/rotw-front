@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
@@ -95,6 +96,15 @@
       .see-on-store {
         width: 100%;
       }
+      .lang-flag {
+        height: initial;
+        margin: 0px 10px;
+        cursor: pointer;
+        opacity: 0.5;
+      }
+      .lang-flag.selected {
+        opacity: 1;
+      }
     </style>
 
 
@@ -113,10 +123,10 @@
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
 
           <a class="menu-icon"><img src="../images/pira.svg" class="full-height"></img></a>
-          <a name="recipes"   href="/recipes"><iron-icon src="../images/foodblanco.svg" class="item-icon"></iron-icon>Recetas</a>
-          <a name="cooking"   href="/cooking"><iron-icon src="../images/pira.svg" class="item-icon"></iron-icon>Cocinar</a>
-          <a name="inventory" href="/inventory"><iron-icon src="../images/menublanco.svg" class="item-icon"></iron-icon>Mi inventario</a>
-          <a name="items"     href="/items"><iron-icon src="../images/manzanablanca.svg" class="item-icon"></iron-icon>Elementos</a>
+          <a name="recipes"   href="/recipes"><iron-icon src="../images/foodblanco.svg" class="item-icon"></iron-icon>{{localize('menu.recipes')}}</a>
+          <a name="cooking"   href="/cooking"><iron-icon src="../images/pira.svg" class="item-icon"></iron-icon>{{localize('menu.cooking')}}</a>
+          <a name="inventory" href="/inventory"><iron-icon src="../images/menublanco.svg" class="item-icon"></iron-icon>{{localize('menu.inventory')}}</a>
+          <a name="items"     href="/items"><iron-icon src="../images/manzanablanca.svg" class="item-icon"></iron-icon>{{localize('menu.elements')}}</a>
           <!-- <a name="form"      href="/form">Insertar recetas nuevas</a> -->
           <a href="https://play.google.com/store/apps/details?id=com.pepocivs.recipesofthewild" target="_blank">
             <img class="see-on-store" src="../images/google_play.png" />
@@ -132,8 +142,10 @@
         <app-header condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="btw-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>Recipes of the wild</div>
-            <!-- <iron-icon src="../images/pira.svg"></iron-icon> -->
+            <div main-title>{{localize('menu.name')}}</div>
+            <template is="dom-repeat" items="{{languages}}" as="lang" id="langbar">
+              <iron-icon id="lang{{lang}}" class="lang-flag" on-tap="selectLang" lang="{{lang}}" src="../images/locale/{{lang}}.png"></iron-icon>
+            </template>
           </app-toolbar>
         </app-header>
 
@@ -144,11 +156,11 @@
             fallback-selection="items"
             role="main">
 
-          <page-recipes name="recipes"></page-recipes>
-          <page-cooking name="cooking" class="full-height"></page-cooking>
-          <page-inventory name="inventory" class="full-height"></page-inventory>
-          <page-info name="info" class="full-height"></page-info>
-          <page-items name="items"></page-items>
+          <page-recipes   language="{{language}}" name="recipes"></page-recipes>
+          <page-cooking   language="{{language}}" name="cooking"   class="full-height"></page-cooking>
+          <page-inventory language="{{language}}" name="inventory" class="full-height"></page-inventory>
+          <page-info      language="{{language}}" name="info"      class="full-height"></page-info>
+          <page-items     language="{{language}}" name="items"></page-items>
           <!-- <page-form name="form" class="full-height"></page-form> -->
 
         </iron-pages>
@@ -159,7 +171,6 @@
   <script>
     Polymer({
       is: 'recipes-wild',
-
       properties: {
         page: {
           type: String,
@@ -171,14 +182,27 @@
         },
         subRoute: {
           type: Object
+        },
+        language: {
+          value: 'es',
+          notify: true,
+          reflectToAttribute: true
+        },
+        languages: {
+          type: Object,
+          value: ['es', 'en']
         }
       },
+      behaviors: [Polymer.AppLocalizeBehavior],
       observers: [
         '_routePageChanged(routeData.page)',
       ],
+      ready: function() {
+        this.loadResources(this.resolveUrl('./locales.json'));
+        console.log('ready');
+      },
       _routePageChanged: function(page) {
         this.page = page || 'recipes';
-
         if (!this.$.drawer.persistent) {
           this.$.drawer.close();
         }
@@ -190,6 +214,14 @@
       _showPage404: function() {
         this.page = 'recipes';
       },
+      selectLang: function(e) {
+        var toolBar   = e.target.parentElement;
+        this.language = e.target.lang;
+        this.languages.forEach(function(lang) {
+          toolBar.querySelector('#lang'+lang).classList.remove('selected');
+        });
+        e.target.classList.add('selected');
+      }
     });
   </script>
 </dom-module>

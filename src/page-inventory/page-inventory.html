@@ -1,8 +1,9 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../app-elements/btw-items.html">
 <link rel="import" href="../general-style.html">
 
@@ -13,7 +14,7 @@
           display: block;
         }
         .flat-button{
-            TEXT-ALIGN: center;
+            text-align: center;
             background: #bdc3c7;
             color: white;
             border-radius: 10px;
@@ -43,6 +44,7 @@
                  params='{}'
                  handle-as="json"
                  loading="{{loading}}"
+                 headers="{{headers}}"
                  last-response="{{itemsResponse}}"></iron-ajax>
 
       <template is="dom-if" if="{{loading}}">
@@ -55,10 +57,10 @@
         <div class="layout vertical full-height">
           <div class="layout horizontal wrap around-justified flat-back-principal">
             <a href$="{{jsonSend}}" class="invisible-a">
-              <paper-button class="flat-button">¿Qué puedo cocinar?</paper-button>
+              <paper-button class="flat-button">{{localize('inventory.whatcook')}}</paper-button>
             </a>
           </div>
-          <btw-items item-list="[[itemsResponse]]" inventory="{{inventory}}" class="over"></btw-items>
+          <btw-items language="{{language}}" item-list="[[itemsResponse]]" inventory="{{inventory}}" class="over"></btw-items>
         </div>
       </template>
 
@@ -81,7 +83,21 @@
               type: Boolean,
               notify: true,
               value: true
+            },
+            headers: {
+              type: Object
             }
+          },
+          observers: [
+            '_executeRequest(language)',
+          ],
+          behaviors: [Polymer.AppLocalizeBehavior],
+          ready: function() {
+            this.loadResources(this.resolveUrl('../locales.json'));
+            this._executeRequest();
+          },
+          _executeRequest: function() {
+            this.headers = { 'Accept-Language': this.language };
           },
           setJsonParam: function(e) {
             var inventory = [];

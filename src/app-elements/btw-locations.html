@@ -1,3 +1,4 @@
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../general-style.html">
 
@@ -16,7 +17,7 @@
         }
       </style>
 
-      <b>Localizado en:</b>
+      <b>{{localize('component.locatedIn')}}:</b>
       <br />
       <template is="dom-repeat" items="{{locations}}" as="location">
         <div class="item-location">{{location}}</div>
@@ -35,6 +36,10 @@
               locations: {
                 type: Object
               }
+            },
+            behaviors: [Polymer.AppLocalizeBehavior],
+            ready: function() {
+              this.loadResources(this.resolveUrl('../locales.json'));
             },
             _formatLocations: function() {
               this.locations = this.locationString.split(", ");

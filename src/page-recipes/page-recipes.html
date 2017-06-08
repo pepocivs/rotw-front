@@ -1,6 +1,7 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../app-elements/btw-btnfilter.html">
 <link rel="import" href="../app-elements/btw-infobar.html">
 <link rel="import" href="../app-elements/btw-recipes.html">
@@ -23,20 +24,22 @@
                  method="POST"
                  loading="{{loading}}"
                  handle-as="json"
+                 headers='{{headers}}'
                  last-response="{{recipesResponse}}"></iron-ajax>
 
-     <btw-btnfilter filter="{{filter}}"></btw-btnfilter>
-     
+
+     <btw-btnfilter filter="{{filter}}" language="{{language}}"></btw-btnfilter>
+
      <template is="dom-if" if="{{loading}}">
        <div class="spinner-block">
          <paper-spinner active></paper-spinner>
        </div>
      </template>
+
      <template is="dom-if" if="{{!loading}}">
         <template is="dom-if" if="[[!hasRecipes]]">
-          <paper-item class="info">No se han encontrado recetas con los elementos seleccionados</paper-item>
+          <paper-item class="info">{{localize('message.notFound')}}</paper-item>
         </template>
-
 
         <template is="dom-if" if="[[showTitle('available')]]" id="resultListAvailable">
           <btw-infobar title="{{availableTitle}}"></btw-infobar>
@@ -89,9 +92,18 @@
               filter: {
                 type: Object,
                 notify: true
+              },
+              headers: {
+                type: Object
               }
             },
+            observers: [
+              '_executeRequest(language)',
+            ],
+            behaviors: [Polymer.AppLocalizeBehavior],
             ready: function() {
+              this.headers = { 'Accept-Language': this.language };
+              this.loadResources(this.resolveUrl('../locales.json'));
               this._getParams();
             },
             attributeChanged: function() {
@@ -107,32 +119,27 @@
               this.recipeList = response;
               this._checkHasrecipes(response);
               var maxRecipes = 50;
-              if (this.recipeList.available.length === 1)
-                this.availableTitle = "Puedes hacer esta receta";
-              else if (this.recipeList.available.length === maxRecipes)
-                this.availableTitle  = "Puedes hacer estas "+this.recipeList.available.length+" recetas, aunque puedes hacer más!";
+              if (this.recipeList.available.length === maxRecipes)
+                this.availableTitle = this.localize('recipe.availableMore', 'num', this.recipeList.available.length);
               else
-                this.availableTitle  = "Puedes hacer estas "+this.recipeList.available.length+" recetas";
+                this.availableTitle = this.localize('recipe.available', 'num', this.recipeList.available.length);
 
-              if (this.recipeList.possible.length === 1)
-                this.possibleTitle = "Te falta algún ingrediente para hacer esta receta";
-              else if (this.recipeList.possible.length === maxRecipes)
-                this.possibleTitle  = "Te falta algún ingrediente para hacer estas "+this.recipeList.possible.length+" recetas, aunque puedes hacer más!";
+              if (this.recipeList.possible.length === maxRecipes)
+                this.possibleTitle = this.localize('recipe.possibleMore', 'num', this.recipeList.possible.length);
               else
-                this.possibleTitle  = "Te falta algún ingrediente para hacer estas "+this.recipeList.possible.length+" recetas";
+                this.possibleTitle = this.localize('recipe.possible', 'num', this.recipeList.possible.length);
 
-              if (this.recipeList.unavailable.length === 1)
-                this.unavailableTitle = "No tienes ningún ingrediente para esta receta";
-              else if (this.recipeList.unavailable.length === maxRecipes)
-                this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas, aunque puedes hacer más!";
-              else
-                this.unavailableTitle  = "No tienes ningún ingrediente para hacer estas "+this.recipeList.unavailable.length+" recetas";
+              this.unavailableTitle = this.localize('recipe.unavailable', 'num', this.recipeList.unavailable.length);
+
             },
             showTitle: function(where) {
               return (this.recipeList && this.recipeList[where].length > 0);
             },
             _getParams: function() {
               this.params = searchToObject();
+            },
+            _executeRequest: function() {
+              this.headers = { 'Accept-Language': this.language };
             }
         });
         function searchToObject() {
