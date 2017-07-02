@@ -95,7 +95,7 @@
             formatStamina: function(x) {
               var color        = (this.effects[x].icon.indexOf('ic_stamina_green_') === 0) ? 'green' : 'yellow';
               var staminaValue = this.effects[x].value;
-              this.calculateStamina(x, staminaValue, 6, color);
+              this.calculateStamina(x, staminaValue, 5, color);
             },
             calculateStamina: function(x, staminaValue, s, color) {
               var counter = Math.floor(staminaValue/s);
