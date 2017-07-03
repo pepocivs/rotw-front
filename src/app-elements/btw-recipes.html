@@ -20,6 +20,10 @@
 
         <template is="dom-repeat" items="[[recipeList]]">
             <div class="food-box-form layout horizontal nowrap center-center justified" >
+              <div class="recipe-price">
+                <img src="../../images/items/rupee.png" />
+                <p>{{item.price}}</p>
+              </div>
               <div class="recipe-image">
                 <img src="../images/items/{{item.image}}" alt="{{item.name}}" class="foodprincipal">
               </div>
