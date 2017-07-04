@@ -18,7 +18,7 @@
 
       <div class="layout horizontal wrap center-center recipes-container">
 
-        <template is="dom-repeat" items="[[recipeList]]">
+        <template is="dom-repeat" items="{{recipeList}}">
             <div class="food-box-form layout horizontal nowrap center-center justified" >
               <div class="recipe-price">
                 <img src="../../images/items/rupee.png" />
@@ -48,7 +48,8 @@
             is: 'btw-recipes',
             properties: {
               recipeList: {
-                type: Object
+                type: Object,
+                notify: true
               }
             }
         });
