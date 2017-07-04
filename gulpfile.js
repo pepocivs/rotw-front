@@ -19,6 +19,7 @@ gulp.task('cordova-replace', function() {
     .pipe(replace('/src/', 'src/'))
     .pipe(replace('../../images/rupee_wh.png', '/android_asset/www/images/rupee_wh.png'))
     .pipe(replace('../../images/pira.svg', '/android_asset/www/images/pira.svg'))
+    .pipe(replace('../../images/', '/android_asset/www/images/'))
     .pipe(replace('../images/', '/android_asset/www/images/'))
     .pipe(replace('https://api.', 'http://api.'))
     .pipe(replace('.custom-background{background-color:#33485c;}', '.custom-background{background-color:#33485c;margin-top:64px;}'))

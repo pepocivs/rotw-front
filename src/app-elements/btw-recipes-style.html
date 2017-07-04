@@ -42,9 +42,10 @@
         margin-bottom: 4px;
         margin-top: 0;
       }
-      .food-box-one>p:first-child {
+      .food-box-one p {
         font-weight: 800;
         text-transform: uppercase;
+        clear: both;
       }
       .food-box-two {
         display: flex;
@@ -63,6 +64,22 @@
       .recipe-image {
         width: 24%;
         margin-right: 9px;
+      }
+      .recipe-price {
+        position: absolute;
+        top: 4px;
+      }
+      .recipe-price img {
+        float: left;
+        width: 25px;
+        height: 25px;
+      }
+      .recipe-price p {
+        float: left;
+        color: grey;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 1px;
       }
     </style>
   </template>

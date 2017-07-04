@@ -1,5 +1,6 @@
 {
   "name": "recipes-of-the-wild",
+  "version": "1.2.0",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "eslint": "^3.12.0",

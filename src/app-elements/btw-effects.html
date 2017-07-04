@@ -8,31 +8,37 @@
           display: block;
         }
         .img-efects {
-          float: left;
           width: 15px;
-          height: 15px !important;
+          height: 15px;
           margin-right: 6px;
         }
         .time-effect {
-          float: left;
           width: 100%;
           margin: 5px 0px;
         }
         .time-effect img {
-          width: 25px !important;
-          height: 25px !important;
+          float: left;
+          width: 25px;
+          height: 25px;
         }
         .time-effect p {
+          float: left;
           color: grey;
           font-weight: bold;
           margin-top: 1px;
         }
       </style>
       <template is="dom-repeat" items="{{effectsToPrint}}" as="effect" index-as="x">
-        <template is="dom-if" if="{{!effect.humanTime}}">
+        <template is="dom-if" if="{{effect.hearts}}">
           <img src="{{effect.icon}}" value="{{effect._id}}" alt="{{effect.name}}" title="{{effect.name}} | {{effect.value}}" class="img-efects">
         </template>
-        <template is="dom-if" if="{{effect.humanTime}}">
+        <template is="dom-if" if="{{effect.stamina}}">
+          <div class="time-effect">
+            <img src="{{effect.icon}}" value="{{effect._id}}" alt="{{effect.name}}" title="{{effect.name}} | {{effect.value}}" class="img-efects">
+            <p>{{effect.value}}</p>
+          </div>
+        </template>
+        <template is="dom-if" if="{{effect.humanTime}}" class="time-effect">
           <div class="time-effect">
             <img src="{{effect.icon}}" value="{{effect._id}}" alt="{{effect.name}}" title="{{effect.name}} | {{effect.humanTime}}" class="img-efects">
             <!-- <p>{{effect.name}} - {{effect.humanTime}}</p> -->
@@ -95,19 +101,21 @@
             formatStamina: function(x) {
               var color        = (this.effects[x].icon.indexOf('ic_stamina_green_') === 0) ? 'green' : 'yellow';
               var staminaValue = this.effects[x].value;
-              this.calculateStamina(x, staminaValue, 6, color);
+              this.calculateStamina(x, staminaValue, 1, color);
             },
             calculateStamina: function(x, staminaValue, s, color) {
-              var counter = Math.floor(staminaValue/s);
-              for (var j = 0; j < counter; j++ ) {
+              // var counter = Math.floor(staminaValue/s);
+              var number = (staminaValue < 10) ? '0'+staminaValue : staminaValue;
+              // for (var j = 0; j < counter; j++ ) {
                 this.preparedEffect.push({
                   "_id"   : this.effects[x]._id,
                   "name"  : this.effects[x].name || this.effects[x].effect,
-                  "icon"  : "../images/items/ic_stamina_"+color+"_"+s+".png",
-                  "value" : s
+                  "icon"  : "../images/items/stamina_"+color+"_"+number+".png",
+                  "stamina"  : "stamina",
+                  "value" : Math.round((staminaValue * 0.2)*100)+'%'
                 });
                 staminaValue = staminaValue - s;
-              }
+              // }
               s = s - 1;
               if (s > 0) this.calculateStamina(x, staminaValue, s, color);
               else return false;
@@ -122,6 +130,7 @@
                   "_id"   : this.effects[x]._id,
                   "name"  : this.effects[x].name || this.effects[x].effect,
                   "icon"  : "../images/items/ic_heart_five_"+color+".png",
+                  "hearts"  : "hearts",
                   "value" : "5"
                 });
               }
@@ -131,6 +140,7 @@
                   "_id"   : this.effects[x]._id,
                   "name"  : this.effects[x].name || this.effects[x].effect,
                   "icon"  : "../images/items/"+this.effects[x].icon,
+                  "hearts"  : "hearts",
                   "value" : "1"
                 });
               }
@@ -144,6 +154,7 @@
                     "_id"   : this.effects[x]._id,
                     "name"  : this.effects[x].name || this.effects[x].effect,
                     "icon"  : "../images/items/"+partIcon+".png",
+                    "hearts"  : "hearts",
                     "value" : m
                   });
                 }
