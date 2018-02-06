@@ -25,7 +25,7 @@
                  loading="{{loading}}"
                  handle-as="json"
                  headers='{{headers}}'
-                 last-response="{{recipesResponse}}"></iron-ajax>
+                 on-response="_recipesResponse"></iron-ajax>
 
 
      <btw-btnfilter filter="{{filter}}" language="{{language}}"></btw-btnfilter>
@@ -115,9 +115,9 @@
                 (response && response.possible && response.possible.length > 0)
               );
             },
-            _recipesResponse: function(response) {
-              this.recipeList = response;
-              this._checkHasrecipes(response);
+            _recipesResponse: function(data) {
+              this.recipeList = data.detail.response;
+              this._checkHasrecipes(data.detail.response);
               var maxRecipes = 50;
               if (this.recipeList.available.length === maxRecipes)
                 this.availableTitle = this.localize('recipe.availableMore', 'num', this.recipeList.available.length);

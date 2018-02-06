@@ -16,6 +16,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
 <link rel="import" href="app-elements/btw-icons.html">
+<link rel="import" href="app-elements/btw-storage.html">
 <link rel="import" href="general-style.html">
 
 <dom-module id="recipes-wild">
@@ -107,6 +108,7 @@
       }
     </style>
 
+    <btw-storage id="storageData" data="{{data}}"></btw-storage>
 
     <app-location route="{{route}}"></app-location>
     <app-route
@@ -144,7 +146,11 @@
             <paper-icon-button icon="btw-icons:menu" drawer-toggle></paper-icon-button>
             <div main-title>{{localize('menu.name')}}</div>
             <template is="dom-repeat" items="{{languages}}" as="lang" id="langbar">
-              <iron-icon id="lang{{lang}}" class="lang-flag" on-tap="selectLang" lang="{{lang}}" src="../images/locale/{{lang}}.png"></iron-icon>
+              <iron-icon id="lang{{lang}}"
+                         class="lang-flag"
+                         on-tap="selectLang"
+                         lang="{{lang}}"
+                         src="../images/locale/{{lang}}.png"></iron-icon>
             </template>
           </app-toolbar>
         </app-header>
@@ -158,7 +164,7 @@
 
           <page-recipes   language="{{language}}" name="recipes"></page-recipes>
           <page-cooking   language="{{language}}" name="cooking"   class="full-height"></page-cooking>
-          <page-inventory language="{{language}}" name="inventory" class="full-height"></page-inventory>
+          <page-inventory language="{{language}}" name="inventory" inventory="[[inventory]]" class="full-height"></page-inventory>
           <page-info      language="{{language}}" name="info"      class="full-height"></page-info>
           <page-items     language="{{language}}" name="items"></page-items>
           <!-- <page-form name="form" class="full-height"></page-form> -->
@@ -191,6 +197,11 @@
         languages: {
           type: Object,
           value: ['es', 'en']
+        },
+        inventory: {
+          type: Object,
+          notify: true,
+          reflectToAttribute: true
         }
       },
       behaviors: [Polymer.AppLocalizeBehavior],
@@ -199,8 +210,14 @@
       ],
       ready: function() {
         this.loadResources(this.resolveUrl('./locales.json'));
-        console.log('ready');
       },
+
+      attached: function() {
+        this.language = this.$.storageData.botwData.language || 'es';
+        this.inventory = this.$.storageData.botwData.inventory || [];
+        this.$$('#lang'+this.language).classList.add('selected');
+      },
+
       _routePageChanged: function(page) {
         this.page = page || 'recipes';
         if (!this.$.drawer.persistent) {
@@ -217,6 +234,7 @@
       selectLang: function(e) {
         var toolBar   = e.target.parentElement;
         this.language = e.target.lang;
+        this.$.storageData.updateStorage('language', e.target.lang);
         this.languages.forEach(function(lang) {
           toolBar.querySelector('#lang'+lang).classList.remove('selected');
         });
