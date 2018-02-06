@@ -39,6 +39,8 @@
         }
       </style>
 
+      <btw-storage id="storageData" data="{{data}}"></btw-storage>
+
       <iron-ajax auto
                  url="https://api.recipeswild.com/items"
                  params='{}'
@@ -96,11 +98,13 @@
             this.loadResources(this.resolveUrl('../locales.json'));
             this._executeRequest();
           },
+
           _executeRequest: function() {
             this.headers = { 'Accept-Language': this.language };
           },
           setJsonParam: function(e) {
             var inventory = [];
+            this.$.storageData.updateStorage('inventory', this.inventory);
             this.inventory.forEach(function(inv) {
               inventory.push({
                 'itemId': inv.itemId,

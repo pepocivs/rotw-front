@@ -231,14 +231,37 @@
                 }
               });
               this.nIngredients = ingredients.length;
-              this.ingredients  = ingredients;
+              this.ingredients = ingredients;
           },
           _formatItems: function(response) {
               for (var x = 0; x < response.length; x++) {
                 if (!response[x].count) response[x].count = 0;
               }
               this.itemList = response;
+              this.addStoreToList(response);
           },
+          addStoreToList: function(itemList) {
+            if (this.inventory) {
+              this.inventory.forEach(function(element) {
+                findObjectByKey(itemList, element);
+              });
+            }
+
+            function findObjectByKey(itemList, element) {
+              const itemId = element.itemId;
+              const count = element.count;
+
+              for (var i = 0; i < itemList.length; i++) {
+                if (itemList[i]._id === itemId) {
+                  itemList[i].count = parseInt(count);
+                  return itemList[i];
+                }
+              }
+              return null;
+            }
+
+          },
+
           addElement: function(e) {
             if (this.itemLimit === 0 || this.nIngredients < this.itemLimit) {
               var model = e.model;
