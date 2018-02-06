@@ -1,0 +1,39 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-storage/app-localstorage/app-localstorage-document.html">
+
+<dom-module id="btw-storage">
+    <template>
+      <app-localstorage-document id="botw-data" key="botw-data" data="{{botwData}}"></app-localstorage-document>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'btw-storage',
+            properties: {
+              botwData: {
+                type: Object,
+                value: function() {
+                  return {
+                    'language': 'es',
+                    'inventory': [],
+                    'cooking': []
+                  }
+                },
+                notify: true
+              }
+            },
+
+            updateStorage: function(type, value) {
+              this.set('botwData.'+type, value);
+            },
+
+            clearStorage() {
+              this.botwData = {
+                'language': 'es',
+                'inventory': [],
+                'cooking': []
+              }
+            }
+        });
+    </script>
+</dom-module>

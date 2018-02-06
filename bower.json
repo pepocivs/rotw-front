@@ -28,7 +28,8 @@
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.5.0",
     "paper-item": "PolymerElements/paper-item#^1.2.1",
     "paper-spinner": "PolymerElements/paper-spinner#^1.2.1",
-    "app-localize-behavior": "PolymerElements/app-localize-behavior#^2.0.0"
+    "app-localize-behavior": "PolymerElements/app-localize-behavior#^2.0.0",
+    "app-storage": "^2.0.2"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
