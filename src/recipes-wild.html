@@ -164,7 +164,7 @@
 
           <page-recipes   language="{{language}}" name="recipes"></page-recipes>
           <page-cooking   language="{{language}}" name="cooking"   class="full-height"></page-cooking>
-          <page-inventory language="{{language}}" name="inventory" inventory="{{inventory}}" class="full-height"></page-inventory>
+          <page-inventory language="{{language}}" name="inventory" inventory="[[inventory]]" class="full-height"></page-inventory>
           <page-info      language="{{language}}" name="info"      class="full-height"></page-info>
           <page-items     language="{{language}}" name="items"></page-items>
           <!-- <page-form name="form" class="full-height"></page-form> -->
@@ -200,6 +200,8 @@
         },
         inventory: {
           type: Object,
+          notify: true,
+          reflectToAttribute: true
         }
       },
       behaviors: [Polymer.AppLocalizeBehavior],
@@ -211,9 +213,8 @@
       },
 
       attached: function() {
-        console.log('Working to load inventory');
         this.language = this.$.storageData.botwData.language || 'es';
-        this.set('inventory', this.$.storageData.botwData.inventory);
+        this.inventory = this.$.storageData.botwData.inventory || [];
         this.$$('#lang'+this.language).classList.add('selected');
       },
 
