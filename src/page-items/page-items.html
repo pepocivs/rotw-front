@@ -47,13 +47,13 @@
             }
           },
           observers: [
-            '_executeRequest(language)',
+            '_executeRequest(language)'
           ],
           ready: function() {
             this._executeRequest();
           },
           _executeRequest: function() {
-            this.headers = { 'Accept-Language': this.language };
+            this.headers = {'Accept-Language': this.language};
           }
         });
     </script>

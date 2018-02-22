@@ -181,7 +181,7 @@
         page: {
           type: String,
           reflectToAttribute: true,
-          observer: '_pageChanged',
+          observer: '_pageChanged'
         },
         routeData: {
           type: Object
@@ -206,7 +206,7 @@
       },
       behaviors: [Polymer.AppLocalizeBehavior],
       observers: [
-        '_routePageChanged(routeData.page)',
+        '_routePageChanged(routeData.page)'
       ],
       ready: function() {
         this.loadResources(this.resolveUrl('./locales.json'));
@@ -232,7 +232,7 @@
         this.page = 'recipes';
       },
       selectLang: function(e) {
-        var toolBar   = e.target.parentElement;
+        var toolBar = e.target.parentElement;
         this.language = e.target.lang;
         this.$.storageData.updateStorage('language', e.target.lang);
         this.languages.forEach(function(lang) {

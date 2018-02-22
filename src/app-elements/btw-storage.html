@@ -16,7 +16,7 @@
                   return {
                     'language': 'es',
                     'inventory': []
-                  }
+                  };
                 },
                 notify: true
               }
@@ -26,11 +26,11 @@
               this.set('botwData.'+type, value);
             },
 
-            clearStorage() {
+            clearStorage: function() {
               this.botwData = {
                 'language': 'es',
                 'inventory': []
-              }
+              };
             }
         });
     </script>

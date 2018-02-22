@@ -50,11 +50,11 @@
               this.ingredients.forEach(function(ingredient) {
                 for (var x = 0; x < ingredient.howMany; x ++) {
                   var newIngredient = {
-                    "_id": ingredient._id,
-                    "name": ingredient.name,
-                    "image": ingredient.image,
-                    "isAvailable": (ingredient.available > x)
-                  }
+                    '_id': ingredient._id,
+                    'name': ingredient.name,
+                    'image': ingredient.image,
+                    'isAvailable': (ingredient.available > x)
+                  };
                   newIngredients.push(newIngredient);
                 }
               });
