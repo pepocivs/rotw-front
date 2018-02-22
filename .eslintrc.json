@@ -8,9 +8,18 @@
   ],
   "rules": {
     "no-var": "off",
-    "new-cap": ["error", { "capIsNewExceptions": ["Polymer"] }]
+    "new-cap": ["error", { "capIsNewExceptions": ["Polymer"] }],
+    "brace-style": "off",
+    "linebreak-style": 0,
+    "require-jsdoc": "off",    
+    "object-curly-spacing": ["error", "never"],    
+    "comma-dangle": ["error", "never"],
+    "max-len": ["error", {"ignoreComments": true, "code": 100}],
+    "prefer-rest-params": 0
   },
   "globals": {
-    "Polymer": true
+    "Polymer": true,
+    "require": true,
+    "ga": true
   }
 }
