@@ -4,7 +4,10 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../app-elements/btw-storage.html">
 <link rel="import" href="../app-elements/btw-items.html">
+
 <link rel="import" href="../general-style.html">
 
 <dom-module id="page-inventory">
@@ -39,7 +42,7 @@
         }
       </style>
 
-      <btw-storage id="storageData" data="{{data}}"></btw-storage>
+      <btw-storage id="storageData"></btw-storage>
 
       <iron-ajax auto
                  url="https://api.recipeswild.com/items"

@@ -17,6 +17,14 @@
 
 <link rel="import" href="app-elements/btw-icons.html">
 <link rel="import" href="app-elements/btw-storage.html">
+
+<link rel="import" href="page-items/page-items.html">
+<link rel="import" href="page-info/page-info.html">
+<link rel="import" href="page-inventory/page-inventory.html">
+<link rel="import" href="page-recipes/page-recipes.html">
+<link rel="import" href="page-cooking/page-cooking.html">
+
+
 <link rel="import" href="general-style.html">
 
 <dom-module id="recipes-wild">
@@ -108,7 +116,7 @@
       }
     </style>
 
-    <btw-storage id="storageData" data="{{data}}"></btw-storage>
+    <btw-storage id="storageData"></btw-storage>
 
     <app-location route="{{route}}"></app-location>
     <app-route
@@ -183,12 +191,8 @@
           reflectToAttribute: true,
           observer: '_pageChanged'
         },
-        routeData: {
-          type: Object
-        },
-        subRoute: {
-          type: Object
-        },
+        routeData: Object,
+        subRoute: Object,
         language: {
           value: 'es',
           notify: true,
