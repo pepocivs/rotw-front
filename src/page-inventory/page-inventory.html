@@ -4,7 +4,10 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../app-elements/btw-storage.html">
 <link rel="import" href="../app-elements/btw-items.html">
+
 <link rel="import" href="../general-style.html">
 
 <dom-module id="page-inventory">
@@ -39,7 +42,7 @@
         }
       </style>
 
-      <btw-storage id="storageData" data="{{data}}"></btw-storage>
+      <btw-storage id="storageData"></btw-storage>
 
       <iron-ajax auto
                  url="https://api.recipeswild.com/items"
@@ -91,7 +94,7 @@
             }
           },
           observers: [
-            '_executeRequest(language)',
+            '_executeRequest(language)'
           ],
           behaviors: [Polymer.AppLocalizeBehavior],
           ready: function() {
@@ -100,7 +103,7 @@
           },
 
           _executeRequest: function() {
-            this.headers = { 'Accept-Language': this.language };
+            this.headers = {'Accept-Language': this.language};
           },
           setJsonParam: function(e) {
             var inventory = [];
@@ -109,8 +112,8 @@
               inventory.push({
                 'itemId': inv.itemId,
                 'count': inv.count
-              })
-            })
+              });
+            });
             this.jsonSend = 'recipes?inventory='+JSON.stringify(inventory);
           }
         });

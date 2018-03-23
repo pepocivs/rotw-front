@@ -17,6 +17,14 @@
 
 <link rel="import" href="app-elements/btw-icons.html">
 <link rel="import" href="app-elements/btw-storage.html">
+
+<link rel="import" href="page-items/page-items.html">
+<link rel="import" href="page-info/page-info.html">
+<link rel="import" href="page-inventory/page-inventory.html">
+<link rel="import" href="page-recipes/page-recipes.html">
+<link rel="import" href="page-cooking/page-cooking.html">
+
+
 <link rel="import" href="general-style.html">
 
 <dom-module id="recipes-wild">
@@ -108,7 +116,7 @@
       }
     </style>
 
-    <btw-storage id="storageData" data="{{data}}"></btw-storage>
+    <btw-storage id="storageData"></btw-storage>
 
     <app-location route="{{route}}"></app-location>
     <app-route
@@ -181,14 +189,10 @@
         page: {
           type: String,
           reflectToAttribute: true,
-          observer: '_pageChanged',
+          observer: '_pageChanged'
         },
-        routeData: {
-          type: Object
-        },
-        subRoute: {
-          type: Object
-        },
+        routeData: Object,
+        subRoute: Object,
         language: {
           value: 'es',
           notify: true,
@@ -206,7 +210,7 @@
       },
       behaviors: [Polymer.AppLocalizeBehavior],
       observers: [
-        '_routePageChanged(routeData.page)',
+        '_routePageChanged(routeData.page)'
       ],
       ready: function() {
         this.loadResources(this.resolveUrl('./locales.json'));
@@ -232,7 +236,7 @@
         this.page = 'recipes';
       },
       selectLang: function(e) {
-        var toolBar   = e.target.parentElement;
+        var toolBar = e.target.parentElement;
         this.language = e.target.lang;
         this.$.storageData.updateStorage('language', e.target.lang);
         this.languages.forEach(function(lang) {

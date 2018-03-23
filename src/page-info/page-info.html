@@ -116,12 +116,9 @@
                 type: Object,
                 value: {}
               },
-              ingredient: {
-                type: Object
-              },
-              recipeList: {
-                type: Object
-              },
+              ingredient: Object,
+              recipeList: Object,
+              language: String,
               loadingRecipes: {
                 type: Boolean,
                 notify: true,
@@ -140,14 +137,14 @@
               }
             },
             observers: [
-              '_executeRequest(language)',
+              '_executeRequest(language)'
             ],
             ready: function() {
               this._getParams();
               this._executeRequest();
             },
             _executeRequest: function() {
-              this.headers = { 'Accept-Language': this.language };
+              this.headers = {'Accept-Language': this.language};
             },
             attributeChanged: function() {
               this._getParams();
@@ -162,20 +159,23 @@
               this.recipeList = response;
             },
             _getParams: function() {
-              var itemId  = searchToObject();
+              var itemId = searchToObject();
               this.itemId = itemId.itemId;
               this.params = {};
               if (this.itemId && this.itemId.length > 0) {
-                this.params = {'inventory': [{"itemId": parseInt(this.itemId),"count": 5 }]};
+                this.params = {'inventory': [{'itemId': parseInt(this.itemId), 'count': 5}]};
               }
             }
         });
         function searchToObject() {
-          var pairs = window.location.search.substring(1).split("&"), obj = {}, pair, i;
+          var pairs = window.location.search.substring(1).split('&');
+          var obj = {};
+          var pair;
+          var i;
           for ( i in pairs ) {
-            if ( pairs[i] === "" ) continue;
-            pair = pairs[i].split("=");
-            obj[ decodeURIComponent( pair[0] ) ] = decodeURIComponent( pair[1] );
+            if ( pairs[i] === '' ) continue;
+            pair = pairs[i].split('=');
+            obj[decodeURIComponent( pair[0] )] = decodeURIComponent( pair[1] );
           }
           return obj;
         }

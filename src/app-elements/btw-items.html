@@ -222,11 +222,11 @@
           },
           _formatIngredients: function() {
               var ingredients = [];
-              this.inventory.forEach(function(itm){
-                for (var x = 0; x < itm.count; x++ ){
+              this.inventory.forEach(function(itm) {
+                for (var x = 0; x < itm.count; x++ ) {
                   ingredients.push({
-                    '_id':  itm.itemId,
-                    'image':  itm.image
+                    '_id': itm.itemId,
+                    'image': itm.image
                   });
                 }
               });
@@ -248,8 +248,8 @@
             }
 
             function findObjectByKey(itemList, element) {
-              const itemId = element.itemId;
-              const count = element.count;
+              var itemId = element.itemId;
+              var count = element.count;
 
               for (var i = 0; i < itemList.length; i++) {
                 if (itemList[i]._id === itemId) {
@@ -259,7 +259,6 @@
               }
               return null;
             }
-
           },
 
           addElement: function(e) {
@@ -271,18 +270,17 @@
             this.updateCountList(e.target.itemid);
           },
           removeElement: function(e) {
-            var model   = e.model;
             var removed = false;
-            var itemId  = 0;
+            var itemId = 0;
             for (var i = 0; i < this.ingredients.length; i++) {
               if (parseInt(e.target.getAttribute('value')) === this.ingredients[i]._id && !removed) {
-                itemId  = this.ingredients[i]._id;
+                itemId = this.ingredients[i]._id;
                 this.set('itemList', this._updateItemList(this.ingredients[i]._id));
                 this.splice('ingredients', i, 1);
                 removed = true;
               }
             }
-            this.inventory    = this._updateInventory();
+            this.inventory = this._updateInventory();
             this.nIngredients = this.ingredients.length;
             this.updateCountList(itemId);
           },
@@ -293,22 +291,22 @@
             this.$.addByNumber.close();
           },
           openDialog: function(e) {
-            this.tempCount   = (e.target.item.count > 0) ? e.target.item.count : '';
-            this.targetItem  = e.target.item;
+            this.tempCount = (e.target.item.count > 0) ? e.target.item.count : '';
+            this.targetItem = e.target.item;
             this.$.addByNumber.toggle();
           },
           _isTap: function() {
-            this.isTap    = (this.tap === 'true' && !this.isLink);
+            this.isTap = (this.tap === 'true' && !this.isLink);
             this.isDialog = (this.tap !== 'true' && !this.isLink);
           },
           _updateInventory: function() {
             var inventory = [];
             this.itemList.forEach(function(item) {
-              if (item.count > 0) inventory.push({
-                'itemId': item._id,
-                'count': item.count,
-                'image': item.image
-              });
+              if (item.count > 0) {inventory.push({
+        'itemId': item._id,
+        'count': item.count,
+        'image': item.image
+      });}
             });
             return inventory;
           },
@@ -320,13 +318,13 @@
             return itemList;
           },
           updateCountList: function(itemId) {
-            if (itemId > 0 && this.$$("#count"+itemId)) {
-              this.$$("#count"+itemId).textContent = 'x'+this.getCount(itemId);
+            if (itemId > 0 && this.$$('#count'+itemId)) {
+              this.$$('#count'+itemId).textContent = 'x'+this.getCount(itemId);
             }
           },
           getCount: function(itemId) {
             var count = 0;
-            this.inventory.forEach(function(item){
+            this.inventory.forEach(function(item) {
               if (item.itemId === itemId) count = item.count;
             });
             return count;
