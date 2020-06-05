@@ -48,9 +48,7 @@
       <template is="dom-if" if="{{!loading}}">
         <div class="layout vertical full-height">
           <div class="layout horizontal wrap around-justified flat-back-principal">
-            <a href$="{{jsonSend}}" class="invisible-a">
-              <paper-button class="flat-button">{{localize('inventory.whatcook')}}</paper-button>
-            </a>
+            <paper-button on-tap="_goCooking" class="flat-button">{{localize('inventory.whatcook')}}</paper-button>
           </div>
           <btw-items 
             language="{{language}}" 
@@ -98,6 +96,9 @@
 
           _executeRequest: function() {
             this.headers = {'Accept-Language': this.language};
+          },
+          _goCooking: function() {
+            location.replace(this.jsonSend);
           },
           setJsonParam: function(e) {
             var inventory = [];
