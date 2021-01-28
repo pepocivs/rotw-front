@@ -238,12 +238,11 @@
       selectLang: function(e) {
         const elementClicked = e.target;
         const parentClicked = elementClicked.parentElement;
-        const appToolBar = document.querySelector('app-toolbar');
+        const appToolBar = (parentClicked.tagName === 'APP-TOOLBAR') ? parentClicked : parentClicked.parentElement;
         this.language = elementClicked.lang || parentClicked.lang;
-        this.$.storageData.updateStorage('language', this.language);
-        this.languages.forEach(function(lang) {
-          appToolBar.querySelector('#lang'+lang).classList.remove('selected');
-        });
+        const toRemove = (this.language === 'es') ? 'en' : 'es';
+        this.$.storageData.updateStorage('language', this.language);  
+        appToolBar.querySelector(`#lang${toRemove}`).classList.remove('selected');
         if (parentClicked.tagName === 'IRON-ICON') {
           parentClicked.classList.add('selected');
         } else {
