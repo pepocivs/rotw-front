@@ -14,5 +14,10 @@
   "scripts": {
     "lint": "eslint . --ext js,html",
     "test": "npm run lint && polymer test"
+  },
+  "dependencies": {
+    "@capacitor/android": "^2.4.6",
+    "@capacitor/cli": "^2.4.6",
+    "@capacitor/core": "^2.4.6"
   }
 }
