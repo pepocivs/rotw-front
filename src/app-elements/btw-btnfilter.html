@@ -80,15 +80,15 @@
               this.loadResources(this.resolveUrl('../locales.json'));
             },
             setFilter: function(e) {
+              targetId = (!e.target.id) ? (e.target.parentElement.id === 'icon') ? e.target.parentElement.parentElement.id : e.target.parentElement.id : e.target.id
               this.filter = {
-                'sort': e.target.id
+                'sort': targetId
               };
-              this.addSelected(e.target.id);
+              this.addSelected(targetId);
             },
             addSelected: function(id) {
               if (this.$$('.filter-button-high'))
               {this.$$('.filter-button-high').classList.remove('filter-button-high');}
-
               this.$$('#'+id).classList.add('filter-button-high');
             }
         });
