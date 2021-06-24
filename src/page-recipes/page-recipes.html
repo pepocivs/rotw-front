@@ -43,7 +43,7 @@
 
         <template is="dom-if" if="[[showTitle('available')]]" id="resultListAvailable">
           <btw-infobar title="{{availableTitle}}"></btw-infobar>
-          <btw-recipes recipe-list="[[recipeList.available]]"></btw-recipes>
+          <btw-recipes recipe-list="[[recipeList.available]]" show-button="[[showDeleteButton]]" button-text="[[localize('recipe.select')]]"></btw-recipes>
         </template>
 
         <template is="dom-if" if="[[showTitle('possible')]]" id="resultListPossible">
@@ -95,19 +95,23 @@
               },
               headers: {
                 type: Object
-              }
+              },
+              showDeleteButton: {
+                type: String
+              },
             },
             observers: [
-              '_executeRequest(language)',
+              '_executeRequest(language)'
             ],
             behaviors: [Polymer.AppLocalizeBehavior],
             ready: function() {
-              this.headers = { 'Accept-Language': this.language };
+              this.headers = {'Accept-Language': this.language};
               this.loadResources(this.resolveUrl('../locales.json'));
               this._getParams();
             },
             attributeChanged: function() {
               this._getParams();
+              this.showDeleteButton = (window.location.search.length === 0) ? 'false' : 'true';
             },
             _checkHasrecipes: function(response) {
               this.hasRecipes = (
@@ -119,18 +123,20 @@
               this.recipeList = data.detail.response;
               this._checkHasrecipes(data.detail.response);
               var maxRecipes = 50;
-              if (this.recipeList.available.length === maxRecipes)
-                this.availableTitle = this.localize('recipe.availableMore', 'num', this.recipeList.available.length);
+              var availableLength = this.recipeList.available.lengthavailableLength;
+              var possibleLength = this.recipeList.possible.lengthpossibleLength;
+              var unavailableLength = this.recipeList.unavailable.length;
+              if (availableLength === maxRecipes)
+                {this.availableTitle = this.localize('recipe.availableMore', 'num', availableLength);}
               else
-                this.availableTitle = this.localize('recipe.available', 'num', this.recipeList.available.length);
+                {this.availableTitle = this.localize('recipe.available', 'num', availableLength);}
 
-              if (this.recipeList.possible.length === maxRecipes)
-                this.possibleTitle = this.localize('recipe.possibleMore', 'num', this.recipeList.possible.length);
+              if (possibleLength === maxRecipes)
+                {this.possibleTitle = this.localize('recipe.possibleMore', 'num', possibleLength);}
               else
-                this.possibleTitle = this.localize('recipe.possible', 'num', this.recipeList.possible.length);
+                {this.possibleTitle = this.localize('recipe.possible', 'num', possibleLength);}
 
-              this.unavailableTitle = this.localize('recipe.unavailable', 'num', this.recipeList.unavailable.length);
-
+              this.unavailableTitle = this.localize('recipe.unavailable', 'num', unavailableLength);
             },
             showTitle: function(where) {
               return (this.recipeList && this.recipeList[where].length > 0);
@@ -139,15 +145,18 @@
               this.params = searchToObject();
             },
             _executeRequest: function() {
-              this.headers = { 'Accept-Language': this.language };
+              this.headers = {'Accept-Language': this.language};
             }
         });
         function searchToObject() {
-          var pairs = window.location.search.substring(1).split("&"), obj = {}, pair, i;
+          var pairs = window.location.search.substring(1).split('&');
+          var obj = {};
+          var pair;
+          var i;
           for ( i in pairs ) {
-            if ( pairs[i] === "" ) continue;
-            pair = pairs[i].split("=");
-            obj[ decodeURIComponent( pair[0] ) ] = JSON.parse(decodeURIComponent( pair[1] ));
+            if ( pairs[i] === '' ) continue;
+            pair = pairs[i].split('=');
+            obj[decodeURIComponent( pair[0] )] = JSON.parse(decodeURIComponent( pair[1] ));
           }
           return obj;
         }

@@ -69,10 +69,10 @@
               for (var x = 0; x < this.effects.length; x++) {
                 var effectIcon = this.effects[x].icon;
                 if (effectIcon.indexOf('ic_heart_red_max.png') === 0) this.formatHearts(x);
-                if (effectIcon.indexOf('ic_heart_red.png') === 0)     this.formatHearts(x);
-                if (effectIcon.indexOf('ic_heart_yellow.png') === 0)  this.formatHearts(x);
-                if (effectIcon.indexOf('ic_stamina_green_') === 0)    this.formatStamina(x);
-                if (effectIcon.indexOf('ic_stamina_yellow_') === 0)   this.formatStamina(x);
+                if (effectIcon.indexOf('ic_heart_red.png') === 0) this.formatHearts(x);
+                if (effectIcon.indexOf('ic_heart_yellow.png') === 0) this.formatHearts(x);
+                if (effectIcon.indexOf('ic_stamina_green_') === 0) this.formatStamina(x);
+                if (effectIcon.indexOf('ic_stamina_yellow_') === 0) this.formatStamina(x);
                 var timeEffects = this.getTimeEffects();
                 for (var index = 0; index < timeEffects.length; index++ ) {
                   if (effectIcon === timeEffects[index]) this.formatTime(x);
@@ -81,25 +81,25 @@
               this.effectsToPrint = this.preparedEffect;
             },
             formatTime: function(x) {
-              var time    = this.effects[x].value;
+              var time = this.effects[x].value;
               var minutes = Math.floor(time / 60);
               var seconds = time - (minutes * 60);
-              var humanTime = str_pad_left(minutes,'0',2)+':'+str_pad_left(seconds,'0',2);
+              var humanTime = strPadLeft(minutes, '0', 2)+':'+strPadLeft(seconds, '0', 2);
 
               this.preparedEffect.push({
-                "_id"       : this.effects[x]._id,
-                "name"      : this.effects[x].name || this.effects[x].effect,
-                "icon"      : "../images/items/"+this.effects[x].icon,
-                "humanTime" : humanTime,
-                "value"     : time
+                '_id': this.effects[x]._id,
+                'name': this.effects[x].name || this.effects[x].effect,
+                'icon': '../images/items/'+this.effects[x].icon,
+                'humanTime': humanTime,
+                'value': time
               });
 
-              function str_pad_left(string,pad,length) {
+              function strPadLeft(string, pad, length) {
                 return (new Array(length+1).join(pad)+string).slice(-length);
               }
             },
             formatStamina: function(x) {
-              var color        = (this.effects[x].icon.indexOf('ic_stamina_green_') === 0) ? 'green' : 'yellow';
+              var color = (this.effects[x].icon.indexOf('ic_stamina_green_') === 0) ? 'green' : 'yellow';
               var staminaValue = this.effects[x].value;
               this.calculateStamina(x, staminaValue, 1, color);
             },
@@ -108,11 +108,11 @@
               var number = (staminaValue < 10) ? '0'+staminaValue : staminaValue;
               // for (var j = 0; j < counter; j++ ) {
                 this.preparedEffect.push({
-                  "_id"   : this.effects[x]._id,
-                  "name"  : this.effects[x].name || this.effects[x].effect,
-                  "icon"  : "../images/items/stamina_"+color+"_"+number+".png",
-                  "stamina"  : "stamina",
-                  "value" : Math.round((staminaValue * 0.2)*100)+'%'
+                  '_id': this.effects[x]._id,
+                  'name': this.effects[x].name || this.effects[x].effect,
+                  'icon': '../images/items/stamina_'+color+'_'+number+'.png',
+                  'stamina': 'stamina',
+                  'value': Math.round((staminaValue * 0.2)*100)+'%'
                 });
                 staminaValue = staminaValue - s;
               // }
@@ -127,35 +127,35 @@
               var fiveHearts = Math.floor(n/5);
               for (var j = 0; j < fiveHearts; j++ ) {
                 this.preparedEffect.push({
-                  "_id"   : this.effects[x]._id,
-                  "name"  : this.effects[x].name || this.effects[x].effect,
-                  "icon"  : "../images/items/ic_heart_five_"+color+".png",
-                  "hearts"  : "hearts",
-                  "value" : "5"
+                  '_id': this.effects[x]._id,
+                  'name': this.effects[x].name || this.effects[x].effect,
+                  'icon': '../images/items/ic_heart_five_'+color+'.png',
+                  'hearts': 'hearts',
+                  'value': '5'
                 });
               }
               n = n -(fiveHearts*5);
               for (var k = 0; k < n; k++ ) {
                 this.preparedEffect.push({
-                  "_id"   : this.effects[x]._id,
-                  "name"  : this.effects[x].name || this.effects[x].effect,
-                  "icon"  : "../images/items/"+this.effects[x].icon,
-                  "hearts"  : "hearts",
-                  "value" : "1"
+                  '_id': this.effects[x]._id,
+                  'name': this.effects[x].name || this.effects[x].effect,
+                  'icon': '../images/items/'+this.effects[x].icon,
+                  'hearts': 'hearts',
+                  'value': '1'
                 });
               }
               if (m > 0) {
                 var partIcon = '';
-                if      (m === 0.25) partIcon = "ic_heart_red_quarter";
-                else if (m === 0.50) partIcon = "ic_heart_red_half";
-                else if (m === 0.75) partIcon = "ic_heart_red_three_quarter";
+                if (m === 0.25) partIcon = 'ic_heart_red_quarter';
+                else if (m === 0.50) partIcon = 'ic_heart_red_half';
+                else if (m === 0.75) partIcon = 'ic_heart_red_three_quarter';
                 if (partIcon !== '') {
                   this.preparedEffect.push({
-                    "_id"   : this.effects[x]._id,
-                    "name"  : this.effects[x].name || this.effects[x].effect,
-                    "icon"  : "../images/items/"+partIcon+".png",
-                    "hearts"  : "hearts",
-                    "value" : m
+                    '_id': this.effects[x]._id,
+                    'name': this.effects[x].name || this.effects[x].effect,
+                    'icon': '../images/items/'+partIcon+'.png',
+                    'hearts': 'hearts',
+                    'value': m
                   });
                 }
               }

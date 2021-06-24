@@ -1,11 +1,13 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="btw-effects.html">
 <link rel="import" href="btw-ingredients.html">
 <link rel="import" href="btw-recipes-style.html">
+<link rel="import" href="btw-storage.html">
 <link rel="import" href="../general-style.html">
 
 <dom-module id="btw-recipes">
@@ -16,8 +18,9 @@
         }
       </style>
 
-      <div class="layout horizontal wrap center-center recipes-container">
+      <btw-storage id="storageData"></btw-storage>
 
+      <div class="layout horizontal wrap center-center recipes-container">
         <template is="dom-repeat" items="{{recipeList}}">
             <div class="food-box-form layout horizontal nowrap center-center justified" >
               <div class="recipe-price">
@@ -26,6 +29,9 @@
               </div>
               <div class="recipe-image">
                 <img src="../images/items/{{item.image}}" alt="{{item.name}}" class="foodprincipal">
+                <template is="dom-if" if="[[showRemoveButton]]">
+                  <paper-button on-tap="deleteItemsFromInventory" $value="{{item.ingredients}}" class="flat-button small-button">{{buttonText}}</paper-button>
+                </template>
               </div>
               <div class="food-box-one flex three wrap  self-start">
                 <p>{{item.name}}</p>
@@ -50,7 +56,32 @@
               recipeList: {
                 type: Object,
                 notify: true
-              }
+              },
+              showButton: {
+                type: String,
+                value: 'false',
+                observer: '_convertStringToBoolean'
+              },
+              buttonText: String,
+              showRemoveButton: Boolean,
+            },
+            _convertStringToBoolean: function (stringBoolean) {
+              this.showRemoveButton = stringBoolean === 'true';
+            },
+            deleteItemsFromInventory: function(e) {
+              var inventory = this.$.storageData.get('botwData.inventory');
+              var usedElements = e.target.$value;
+              var newInventory = [];
+              inventory.map(element => {
+                var finded = usedElements.find(u => u._id === element.itemId);
+                if (finded) {
+                  element.count = element.count - finded.howMany;
+                  if (element.count < 0) element.count = 0;
+                }
+                newInventory.push(element);
+              });
+              this.$.storageData.updateStorage('inventory', newInventory);
+              window.location.href = '/inventory'
             }
         });
     </script>

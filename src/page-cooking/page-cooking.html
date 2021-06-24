@@ -85,12 +85,10 @@
                 notify: true,
                 value: true
               },
-              headers: {
-                type: Object
-              }
+              headers: Object
             },
             observers: [
-              '_executeRequest(language)',
+              '_executeRequest(language)'
             ],
             behaviors: [Polymer.AppLocalizeBehavior],
             ready: function() {
@@ -98,18 +96,18 @@
               this._executeRequest();
             },
             _executeRequest: function() {
-              this.headers = { 'Accept-Language': this.language };
+              this.headers = {'Accept-Language': this.language};
             },
             setJsonParam: function(e) {
               var inventory = [];
               this.inventory.forEach(function(inv) {
-                if(inv.count > 0) {
+                if (inv.count > 0) {
                   inventory.push({
                     'itemId': inv.itemId,
                     'count': inv.count
                   });
                 }
-              })
+              });
               this.jsonSend = 'recipes?inventory='+JSON.stringify(inventory);
             }
         });
