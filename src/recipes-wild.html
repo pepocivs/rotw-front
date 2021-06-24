@@ -236,13 +236,18 @@
         this.page = 'recipes';
       },
       selectLang: function(e) {
-        var toolBar = e.target.parentElement;
-        this.language = e.target.lang;
-        this.$.storageData.updateStorage('language', e.target.lang);
-        this.languages.forEach(function(lang) {
-          toolBar.querySelector('#lang'+lang).classList.remove('selected');
-        });
-        e.target.classList.add('selected');
+        const elementClicked = e.target;
+        const parentClicked = elementClicked.parentElement;
+        const appToolBar = (parentClicked.tagName === 'APP-TOOLBAR') ? parentClicked : parentClicked.parentElement;
+        this.language = elementClicked.lang || parentClicked.lang;
+        const toRemove = (this.language === 'es') ? 'en' : 'es';
+        this.$.storageData.updateStorage('language', this.language);  
+        appToolBar.querySelector(`#lang${toRemove}`).classList.remove('selected');
+        if (parentClicked.tagName === 'IRON-ICON') {
+          parentClicked.classList.add('selected');
+        } else {
+          elementClicked.classList.add('selected');
+        }
       }
     });
   </script>
