@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Recipes of the Wild</string>
+    <string name="title_activity_main">Recipes of the Wild</string>
+    <string name="package_name">com.pepocivs.recipesofthewild</string>
+    <string name="custom_url_scheme">com.pepocivs.recipesofthewild</string>
+</resources>

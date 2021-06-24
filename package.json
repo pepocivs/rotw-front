@@ -13,6 +13,13 @@
   },
   "scripts": {
     "lint": "eslint . --ext js,html",
-    "test": "npm run lint && polymer test"
+    "test": "npm run lint && polymer test",
+    "build:android": "polymer build && npx cap sync",
+    "deploy": "polymer build && firebase deploy"
+  },
+  "dependencies": {
+    "@capacitor/android": "^2.4.6",
+    "@capacitor/cli": "^2.4.6",
+    "@capacitor/core": "^2.4.6"
   }
 }
